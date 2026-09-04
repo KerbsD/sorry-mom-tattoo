@@ -1,0 +1,67 @@
+@reference "../../app/globals.css";
+
+// Desktop
+.header-logo {
+  @apply lg:pl-12;
+}
+
+.header-items {
+  @apply hidden gap-13 lg:flex;
+
+  &__links {
+    @apply relative inline-block uppercase transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-teal-300 after:transition-transform after:duration-300 after:content-[''];
+
+    &-active {
+      @apply text-teal-300 after:scale-x-100;
+    }
+
+    &-inactive {
+      @apply text-white after:scale-x-0 hover:text-teal-300 hover:after:scale-x-100;
+    }
+  }
+}
+
+.booknow-btn {
+  @apply hidden lg:block lg:pr-12;
+}
+
+// Mobile
+.header-mobile-bgr-btn {
+  @apply z-50 text-white lg:hidden;
+}
+
+.header-mobile-container {
+  @apply absolute top-full right-0 left-0 flex flex-col items-center gap-6 bg-[#161616] transition-all duration-300 ease-in-out lg:hidden;
+
+  &__open {
+    @apply visible max-h-100 py-8 opacity-100;
+  }
+
+  &__close {
+    @apply pointer-events-none invisible max-h-0 py-0 opacity-0;
+  }
+
+  .header-mobile-items {
+    @apply flex flex-col items-center gap-6 duration-400;
+
+    &__links {
+      @apply text-sm transition-colors;
+
+      &-active {
+        @apply text-teal-300;
+      }
+
+      &-inactive {
+        @apply text-white hover:text-teal-300;
+      }
+    }
+  }
+}
+
+.header-main {
+  @apply fixed top-0 right-0 left-0 z-50 bg-[#161616] backdrop-blur-sm;
+
+  &__container {
+    @apply relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-0;
+  }
+}

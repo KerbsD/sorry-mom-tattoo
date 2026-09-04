@@ -1,0 +1,35 @@
+@reference "../../app/globals.css";
+
+.footer-main {
+  @apply flex min-h-50 w-full flex-col-reverse items-center bg-[#ebebeb] text-[#161616] md:flex-row;
+
+  .logo {
+    @apply flex items-center justify-center lg:w-[35dvw];
+
+    &__span {
+      @apply -translate-x-1 p-10 text-center text-[clamp(48px,58px,68px)] leading-[0.90] tracking-[-1px];
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+  }
+
+  .footer-items {
+    @apply my-10 flex flex-col-reverse items-center md:mx-auto md:my-0;
+
+    &__container {
+      @apply grid grid-cols-1 gap-8 md:grid-cols-2 md:items-start md:gap-10 xl:grid-cols-3;
+
+      &-content {
+        @apply flex flex-col items-center px-5 py-5 text-sm md:items-start md:text-base xl:mx-auto;
+      }
+    }
+  }
+}
+
+.footer-copyright {
+  @apply flex w-full flex-col-reverse items-center justify-center px-6 py-3 text-xs uppercase md:flex-row md:items-start md:justify-between;
+
+  &__span {
+    @apply tracking-tighter;
+  }
+}
