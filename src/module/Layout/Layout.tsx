@@ -10,7 +10,7 @@ function Layout({ children }: Props) {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className="flex flex-col grow shrink-0 basis-auto">{children}</main>
       <Footer />
     </>
   );
