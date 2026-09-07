@@ -1,4 +1,8 @@
-import { Poppins, Anton } from "next/font/google";
+import {
+  Poppins,
+  Anton,
+  JetBrains_Mono,
+} from "next/font/google";
 
 export const poppins = Poppins({
   variable: "--font-poppins",
@@ -9,5 +13,11 @@ export const poppins = Poppins({
 export const anton = Anton({
   variable: "--font-anton",
   weight: ["400"],
+  subsets: ["latin"],
+});
+
+export const jetbrainsmono = JetBrains_Mono({
+  variable: "--font-jetbrainsmono",
+  weight: ["400", "600"],
   subsets: ["latin"],
 });

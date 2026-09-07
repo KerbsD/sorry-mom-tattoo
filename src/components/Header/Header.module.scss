@@ -35,7 +35,7 @@
 }
 
 .header-mobile-wrapper {
-  @apply relative;
+  @apply relative lg:hidden;
 }
 
 .header-mobile-container {
