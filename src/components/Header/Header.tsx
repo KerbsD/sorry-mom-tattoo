@@ -17,6 +17,7 @@ interface HeaderNavProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   pathname: string;
+  wrapperRef?: any;
 }
 
 function HeaderDesktop(props: HeaderNavProps) {
@@ -66,10 +67,13 @@ function HeaderDesktop(props: HeaderNavProps) {
 }
 
 function HeaderMobile(props: HeaderNavProps) {
-  const { isOpen, setIsOpen, pathname } = props;
+  const { isOpen, setIsOpen, pathname, wrapperRef } = props;
 
   return (
-    <>
+    <div
+      className={styles["header-mobile-wrapper"]}
+      ref={wrapperRef}
+    >
       {/* Mobile toggle button */}
       <button
         className={styles["header-mobile-bgr-btn"]}
@@ -80,7 +84,7 @@ function HeaderMobile(props: HeaderNavProps) {
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu dropdown */}
       <div
         className={`${styles["header-mobile-container"]} ${
           isOpen
@@ -99,8 +103,12 @@ function HeaderMobile(props: HeaderNavProps) {
                   onClick={() => setIsOpen(false)}
                   className={`${styles["header-mobile-items__links"]} ${
                     isActive
-                      ? styles["header-mobile-items__links-active"]
-                      : styles["header-mobile-items__links-inactive"]
+                      ? styles[
+                          "header-mobile-items__links-active"
+                        ]
+                      : styles[
+                          "header-mobile-items__links-inactive"
+                        ]
                   }`}
                 >
                   {item.title}
@@ -109,17 +117,31 @@ function HeaderMobile(props: HeaderNavProps) {
             );
           })}
         </ul>
-        <HeaderButton />
+        <div className={styles["booknow-mobile-btn"]}>
+          <HeaderButton />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
 function Header() {
-  const { isOpen, setIsOpen, pathname } = useHeader();
+  const {
+    isOpen,
+    setIsOpen,
+    pathname,
+    isScrolled,
+    headerRef,
+    wrapperRef,
+  } = useHeader();
 
   return (
-    <nav className={styles["header-main"]}>
+    <nav
+      ref={headerRef}
+      className={`${styles["header-main"]} ${
+        isScrolled ? styles["header-main--scrolled"] : ""
+      }`}
+    >
       <div className={styles["header-main__container"]}>
         <HeaderDesktop
           isOpen={isOpen}
@@ -130,6 +152,7 @@ function Header() {
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           pathname={pathname}
+          wrapperRef={wrapperRef}
         />
       </div>
     </nav>

@@ -25,43 +25,73 @@
   @apply hidden lg:block lg:pr-12;
 }
 
+.booknow-mobile-btn {
+  @apply px-3 py-2 lg:hidden;
+}
+
 // Mobile
 .header-mobile-bgr-btn {
   @apply z-50 text-white lg:hidden;
 }
 
+.header-mobile-wrapper {
+  @apply relative;
+}
+
 .header-mobile-container {
-  @apply absolute top-full right-0 left-0 flex flex-col items-center gap-6 bg-[#161616] transition-all duration-300 ease-in-out lg:hidden;
+  @apply absolute top-full right-0 mt-3 w-64 origin-top-right rounded-xl bg-[#1c1c1c] p-4 shadow-xl;
+
+  transform: scale(0.95) translateY(-8px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    visibility 0.2s;
 
   &__open {
-    @apply visible max-h-100 py-8 opacity-100;
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+.header-mobile-items {
+  @apply flex flex-col gap-1;
+
+  &__links {
+    @apply block rounded-lg px-3 py-2 text-sm transition-colors;
   }
 
-  &__close {
-    @apply pointer-events-none invisible max-h-0 py-0 opacity-0;
+  &__links-active {
+    @apply bg-white/10 text-white;
   }
 
-  .header-mobile-items {
-    @apply flex flex-col items-center gap-6 duration-400;
-
-    &__links {
-      @apply text-sm transition-colors;
-
-      &-active {
-        @apply text-teal-300;
-      }
-
-      &-inactive {
-        @apply text-white hover:text-teal-300;
-      }
-    }
+  &__links-inactive {
+    @apply text-white/70 hover:bg-white/5 hover:text-white;
   }
 }
 
 .header-main {
-  @apply fixed top-0 right-0 left-0 z-50 bg-[#161616] backdrop-blur-sm;
+  @apply fixed top-0 right-0 left-0 z-50 bg-transparent;
+
+  &::before {
+    content: "";
+    @apply absolute inset-0 -z-10 bg-[#161616];
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  &--scrolled {
+    &::before {
+      transform: scaleY(1);
+    }
+  }
 
   &__container {
-    @apply relative mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-0;
+    @apply relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-0;
   }
 }

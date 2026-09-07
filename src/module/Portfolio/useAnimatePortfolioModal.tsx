@@ -19,7 +19,7 @@ function useAnimatePortfolioModal({
       gsap.fromTo(
         overlayRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: "power2.out" },
+        { opacity: 1, duration: 0.1, ease: "power2.out" },
       );
       gsap.fromTo(
         panelRef.current,
@@ -28,7 +28,7 @@ function useAnimatePortfolioModal({
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.4,
+          duration: 0.2,
           ease: "power2.out",
         },
       );
@@ -38,12 +38,12 @@ function useAnimatePortfolioModal({
         y: 20,
         scale: 0.95,
         duration: 0.25,
-        ease: "power2.in",
+        ease: "power2.out",
       });
       gsap.to(overlayRef.current, {
         opacity: 0,
         duration: 0.25,
-        ease: "power2.in",
+        ease: "power2.out",
         onComplete: () => {
           if (overlayRef.current) {
             gsap.set(overlayRef.current, {
