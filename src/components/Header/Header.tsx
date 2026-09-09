@@ -8,7 +8,7 @@ import HeaderButton from "../Buttons/Header/HeaderButton";
 import ScrambleText from "../Interactions/ScrambleText/ScrambleText";
 
 import { Menu, X } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, RefObject } from "react";
 import { HeaderItems } from "@/constants/Menu/MenuItems";
 
 import styles from "./Header.module.scss";
@@ -17,7 +17,10 @@ interface HeaderNavProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   pathname: string;
-  wrapperRef?: any;
+}
+
+interface HeaderMobileProps extends HeaderNavProps {
+  wrapperRef: RefObject<HTMLDivElement | null>;
 }
 
 function HeaderDesktop(props: HeaderNavProps) {
@@ -66,14 +69,11 @@ function HeaderDesktop(props: HeaderNavProps) {
   );
 }
 
-function HeaderMobile(props: HeaderNavProps) {
+function HeaderMobile(props: HeaderMobileProps) {
   const { isOpen, setIsOpen, pathname, wrapperRef } = props;
 
   return (
-    <div
-      className={styles["header-mobile-wrapper"]}
-      ref={wrapperRef}
-    >
+    <div className={styles["header-mobile-wrapper"]} ref={wrapperRef}>
       {/* Mobile toggle button */}
       <button
         className={styles["header-mobile-bgr-btn"]}
@@ -103,12 +103,8 @@ function HeaderMobile(props: HeaderNavProps) {
                   onClick={() => setIsOpen(false)}
                   className={`${styles["header-mobile-items__links"]} ${
                     isActive
-                      ? styles[
-                          "header-mobile-items__links-active"
-                        ]
-                      : styles[
-                          "header-mobile-items__links-inactive"
-                        ]
+                      ? styles["header-mobile-items__links-active"]
+                      : styles["header-mobile-items__links-inactive"]
                   }`}
                 >
                   {item.title}
@@ -126,14 +122,8 @@ function HeaderMobile(props: HeaderNavProps) {
 }
 
 function Header() {
-  const {
-    isOpen,
-    setIsOpen,
-    pathname,
-    isScrolled,
-    headerRef,
-    wrapperRef,
-  } = useHeader();
+  const { isOpen, setIsOpen, pathname, isScrolled, headerRef, wrapperRef } =
+    useHeader();
 
   return (
     <nav

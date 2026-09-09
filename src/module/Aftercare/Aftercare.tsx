@@ -2,11 +2,7 @@
 
 import { Check, X } from "lucide-react";
 import { anton, jetbrainsmono } from "@/utils/Fonts";
-import {
-  steps,
-  dos,
-  donts,
-} from "@/constants/Aftercare/Aftercare";
+import { steps, dos, donts } from "@/constants/Aftercare/Aftercare";
 
 import useAnimateAftercare from "./useAnimateAftercare";
 
@@ -14,12 +10,9 @@ function Aftercare() {
   const { container } = useAnimateAftercare();
 
   return (
-    <main
-      ref={container}
-      className="bg-[#161616] text-white"
-    >
+    <section ref={container}>
       {/* Hero */}
-      <section className="flex min-h-[97vh] justify-center flex-col border-b border-white/10 px-6 pt-40 pb-16 text-center">
+      <section className="flex min-h-[97vh] flex-col justify-center border-b border-white/10 px-6 pt-40 pb-16 text-center">
         <p
           className={`${jetbrainsmono.className} hero-eyebrow text-xs tracking-[0.3em] text-teal-400/70`}
         >
@@ -33,10 +26,9 @@ function Aftercare() {
           of the art
         </h1>
         <p className="hero-copy mx-auto mt-6 max-w-xl text-sm text-white/60 sm:text-base">
-          A fresh tattoo is an open wound before it's art.
-          Follow these steps closely for the first two to
-          three weeks — your skin, and the piece, will thank
-          you.
+          A fresh tattoo is an open wound before it's art. Follow these steps
+          closely for the first two to three weeks — your skin, and the piece,
+          will thank you.
         </p>
       </section>
 
@@ -44,9 +36,7 @@ function Aftercare() {
       <section className="px-6 py-15">
         <div className="mx-auto max-w-6xl">
           <div className="steps-header mb-10 flex items-baseline justify-between border-b border-white/10 pb-4">
-            <h2
-              className={`${anton.className} section-header text-3xl`}
-            >
+            <h2 className={`${anton.className} section-header text-3xl`}>
               The Process
             </h2>
             <span
@@ -57,35 +47,29 @@ function Aftercare() {
           </div>
 
           <div className="steps-grid grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3">
-            {steps.map(
-              ({ num, icon: Icon, title, text }) => (
-                <div
-                  key={num}
-                  className="step-card group relative flex flex-col gap-4 bg-[#0a0a0a] p-8 transition-colors duration-300 hover:bg-[#121212]"
+            {steps.map(({ num, icon: Icon, title, text }) => (
+              <div
+                key={num}
+                className="step-card group relative flex flex-col gap-4 bg-[#0a0a0a] p-8 transition-colors duration-300 hover:bg-[#121212]"
+              >
+                <span
+                  className={`${anton.className} absolute top-4 right-6 text-6xl text-white/4 transition-colors duration-300 group-hover:text-teal-400/10`}
                 >
-                  <span
-                    className={`${anton.className} absolute top-4 right-6 text-6xl text-white/4 transition-colors duration-300 group-hover:text-teal-400/10`}
-                  >
-                    {num}
-                  </span>
-                  <Icon
-                    className="relative z-10 text-teal-400"
-                    size={28}
-                    strokeWidth={1.5}
-                  />
-                  <div className="relative z-10">
-                    <h3
-                      className={`${anton.className} text-2xl`}
-                    >
-                      {title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/55">
-                      {text}
-                    </p>
-                  </div>
+                  {num}
+                </span>
+                <Icon
+                  className="relative z-10 text-teal-400"
+                  size={28}
+                  strokeWidth={1.5}
+                />
+                <div className="relative z-10">
+                  <h3 className={`${anton.className} text-2xl`}>{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/55">
+                    {text}
+                  </p>
                 </div>
-              ),
-            )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -94,9 +78,7 @@ function Aftercare() {
       <section className="border-t border-white/10 px-6 pt-15 pb-20 lg:pb-50">
         <div className="mx-auto max-w-6xl">
           <div className="rules-header mb-10 flex items-baseline justify-between border-b border-white/10 pb-4">
-            <h2
-              className={`${anton.className} section-header text-3xl`}
-            >
+            <h2 className={`${anton.className} section-header text-3xl`}>
               Rules of Healing
             </h2>
             <span
@@ -163,7 +145,7 @@ function Aftercare() {
           </div>
         </div>
       </section>
-    </main>
+    </section>
   );
 }
 

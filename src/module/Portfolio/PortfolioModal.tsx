@@ -14,14 +14,12 @@ export interface PortfolioModalProps {
   onClose: () => void;
 }
 
-function PortfolioModal({
-  tattoo,
-  isOpen,
-  onClose,
-}: PortfolioModalProps) {
-  const { overlayRef, panelRef } = useAnimatePortfolioModal(
-    { tattoo, isOpen, onClose },
-  );
+function PortfolioModal({ tattoo, isOpen, onClose }: PortfolioModalProps) {
+  const { overlayRef, panelRef } = useAnimatePortfolioModal({
+    tattoo,
+    isOpen,
+    onClose,
+  });
 
   if (!tattoo) return null;
 
@@ -36,6 +34,7 @@ function PortfolioModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="tattoo-modal-title"
+      data-lenis-prevent
     >
       <div
         ref={panelRef}
@@ -62,10 +61,7 @@ function PortfolioModal({
 
         {/* Details side */}
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto overscroll-contain p-6 text-white md:p-8">
-          <h2
-            id="tattoo-modal-title"
-            className={`text-3xl ${anton.className}`}
-          >
+          <h2 id="tattoo-modal-title" className={`text-3xl ${anton.className}`}>
             {tattoo.title}
           </h2>
 
@@ -79,27 +75,19 @@ function PortfolioModal({
             {tattoo.artist && (
               <>
                 <dt className="text-white/50">Artist</dt>
-                <dd className="text-white">
-                  {tattoo.artist}
-                </dd>
+                <dd className="text-white">{tattoo.artist}</dd>
               </>
             )}
             {tattoo.duration && (
               <>
-                <dt className="text-white/50">
-                  Session Length
-                </dt>
-                <dd className="text-white">
-                  {tattoo.duration}
-                </dd>
+                <dt className="text-white/50">Session Length</dt>
+                <dd className="text-white">{tattoo.duration}</dd>
               </>
             )}
             {tattoo.date && (
               <>
                 <dt className="text-white/50">Date</dt>
-                <dd className="text-white">
-                  {tattoo.date}
-                </dd>
+                <dd className="text-white">{tattoo.date}</dd>
               </>
             )}
           </dl>

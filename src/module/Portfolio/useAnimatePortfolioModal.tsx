@@ -1,14 +1,13 @@
 import gsap from "gsap";
+import { useLenis } from "lenis/react";
 import { useEffect, useRef } from "react";
 
 import { PortfolioModalProps } from "./PortfolioModal";
 
-function useAnimatePortfolioModal({
-  isOpen,
-  onClose,
-}: PortfolioModalProps) {
+function useAnimatePortfolioModal({ isOpen, onClose }: PortfolioModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
 
   // Animate open/close
   useEffect(() => {
@@ -64,28 +63,23 @@ function useAnimatePortfolioModal({
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () =>
-      window.removeEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Prevent background scroll while open
+  // Lock Lenis (and native) scroll while open
   useEffect(() => {
-    const original = {
-      body: document.body.style.overflow,
-      html: document.documentElement.style.overflow,
-    };
+    if (!lenis) return;
 
     if (isOpen) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
+      lenis.stop();
+    } else {
+      lenis.start();
     }
 
     return () => {
-      document.body.style.overflow = original.body;
-      document.documentElement.style.overflow =
-        original.html;
+      lenis.start();
     };
-  }, [isOpen]);
+  }, [isOpen, lenis]);
 
   return {
     overlayRef,

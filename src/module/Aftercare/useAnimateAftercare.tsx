@@ -113,9 +113,7 @@ function useAnimateAftercare() {
     return () => ctx.revert();
   }, []);
 
-  return {
-    container,
-  };
+  return { container };
 }
 
 export default useAnimateAftercare;

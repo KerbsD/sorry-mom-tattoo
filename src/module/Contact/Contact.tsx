@@ -3,25 +3,25 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { anton, jetbrainsmono } from "@/utils/Fonts";
-import {
-  directContacts,
-  infoStrip,
-} from "@/constants/Contact/Contact";
+import { directContacts, infoStrip } from "@/constants/Contact/Contact";
+
+import useAnimateContact from "./useAnimateContact";
 
 function Contact() {
+  const { containerRef } = useAnimateContact();
+
   return (
-    <section className="min-h-screen bg-[#161616] text-white">
+    <section ref={containerRef} className="min-h-screen">
       {/* Hero */}
       <section className="px-6 pt-34 pb-12 text-center">
         <h1
-          className={`${anton.className} text-6xl leading-none sm:text-8xl`}
+          className={`${anton.className} hero-heading text-6xl leading-none sm:text-8xl`}
         >
           Let&apos;s Talk
         </h1>
 
-        <p className="mx-auto mt-6 max-w-xl text-sm text-white/60 sm:text-base">
-          Got questions, ideas, or ready to book your next
-          tattoo?
+        <p className="hero-copy mx-auto mt-6 max-w-xl text-sm text-white/60 sm:text-base">
+          Got questions, ideas, or ready to book your next tattoo?
           <br />
           Send us a message — we&apos;re here to help.
         </p>
@@ -35,7 +35,7 @@ function Contact() {
             {/* Messenger CTA */}
             <a
               href="#"
-              className="group flex items-center gap-5 border border-teal-400/40 bg-teal-400/5 p-6 transition-colors duration-300 hover:bg-teal-400/10 sm:p-8"
+              className="messenger-cta group flex items-center gap-5 border border-teal-400/40 bg-teal-400/5 p-6 transition-colors duration-300 hover:bg-teal-400/10 sm:p-8"
             >
               <Image
                 src="/messenger.svg"
@@ -69,31 +69,21 @@ function Contact() {
             {/* Other ways to reach us */}
             <div>
               <h2
-                className={`${anton.className} border-b border-white/10 pb-3 text-2xl`}
+                className={`${anton.className} contacts-header border-b border-white/10 pb-3 text-2xl`}
               >
                 Other Ways to Reach Us
               </h2>
 
-              <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+              <div className="contacts-grid mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 {directContacts.map(
-                  ({
-                    id,
-                    icon: Icon,
-                    image,
-                    label,
-                    value,
-                  }) => (
+                  ({ id, icon: Icon, image, label, value }) => (
                     <div
                       key={id}
-                      className="flex items-start gap-4"
+                      className="contact-item flex items-start gap-4"
                     >
                       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white">
                         {Icon ? (
-                          <Icon
-                            size={18}
-                            strokeWidth={2}
-                            color="#2DD4BF"
-                          />
+                          <Icon size={18} strokeWidth={2} color="#2DD4BF" />
                         ) : (
                           <Image
                             src={image}
@@ -110,7 +100,7 @@ function Contact() {
                         >
                           {label}
                         </p>
-                        <p className="text-sm font-medium text-white">
+                        <p className="text-sm font-medium text-wrap text-white">
                           {value}
                         </p>
                       </div>
@@ -122,45 +112,36 @@ function Contact() {
           </div>
 
           {/* Right column: map */}
-          <div className="flex flex-col gap-px border border-white/10">
+          <div className="map-card flex flex-col gap-px border border-white/10">
             <div className="relative aspect-505/308 w-full overflow-hidden bg-[#dcdcdc]">
-              <img
+              <Image
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 src="/bg-map.png"
                 alt="Map showing Sorry Mom Tattoo's location in Antipolo"
                 className="absolute inset-0 h-full w-full object-cover"
+                fill
+                loading="eager"
               />
             </div>
 
             {/* Info strip */}
-            <div className="grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
-              {infoStrip.map(
-                ({ id, icon: Icon, title, lines }) => (
-                  <div
-                    key={id}
-                    className="flex items-start gap-3 p-5"
-                  >
-                    <Icon
-                      size={18}
-                      className="mt-0.5 shrink-0 text-white"
-                    />
-                    <div>
-                      <p
-                        className={`${anton.className} text-sm`}
-                      >
-                        {title}
-                      </p>
-                      <p className="mt-1 text-sm leading-relaxed text-white/60">
-                        {lines.map((line, i) => (
-                          <span key={i}>
-                            {line}
-                            {i < lines.length - 1 && <br />}
-                          </span>
-                        ))}
-                      </p>
-                    </div>
+            <div className="info-strip grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+              {infoStrip.map(({ id, icon: Icon, title, lines }) => (
+                <div key={id} className="info-item flex items-start gap-3 p-5">
+                  <Icon size={18} className="mt-0.5 shrink-0 text-white" />
+                  <div>
+                    <p className={`${anton.className} text-sm`}>{title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/60">
+                      {lines.map((line, i) => (
+                        <span key={i}>
+                          {line}
+                          {i < lines.length - 1 && <br />}
+                        </span>
+                      ))}
+                    </p>
                   </div>
-                ),
-              )}
+                </div>
+              ))}
             </div>
           </div>
         </div>

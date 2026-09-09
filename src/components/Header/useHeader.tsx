@@ -11,7 +11,7 @@ function useHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const headerRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useLenis(({ scroll }) => {
@@ -70,18 +70,12 @@ function useHeader() {
     }
 
     if (isOpen) {
-      document.addEventListener(
-        "mousedown",
-        handleClickOutside,
-      );
+      document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleEscape);
     }
 
     return () => {
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutside,
-      );
+      document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
   }, [isOpen, setIsOpen]);

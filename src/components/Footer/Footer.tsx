@@ -9,7 +9,7 @@ export const FOOTER_COLUMNS: {
   title: string;
   headingClassName: string;
   content: React.ReactNode;
-  icon?: any;
+  icon?: React.ReactNode;
 }[] = [
   {
     title: "Follow",

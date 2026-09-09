@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWYZ";
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 function useScrambleText({ text }: { text: string }) {
   const [display, setDisplay] = useState(text);
