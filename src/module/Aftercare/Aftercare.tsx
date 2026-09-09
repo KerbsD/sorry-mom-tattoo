@@ -7,10 +7,10 @@ import { steps, dos, donts } from "@/constants/Aftercare/Aftercare";
 import useAnimateAftercare from "./useAnimateAftercare";
 
 function Aftercare() {
-  const { container } = useAnimateAftercare();
+  const { containerRef } = useAnimateAftercare();
 
   return (
-    <section ref={container}>
+    <section ref={containerRef}>
       {/* Hero */}
       <section className="flex min-h-[97vh] flex-col justify-center border-b border-white/10 px-6 pt-40 pb-16 text-center">
         <p
@@ -19,7 +19,7 @@ function Aftercare() {
           AFTERCARE GUIDE
         </p>
         <h1
-          className={`${anton.className} hero-heading mt-3 text-6xl leading-none sm:text-8xl`}
+          className={`${anton.className} hero-heading mt-3 text-6xl leading-none`}
         >
           Healing is part
           <br />

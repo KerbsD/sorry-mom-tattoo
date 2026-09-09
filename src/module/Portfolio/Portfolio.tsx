@@ -25,18 +25,16 @@ function Portfolio() {
   return (
     <section className="my-30 min-h-[75dvh] flex-1">
       <div className="flex flex-col items-center">
-        <h1 className={`text-[50px] ${anton.className}`}>
+        <h1 className={`mt-3 text-6xl leading-none ${anton.className}`}>
           SMT PORTFOLIO
         </h1>
-        <p className="border-t-2 border-teal-200 text-[15px]">
+        <p className="mt-6 text-sm text-white/60 sm:text-base">
           Gallery of tattoos done by Sorry Mom.
         </p>
       </div>
 
       <div className="relative mx-auto mt-20 max-w-5xl px-3 lg:max-w-7xl">
-        <h3
-          className={`mt-4 text-center text-2xl ${anton.className}`}
-        >
+        <h3 className={`mt-4 text-center text-2xl ${anton.className}`}>
           {PortfolioImages[selectedIndex].title}
         </h3>
         <button
@@ -56,35 +54,33 @@ function Portfolio() {
             className="my-15 flex lg:my-10"
             style={{ transformStyle: "preserve-3d" }}
           >
-            {PortfolioImages.map(
-              ({ src, title, style }, index) => (
+            {PortfolioImages.map(({ src, title, style }, index) => (
+              <div
+                onClick={() => setIsModalOpen(true)}
+                key={style}
+                className="min-w-0 flex-[0_0_70%] lg:flex-[0_0_40%]"
+              >
                 <div
-                  onClick={() => setIsModalOpen(true)}
-                  key={style}
-                  className="min-w-0 flex-[0_0_70%] lg:flex-[0_0_40%]"
+                  ref={(el) => {
+                    slideRefs.current[index] = el;
+                  }}
+                  className="relative"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    willChange: "transform",
+                  }}
                 >
-                  <div
-                    ref={(el) => {
-                      slideRefs.current[index] = el;
-                    }}
-                    className="relative"
-                    style={{
-                      transformStyle: "preserve-3d",
-                      willChange: "transform",
-                    }}
-                  >
-                    <Image
-                      src={src}
-                      alt={title}
-                      width={600}
-                      height={600}
-                      className="h-auto max-h-[70vh] w-full object-contain"
-                      loading="eager"
-                    />
-                  </div>
+                  <Image
+                    src={src}
+                    alt={title}
+                    width={600}
+                    height={600}
+                    className="h-auto max-h-[70vh] w-full object-contain"
+                    loading="eager"
+                  />
                 </div>
-              ),
-            )}
+              </div>
+            ))}
           </div>
         </div>
 
@@ -103,9 +99,7 @@ function Portfolio() {
             key={index}
             onClick={() => scrollTo(index)}
             className={`h-2 w-2 rounded-full transition-colors ${
-              index === selectedIndex
-                ? "bg-teal-400"
-                : "bg-white/40"
+              index === selectedIndex ? "bg-teal-400" : "bg-white/40"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

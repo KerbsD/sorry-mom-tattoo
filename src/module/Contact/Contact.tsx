@@ -15,7 +15,7 @@ function Contact() {
       {/* Hero */}
       <section className="px-6 pt-34 pb-12 text-center">
         <h1
-          className={`${anton.className} hero-heading text-6xl leading-none sm:text-8xl`}
+          className={`${anton.className} hero-heading text-6xl leading-none`}
         >
           Let&apos;s Talk
         </h1>

@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 function useAnimateAftercare() {
-  const container = useRef(null);
+  const containerRef = useRef(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -108,12 +108,12 @@ function useAnimateAftercare() {
           toggleActions: "play none none reverse",
         },
       });
-    }, container);
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
-  return { container };
+  return { containerRef };
 }
 
 export default useAnimateAftercare;
