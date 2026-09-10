@@ -17,6 +17,7 @@ interface HeaderNavProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   pathname: string;
+  isHome: boolean;
 }
 
 interface HeaderMobileProps extends HeaderNavProps {
@@ -24,11 +25,15 @@ interface HeaderMobileProps extends HeaderNavProps {
 }
 
 function HeaderDesktop(props: HeaderNavProps) {
-  const { pathname } = props;
+  const { pathname, isHome } = props;
 
   return (
     <>
-      <div className={styles["header-logo"]}>
+      <div
+        className={`${styles["header-logo"]} ${
+          isHome ? styles["header-logo--force-mobile"] : ""
+        }`}
+      >
         <Link href={"/"}>
           <Image
             src="/smt-logo.png"
@@ -40,43 +45,54 @@ function HeaderDesktop(props: HeaderNavProps) {
         </Link>
       </div>
 
-      {/* Desktop nav */}
-      <ul className={styles["header-items"]}>
-        {HeaderItems.map((item) => {
-          const isActive = pathname === item.link;
+      {/* Desktop nav — skipped entirely on the home page */}
+      {!isHome && (
+        <>
+          <ul className={styles["header-items"]}>
+            {HeaderItems.map((item) => {
+              const isActive = pathname === item.link;
 
-          return (
-            <li key={item.title}>
-              <Link
-                href={item.link}
-                className={`${styles["header-items__links"]} ${
-                  isActive
-                    ? styles["header-items__links-active"]
-                    : styles["header-items__links-inactive"]
-                }`}
-              >
-                <ScrambleText text={item.title} />
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+              return (
+                <li key={item.title}>
+                  <Link
+                    href={item.link}
+                    className={`${styles["header-items__links"]} ${
+                      isActive
+                        ? styles["header-items__links-active"]
+                        : styles["header-items__links-inactive"]
+                    }`}
+                  >
+                    <ScrambleText text={item.title} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
 
-      <div className={styles["booknow-btn"]}>
-        <HeaderButton />
-      </div>
+          <div className={styles["booknow-btn"]}>
+            <HeaderButton />
+          </div>
+        </>
+      )}
     </>
   );
 }
 
 function HeaderMobile(props: HeaderMobileProps) {
-  const { isOpen, setIsOpen, pathname, wrapperRef } = props;
+  const { isOpen, setIsOpen, pathname, wrapperRef, isHome } = props;
 
   return (
-    <div className={styles["header-mobile-wrapper"]} ref={wrapperRef}>
+    <div
+      className={`${styles["header-mobile-wrapper"]} ${
+        isHome ? styles["header-mobile-wrapper--force-visible"] : ""
+      }`}
+      ref={wrapperRef}
+    >
       {/* Mobile toggle button */}
       <button
-        className={styles["header-mobile-bgr-btn"]}
+        className={`${styles["header-mobile-bgr-btn"]} ${
+          isHome ? styles["header-mobile-bgr-btn--force-visible"] : ""
+        }`}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
@@ -125,24 +141,32 @@ function Header() {
   const { isOpen, setIsOpen, pathname, isScrolled, headerRef, wrapperRef } =
     useHeader();
 
+  const isHome = pathname === "/";
+
   return (
     <nav
       ref={headerRef}
       className={`${styles["header-main"]} ${
-        isScrolled ? styles["header-main--scrolled"] : ""
+        isScrolled && !isHome ? styles["header-main--scrolled"] : ""
       }`}
     >
-      <div className={styles["header-main__container"]}>
+      <div
+        className={`${styles["header-main__container"]} ${
+          isHome ? styles["header-main__container--force-mobile"] : ""
+        }`}
+      >
         <HeaderDesktop
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           pathname={pathname}
+          isHome={isHome}
         />
         <HeaderMobile
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           pathname={pathname}
           wrapperRef={wrapperRef}
+          isHome={isHome}
         />
       </div>
     </nav>

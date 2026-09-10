@@ -3,6 +3,10 @@
 // Desktop
 .header-logo {
   @apply lg:pl-12;
+
+  &--force-mobile {
+    @apply lg:pl-8;
+  }
 }
 
 .header-items {
@@ -32,10 +36,18 @@
 // Mobile
 .header-mobile-bgr-btn {
   @apply z-50 text-white lg:hidden;
+
+  &--force-visible {
+    @apply block!;
+  }
 }
 
 .header-mobile-wrapper {
   @apply relative lg:hidden;
+
+  &--force-visible {
+    @apply block!;
+  }
 }
 
 .header-mobile-container {
@@ -93,5 +105,9 @@
 
   &__container {
     @apply relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-0;
+
+    &--force-mobile {
+      @apply px-4!;
+    }
   }
 }

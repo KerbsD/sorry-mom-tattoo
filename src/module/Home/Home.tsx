@@ -1,7 +1,13 @@
+import HomeHero from "./HomeHero";
+import HomeTeaserVid from "./HomeTeaserVid";
+import HomeAbout from "./HomeAbout";
+
 function Home() {
   return (
-    <section className="flex min-h-dvh items-center justify-center">
-      Home
+    <section>
+      <HomeHero />
+      <HomeTeaserVid />
+      <HomeAbout />
     </section>
   );
 }

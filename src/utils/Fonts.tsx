@@ -1,8 +1,4 @@
-import {
-  Poppins,
-  Anton,
-  JetBrains_Mono,
-} from "next/font/google";
+import { Poppins, Anton, JetBrains_Mono, EB_Garamond } from "next/font/google";
 
 export const poppins = Poppins({
   variable: "--font-poppins",
@@ -19,5 +15,12 @@ export const anton = Anton({
 export const jetbrainsmono = JetBrains_Mono({
   variable: "--font-jetbrainsmono",
   weight: ["400", "600"],
+  subsets: ["latin"],
+});
+
+export const emgaramond = EB_Garamond({
+  variable: "--font-emgaramond",
+  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
