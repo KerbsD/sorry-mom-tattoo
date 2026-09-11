@@ -25,6 +25,10 @@
   /* 52px → 76px */
 }
 
+.rdp-root {
+  --rdp-accent-color: #ededed !important;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -56,4 +60,27 @@ html {
 html::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari, Opera */
+}
+
+.rdp-month_grid {
+  width: 100%;
+  table-layout: fixed;
+  /* forces all 7 columns to divide width equally, ignoring content size */
+}
+
+.rdp-weekday,
+.rdp-day {
+  width: 14.28%;
+  /* 100% / 7 days */
+  padding: 0;
+}
+
+.rdp-day_button {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* keeps cells square as they shrink instead of overflowing height-wise */
+  min-width: 0;
+  /* prevents buttons from forcing a min intrinsic width past the column */
+  font-size: clamp(0.7rem, 2.5vw, 0.875rem);
+  /* shrinks text at narrow widths so numbers don't wrap/clip */
 }

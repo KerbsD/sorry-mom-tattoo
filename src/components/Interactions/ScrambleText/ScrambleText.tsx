@@ -1,7 +1,6 @@
 "use client";
 
 import useScrambleText from "./useScrambleText";
-import styles from "./ScrambleText.module.scss";
 
 function ScrambleText({ text }: { text: string }) {
   const { spanRef, scramble, reset, width, display } = useScrambleText({
@@ -13,7 +12,7 @@ function ScrambleText({ text }: { text: string }) {
       ref={spanRef}
       onMouseEnter={scramble}
       onMouseLeave={reset}
-      className={styles["scramble-text"]}
+      className="inline-block tracking-tight text-base"
       style={{ width }}
     >
       {display}

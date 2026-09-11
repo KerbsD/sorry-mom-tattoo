@@ -1,11 +1,7 @@
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import useEmblaCarousel from "embla-carousel-react";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useRef, useState } from "react";
 import { PortfolioImages } from "@/constants/Portfolio/Images";
 
 function usePortfolio() {
@@ -16,22 +12,15 @@ function usePortfolio() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const scrollPrev = useCallback(
-    () => emblaApi?.scrollPrev(),
-    [emblaApi],
-  );
-  const scrollNext = useCallback(
-    () => emblaApi?.scrollNext(),
-    [emblaApi],
-  );
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   const scrollTo = useCallback(
     (index: number) => emblaApi?.scrollTo(index),
     [emblaApi],
   );
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const currentTattoo =
-    PortfolioImages[selectedIndex] ?? null;
+  const currentTattoo = PortfolioImages[selectedIndex] ?? null;
 
   const animateSlides = useCallback(() => {
     if (!emblaApi) return;
@@ -56,24 +45,28 @@ function usePortfolio() {
         x: direction * distance * 40,
         z: isActive ? 0 : -distance * 120,
         scale: isActive ? 1 : 0.85,
-        opacity: isActive
-          ? 1
-          : Math.max(0.1, 0.2 - distance * 0.35),
+        opacity: isActive ? 1 : Math.max(0.1, 0.2 - distance * 0.35),
         duration: 0.6,
         ease: "power2.out",
         transformPerspective: 1000,
-        transformOrigin:
-          direction > 0 ? "left center" : "right center",
+        transformOrigin: direction > 0 ? "left center" : "right center",
       });
     });
   }, [emblaApi]);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!emblaApi) return;
+
     animateSlides();
     emblaApi.on("select", animateSlides);
     emblaApi.on("reInit", animateSlides);
     emblaApi.on("scroll", animateSlides); // smoother live updates while dragging
+
+    return () => {
+      emblaApi.off("select", animateSlides);
+      emblaApi.off("reInit", animateSlides);
+      emblaApi.off("scroll", animateSlides);
+    };
   }, [emblaApi, animateSlides]);
 
   return {

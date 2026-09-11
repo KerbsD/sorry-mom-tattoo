@@ -1,6 +1,5 @@
 import gsap from "gsap";
-import styles from "./Header.module.scss";
-
+import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
@@ -18,30 +17,29 @@ function useHeader() {
     setIsScrolled(scroll > 20);
   });
 
-  //Header background animation
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useGSAP(
+    () => {
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
       });
 
-      tl.from(`.${styles["header-logo"]}`, {
+      tl.from(".header-logo", {
         opacity: 0,
         y: -20,
         duration: 0.6,
       })
         .from(
-          `.${styles["header-items"]} li`,
+          ".header-items",
           {
             opacity: 0,
             y: -20,
             duration: 0.6,
             stagger: 0.12,
           },
-          "-=0.3", // overlap slightly with the logo animation
+          "-=0.3",
         )
         .from(
-          `.${styles["booknow-btn"]}`,
+          ".booknow-btn",
           {
             opacity: 0,
             y: -20,
@@ -49,12 +47,10 @@ function useHeader() {
           },
           "-=0.3",
         );
-    }, headerRef);
+    },
+    { scope: headerRef },
+  );
 
-    return () => ctx.revert(); // cleanup on unmount
-  }, []);
-
-  //Mobile Dropdown Menu
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (

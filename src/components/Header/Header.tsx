@@ -11,8 +11,6 @@ import { Menu, X } from "lucide-react";
 import { Dispatch, SetStateAction, RefObject } from "react";
 import { HeaderItems } from "@/constants/Menu/MenuItems";
 
-import styles from "./Header.module.scss";
-
 interface HeaderNavProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -29,11 +27,7 @@ function HeaderDesktop(props: HeaderNavProps) {
 
   return (
     <>
-      <div
-        className={`${styles["header-logo"]} ${
-          isHome ? styles["header-logo--force-mobile"] : ""
-        }`}
-      >
+      <div className={isHome ? "lg:pl-8" : "lg:pl-12"}>
         <Link href={"/"}>
           <Image
             src="/smt-logo.png"
@@ -41,6 +35,7 @@ function HeaderDesktop(props: HeaderNavProps) {
             width={100}
             height={100}
             loading="eager"
+            className="header-logo"
           />
         </Link>
       </div>
@@ -48,18 +43,18 @@ function HeaderDesktop(props: HeaderNavProps) {
       {/* Desktop nav — skipped entirely on the home page */}
       {!isHome && (
         <>
-          <ul className={styles["header-items"]}>
+          <ul className="hidden gap-13 lg:flex">
             {HeaderItems.map((item) => {
               const isActive = pathname === item.link;
 
               return (
-                <li key={item.title}>
+                <li className="header-items" key={item.title}>
                   <Link
                     href={item.link}
-                    className={`${styles["header-items__links"]} ${
+                    className={`relative inline-block uppercase transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-teal-300 after:transition-transform after:duration-300 after:content-[''] ${
                       isActive
-                        ? styles["header-items__links-active"]
-                        : styles["header-items__links-inactive"]
+                        ? "text-teal-300 after:scale-x-100"
+                        : "text-white after:scale-x-0 hover:text-teal-300 hover:after:scale-x-100"
                     }`}
                   >
                     <ScrambleText text={item.title} />
@@ -69,7 +64,7 @@ function HeaderDesktop(props: HeaderNavProps) {
             })}
           </ul>
 
-          <div className={styles["booknow-btn"]}>
+          <div className="booknow-btn hidden lg:block lg:pr-12">
             <HeaderButton />
           </div>
         </>
@@ -83,16 +78,12 @@ function HeaderMobile(props: HeaderMobileProps) {
 
   return (
     <div
-      className={`${styles["header-mobile-wrapper"]} ${
-        isHome ? styles["header-mobile-wrapper--force-visible"] : ""
-      }`}
+      className={`relative lg:hidden ${isHome ? "block!" : ""}`}
       ref={wrapperRef}
     >
       {/* Mobile toggle button */}
       <button
-        className={`${styles["header-mobile-bgr-btn"]} ${
-          isHome ? styles["header-mobile-bgr-btn--force-visible"] : ""
-        }`}
+        className={`z-50 text-white lg:hidden ${isHome ? "block!" : ""}`}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
@@ -102,13 +93,13 @@ function HeaderMobile(props: HeaderMobileProps) {
 
       {/* Mobile menu dropdown */}
       <div
-        className={`${styles["header-mobile-container"]} ${
+        className={`absolute top-full right-0 mt-3 w-64 origin-top-right rounded-xl bg-[#1c1c1c] p-4 shadow-xl transition-[transform,opacity,visibility] duration-200 ease-out ${
           isOpen
-            ? styles["header-mobile-container__open"]
-            : styles["header-mobile-container__close"]
+            ? "pointer-events-auto visible translate-y-0 scale-100 opacity-100"
+            : "pointer-events-none invisible -translate-y-2 scale-95 opacity-0"
         }`}
       >
-        <ul className={styles["header-mobile-items"]}>
+        <ul className="flex flex-col gap-1">
           {HeaderItems.map((item) => {
             const isActive = pathname === item.link;
 
@@ -117,10 +108,10 @@ function HeaderMobile(props: HeaderMobileProps) {
                 <Link
                   href={item.link}
                   onClick={() => setIsOpen(false)}
-                  className={`${styles["header-mobile-items__links"]} ${
+                  className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                     isActive
-                      ? styles["header-mobile-items__links-active"]
-                      : styles["header-mobile-items__links-inactive"]
+                      ? "bg-white/10 text-white"
+                      : "text-white/70 hover:bg-white/5 hover:text-white"
                   }`}
                 >
                   {item.title}
@@ -129,7 +120,7 @@ function HeaderMobile(props: HeaderMobileProps) {
             );
           })}
         </ul>
-        <div className={styles["booknow-mobile-btn"]}>
+        <div className="px-3 py-2 lg:hidden">
           <HeaderButton />
         </div>
       </div>
@@ -146,13 +137,13 @@ function Header() {
   return (
     <nav
       ref={headerRef}
-      className={`${styles["header-main"]} ${
-        isScrolled && !isHome ? styles["header-main--scrolled"] : ""
+      className={`fixed top-0 right-0 left-0 z-50 bg-transparent before:absolute before:inset-0 before:-z-10 before:origin-top before:bg-[#161616] before:transition-transform before:duration-400 before:ease-in-out before:content-[''] ${
+        isScrolled && !isHome ? "before:scale-y-100" : "before:scale-y-0"
       }`}
     >
       <div
-        className={`${styles["header-main__container"]} ${
-          isHome ? styles["header-main__container--force-mobile"] : ""
+        className={`relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-0 ${
+          isHome ? "px-4!" : ""
         }`}
       >
         <HeaderDesktop

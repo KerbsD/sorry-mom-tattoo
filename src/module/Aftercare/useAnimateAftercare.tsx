@@ -1,5 +1,6 @@
 import gsap from "gsap";
-import { useRef, useLayoutEffect } from "react";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -7,9 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
 function useAnimateAftercare() {
   const containerRef = useRef(null);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // ---- Hero intro (plays on load, no scroll trigger) ----
+  useGSAP(
+    () => {
       const heroTl = gsap.timeline({
         defaults: { ease: "power3.out" },
       });
@@ -108,10 +108,9 @@ function useAnimateAftercare() {
           toggleActions: "play none none reverse",
         },
       });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+    },
+    { scope: containerRef },
+  );
 
   return { containerRef };
 }

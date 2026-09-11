@@ -1,10 +1,9 @@
-import styles from "./HeaderButton.module.scss";
 import { CircleArrowRight } from "lucide-react";
 
 function HeaderButton() {
   return (
-    <button className={styles["header-button--main"]}>
-      <span className={styles["header-button--span"]}>BOOK NOW</span>
+    <button className="flex items-center justify-center gap-1 rounded-md border-2 border-teal-400 px-2 py-1 text-sm text-teal-300 transition hover:bg-teal-400 hover:text-black">
+      <span className="text-base font-semibold tracking-tight">BOOK NOW</span>
       <CircleArrowRight size={20} />
     </button>
   );
