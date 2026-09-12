@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 
@@ -7,16 +7,42 @@ interface CalendarProps {
   setDate: (date: Date | undefined) => void;
 }
 
+// If the given date lands on a Sat/Sun, roll forward to the next Monday
+function getNextAvailableDate(input: Date): Date {
+  const date = new Date(input);
+  const day = date.getDay();
+
+  if (day === 6) {
+    // Saturday -> +2 days
+    date.setDate(date.getDate() + 2);
+  } else if (day === 0) {
+    // Sunday -> +1 day
+    date.setDate(date.getDate() + 1);
+  }
+
+  return date;
+}
+
 const QUICK_SELECT_OPTIONS = [
   {
     label: "Reset",
-    getDate: () => new Date(),
+    getDate: () => getNextAvailableDate(new Date()),
   },
 ];
 
 function Calendar(props: CalendarProps) {
   const { date, setDate } = props;
   const [displayMonth, setDisplayMonth] = useState<Date>(new Date());
+
+  // On mount: if no date is selected yet, default to today —
+  // but if today is disabled (weekend), jump to the next available weekday
+  useEffect(() => {
+    const initialDate = getNextAvailableDate(new Date());
+    setDate(initialDate);
+    setDisplayMonth(initialDate);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="w-full">
@@ -61,8 +87,9 @@ function Calendar(props: CalendarProps) {
             key={label}
             type="button"
             onClick={() => {
-              setDate(getDate());
-              setDisplayMonth(getDate());
+              const nextDate = getDate();
+              setDate(nextDate);
+              setDisplayMonth(nextDate);
             }}
             className="flex-1 rounded-md border border-white/10 bg-[#2a2a2a] px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >

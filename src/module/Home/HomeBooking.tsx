@@ -1,9 +1,13 @@
+// HomeBooking.tsx
 "use client";
 
 import Image from "next/image";
+import { FormikProvider } from "formik";
 import { anton } from "@/utils/Fonts";
-import Calendar from "@/components/Calendar/Calendar";
 import useHomeBooking from "./hooks/useHomeBooking";
+import FormInput from "@/components/Form/FormInput";
+import BookingCalendar from "@/components/Form/Booking/BookingCalendar";
+import BookingFormButton from "@/components/Form/Booking/BoookingFormButton";
 
 function HomeBooking() {
   const { formik, formattedDate } = useHomeBooking();
@@ -27,91 +31,42 @@ function HomeBooking() {
           BOOK A SESSION
         </h2>
 
-        <form
-          onSubmit={formik.handleSubmit}
-          className="rounded-2xl border border-white/10 bg-[#161616] p-6"
-        >
-          {/* Name inputs */}
-          <div className="mb-4 flex flex-col gap-4 sm:flex-row">
-            <div className="flex-1">
-              <input
-                type="text"
+        <FormikProvider value={formik}>
+          <form
+            onSubmit={formik.handleSubmit}
+            className="rounded-2xl border border-white/10 bg-[#161616] p-6"
+          >
+            <div className="mb-4 flex flex-col gap-4 sm:flex-row">
+              <FormInput
                 name="firstName"
                 placeholder="First Name"
-                value={formik.values.firstName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full rounded-lg border border-white/10 bg-[#2a2a2a] px-4 py-3 text-white placeholder:text-white/40 focus:border-teal-400 focus:outline-none"
+                className="flex-1"
               />
-              {formik.touched.firstName && formik.errors.firstName && (
-                <p className="mt-1 text-xs text-red-400">
-                  {formik.errors.firstName}
-                </p>
-              )}
-            </div>
-
-            <div className="flex-1">
-              <input
-                type="text"
+              <FormInput
                 name="lastName"
                 placeholder="Last Name"
-                value={formik.values.lastName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full rounded-lg border border-white/10 bg-[#2a2a2a] px-4 py-3 text-white placeholder:text-white/40 focus:border-teal-400 focus:outline-none"
+                className="flex-1"
               />
-              {formik.touched.lastName && formik.errors.lastName && (
-                <p className="mt-1 text-xs text-red-400">
-                  {formik.errors.lastName}
-                </p>
-              )}
             </div>
-          </div>
 
-          {/* Email */}
-          <div className="mb-4">
-            <input
-              type="email"
+            <FormInput
               name="email"
+              type="email"
               placeholder="Email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className="w-full rounded-lg border border-white/10 bg-[#2a2a2a] px-4 py-3 text-white placeholder:text-white/40 focus:border-teal-400 focus:outline-none"
+              className="mb-4"
             />
-            {formik.touched.email && formik.errors.email && (
-              <p className="mt-1 text-xs text-red-400">{formik.errors.email}</p>
-            )}
-          </div>
 
-          {/* Date picker */}
-          <p className="mb-4 text-sm text-white/70">Pick a Date:</p>
+            <p className="mb-4 text-sm text-white/70">Pick a Date:</p>
+            <BookingCalendar />
 
-          <Calendar
-            date={formik.values.date}
-            setDate={(d: Date | undefined) => formik.setFieldValue("date", d)}
-          />
-
-          {formik.touched.date && formik.errors.date && (
-            <p className="mt-1 text-xs text-red-400">
-              {String(formik.errors.date)}
-            </p>
-          )}
-
-          {/* Selected date + submit */}
-          <div className="mt-6 flex items-center justify-between">
-            <p className="text-sm font-semibold text-white/90">
-              Date: {formattedDate}
-            </p>
-            <button
-              type="submit"
-              disabled={formik.isSubmitting}
-              className="rounded-md border-2 border-teal-400 px-4 py-2 text-sm font-semibold text-nowrap text-teal-300 transition hover:bg-teal-400 hover:text-black disabled:opacity-50"
-            >
-              {formik.isSubmitting ? "Booking..." : "Book Now"}
-            </button>
-          </div>
-        </form>
+            <div className="mt-6 flex items-center justify-between">
+              <p className="text-sm font-semibold text-white/90">
+                Date: {formattedDate}
+              </p>
+              <BookingFormButton />
+            </div>
+          </form>
+        </FormikProvider>
       </div>
     </section>
   );
