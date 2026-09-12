@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FormikProvider } from "formik";
 import { anton } from "@/utils/Fonts";
 import useHomeBooking from "./hooks/useHomeBooking";
-import FormInput from "@/components/Form/FormInput";
+import FormInput from "@/components/Form/Booking/FormInput";
 import BookingCalendar from "@/components/Form/Booking/BookingCalendar";
 import BookingFormButton from "@/components/Form/Booking/BoookingFormButton";
 
