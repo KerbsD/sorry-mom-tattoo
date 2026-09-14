@@ -13,7 +13,7 @@ function Contact() {
   return (
     <section ref={containerRef} className="min-h-screen">
       {/* Hero */}
-      <section className="px-6 pt-34 pb-12 text-center">
+      <section className="px-6 pt-40 pb-12 text-center">
         <h1
           className={`${anton.className} hero-heading text-6xl leading-none`}
         >

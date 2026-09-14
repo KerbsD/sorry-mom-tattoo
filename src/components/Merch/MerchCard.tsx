@@ -9,7 +9,7 @@ interface MerchCardProps {
 
 function MerchCard({ product }: MerchCardProps) {
   return (
-    <div className="flex max-w-75 flex-col">
+    <div className="merch-card flex max-w-75 flex-col z-10">
       <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-white">
         <Image
           src={product.image}

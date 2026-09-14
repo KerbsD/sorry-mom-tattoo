@@ -129,10 +129,15 @@ function HeaderMobile(props: HeaderMobileProps) {
 }
 
 function Header() {
-  const { isOpen, setIsOpen, pathname, isScrolled, headerRef, wrapperRef } =
-    useHeader();
-
-  const isHome = pathname === "/";
+  const {
+    isOpen,
+    setIsOpen,
+    pathname,
+    isScrolled,
+    headerRef,
+    wrapperRef,
+    isHome,
+  } = useHeader();
 
   return (
     <nav

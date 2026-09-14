@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 function useHeader() {
   const pathname = usePathname();
 
+  const isHome = pathname === "/";
+
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -19,6 +21,8 @@ function useHeader() {
 
   useGSAP(
     () => {
+      if (isHome) return;
+
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
       });
@@ -48,7 +52,7 @@ function useHeader() {
           "-=0.3",
         );
     },
-    { scope: headerRef },
+    { scope: headerRef, dependencies: [isHome] },
   );
 
   useEffect(() => {
@@ -83,6 +87,7 @@ function useHeader() {
     isScrolled,
     headerRef,
     wrapperRef,
+    isHome,
   };
 }
 
