@@ -38,13 +38,8 @@ function HomeBooking() {
           >
             <div className="mb-4 flex flex-col gap-4 sm:flex-row">
               <FormInput
-                name="firstName"
-                placeholder="First Name"
-                className="flex-1"
-              />
-              <FormInput
-                name="lastName"
-                placeholder="Last Name"
+                name="fullName"
+                placeholder="Full Name"
                 className="flex-1"
               />
             </div>
