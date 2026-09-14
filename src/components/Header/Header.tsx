@@ -54,7 +54,7 @@ function HeaderDesktop(props: HeaderNavProps) {
                     className={`relative inline-block uppercase transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-teal-300 after:transition-transform after:duration-300 after:content-[''] ${
                       isActive
                         ? "text-teal-300 after:scale-x-100"
-                        : "text-white after:scale-x-0 hover:text-teal-300 hover:after:scale-x-100"
+                        : "mix-blend-difference after:scale-x-0 hover:text-teal-300 hover:after:scale-x-100"
                     }`}
                   >
                     <ScrambleText text={item.title} />
