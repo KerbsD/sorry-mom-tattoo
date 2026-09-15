@@ -3,15 +3,13 @@ import { useFormik } from "formik";
 import { bookingSchema } from "@/schemas/bookingSchema";
 
 interface BookingValues {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   date: Date | undefined;
 }
 
 const initialValues: BookingValues = {
-  firstName: "",
-  lastName: "",
+  fullName: "",
   email: "",
   date: new Date(),
 };

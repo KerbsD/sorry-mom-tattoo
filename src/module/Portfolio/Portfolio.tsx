@@ -23,17 +23,19 @@ function Portfolio() {
   } = usePortfolio();
 
   return (
-    <section className="my-30 min-h-[75dvh] flex-1">
-      <div className="flex flex-col items-center">
-        <h1 className={`mt-3 text-6xl leading-none ${anton.className}`}>
+    <section className="min-h-[75dvh] flex-1">
+      <div className="flex flex-col items-center pt-40">
+        <h1
+          className={`portfolio-heading text-6xl leading-none ${anton.className}`}
+        >
           SMT PORTFOLIO
         </h1>
-        <p className="mt-6 text-sm text-white/60 sm:text-base">
+        <p className="portfolio-copy mt-6 text-sm text-white/60 sm:text-base">
           Gallery of tattoos done by Sorry Mom.
         </p>
       </div>
 
-      <div className="relative mx-auto mt-20 max-w-5xl px-3 lg:max-w-7xl">
+      <div className="relative mx-auto mt-12 max-w-5xl px-3 lg:max-w-7xl">
         <h3 className={`mt-4 text-center text-2xl ${anton.className}`}>
           {PortfolioImages[selectedIndex].title}
         </h3>
@@ -93,7 +95,7 @@ function Portfolio() {
         </button>
       </div>
 
-      <div className="mt-12 flex justify-center gap-2">
+      <div className="mt-8 flex justify-center gap-2 pb-40">
         {PortfolioImages.map((_, index) => (
           <button
             key={index}

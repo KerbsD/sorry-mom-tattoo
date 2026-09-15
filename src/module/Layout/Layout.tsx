@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-
+import ScrollToTop from "@/utils/ScrollToTop";
 interface Props {
   children: ReactNode;
 }
@@ -9,8 +9,9 @@ interface Props {
 function Layout({ children }: Props) {
   return (
     <>
+      <ScrollToTop />
       <Header />
-      <main className="flex flex-col grow shrink-0 basis-auto">{children}</main>
+      <main className="flex shrink-0 grow basis-auto flex-col">{children}</main>
       <Footer />
     </>
   );

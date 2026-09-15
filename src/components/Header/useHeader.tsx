@@ -1,17 +1,18 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { usePathname } from "next/navigation";
+
+import useClickOutside from "../hooks/useClickOutside";
 
 function useHeader() {
   const pathname = usePathname();
-
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen, wrapperRef } = useClickOutside();
   const [isScrolled, setIsScrolled] = useState(false);
-
   const headerRef = useRef<HTMLElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const isHome = pathname === "/";
 
   useLenis(({ scroll }) => {
     setIsScrolled(scroll > 20);
@@ -19,6 +20,8 @@ function useHeader() {
 
   useGSAP(
     () => {
+      if (isHome) return;
+
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
       });
@@ -48,33 +51,8 @@ function useHeader() {
           "-=0.3",
         );
     },
-    { scope: headerRef },
+    { scope: headerRef, dependencies: [isHome] },
   );
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    }
-
-    function handleEscape(e: KeyboardEvent) {
-      if (e.key === "Escape") setIsOpen(false);
-    }
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("keydown", handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [isOpen, setIsOpen]);
 
   return {
     isOpen,
@@ -83,6 +61,7 @@ function useHeader() {
     isScrolled,
     headerRef,
     wrapperRef,
+    isHome,
   };
 }
 
