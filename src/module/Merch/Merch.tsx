@@ -2,7 +2,7 @@
 "use client";
 
 import { anton } from "@/utils/Fonts";
-import MerchCard from "@/components/Merch/MerchCard";
+import MerchCard from "@/module/Merch/MerchCard";
 import { categories } from "@/constants/Merch/Products";
 import useAnimateMerch from "@/module/Merch/useAnimateMerch";
 import MerchFilterDropdown from "@/components/Filters/Merch/MerchFilterDropdown";

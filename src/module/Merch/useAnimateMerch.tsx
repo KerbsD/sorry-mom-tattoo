@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { products, categories } from "@/constants/Merch/Products";
+import { products } from "@/constants/Merch/Products";
 
 function useAnimateMerch() {
   const [activeCategory, setActiveCategory] = useState("All");
