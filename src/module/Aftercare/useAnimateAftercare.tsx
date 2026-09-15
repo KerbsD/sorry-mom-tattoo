@@ -39,7 +39,6 @@ function useAnimateAftercare() {
           "-=0.5",
         );
 
-      // ---- Steps section header ----
       gsap.from(".steps-header > *", {
         y: 20,
         opacity: 0,
@@ -53,7 +52,6 @@ function useAnimateAftercare() {
         },
       });
 
-      // ---- Steps grid cards ----
       gsap.from(".step-card", {
         y: 40,
         opacity: 0,
@@ -67,7 +65,6 @@ function useAnimateAftercare() {
         },
       });
 
-      // ---- Rules header ----
       gsap.from(".rules-header > *", {
         y: 20,
         opacity: 0,
@@ -81,7 +78,6 @@ function useAnimateAftercare() {
         },
       });
 
-      // ---- Do's / Don'ts columns ----
       gsap.from(".rules-col", {
         y: 30,
         opacity: 0,
@@ -95,7 +91,6 @@ function useAnimateAftercare() {
         },
       });
 
-      // Items within each column stagger in slightly after the column
       gsap.from(".rule-item", {
         x: -12,
         opacity: 0,

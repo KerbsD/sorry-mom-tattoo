@@ -7,7 +7,7 @@ import { anton } from "@/utils/Fonts";
 import useHomeBooking from "./hooks/useHomeBooking";
 import FormInput from "@/components/Form/Booking/FormInput";
 import BookingCalendar from "@/components/Form/Booking/BookingCalendar";
-import BookingFormButton from "@/components/Form/Booking/BoookingFormButton";
+import BookingFormButton from "@/components/Form/Booking/BookingFormButton";
 
 function HomeBooking() {
   const { formik, formattedDate } = useHomeBooking();
@@ -15,7 +15,7 @@ function HomeBooking() {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center px-6 py-16">
       <Image
-        src="/booking-bg.jpg"
+        src="/booking-bg.JPG"
         alt="Tattoo studio table with ink and equipment"
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

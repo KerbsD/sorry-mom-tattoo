@@ -16,7 +16,6 @@ function useAnimateHomeAbout() {
     () => {
       if (!textRef.current) return;
 
-      // Text line reveal
       const split = new SplitText(textRef.current, {
         type: "lines",
         linesClass: "line",

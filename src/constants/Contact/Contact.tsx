@@ -66,3 +66,5 @@ export const infoStrip = [
     lines: ["Street parking available", "near the shop."],
   },
 ];
+
+

@@ -23,12 +23,12 @@ function Merch() {
         {/* Hero */}
         <div ref={heroRef} className="text-center">
           <h1
-            className={`${anton.className} hero-heading text-6xl leading-none`}
+            className={`merch-heading ${anton.className} hero-heading text-6xl leading-none`}
           >
             SMT Merch
           </h1>
 
-          <p className="hero-copy mx-auto mt-6 max-w-xl text-sm text-white/60 sm:text-base">
+          <p className="merch-copy hero-copy mx-auto mt-6 max-w-xl text-sm text-white/60 sm:text-base">
             Collection of merch from SMT.
           </p>
         </div>

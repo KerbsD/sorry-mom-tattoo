@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import useClickOutside from "@/components/hooks/useClickOutside";
 
 interface MerchFilterDropdownProps {
   onChange: (category: string) => void;
@@ -7,23 +7,7 @@ interface MerchFilterDropdownProps {
 function useMerchFilterDropdown(props: MerchFilterDropdownProps) {
   const { onChange } = props;
 
-  const [isOpen, setIsOpen] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-  // Close on outside click
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const { isOpen, setIsOpen, wrapperRef } = useClickOutside();
 
   function handleSelect(category: string) {
     onChange(category);
