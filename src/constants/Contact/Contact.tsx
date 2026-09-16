@@ -30,19 +30,19 @@ export const directContacts: ContactMethod[] = [
   },
   {
     id: "instagram",
-    image: "/instagram.svg",
+    image: "/socials/instagram.svg",
     label: "INSTAGRAM",
     value: "@sorrymom.tattoo",
   },
   {
     id: "facebook",
-    image: "/facebook.svg",
+    image: "/socials/facebook.svg",
     label: "FACEBOOK",
     value: "Sorry Mom Tattoo",
   },
   {
     id: "tiktok",
-    image: "/tiktok.svg", // no lucide icon for TikTok, falls back to next/image
+    image: "/socials/tiktok.svg", // no lucide icon for TikTok, falls back to next/image
     label: "TIKTOK",
     value: "@sorrymom.tattoo",
   },

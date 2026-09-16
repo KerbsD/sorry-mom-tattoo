@@ -2,15 +2,18 @@ export const ICON_SIZE = 30;
 
 export const SOCIAL_LINKS = [
   {
-    src: "/instagram.svg",
+    src: "/socials/instagram.svg",
     alt: "Instagram logo",
+    href: "https://instagram.com",
   },
   {
-    src: "/facebook.svg",
+    src: "/socials/facebook.svg",
     alt: "Facebook logo",
+    href: "https://facebook.com",
   },
   {
-    src: "/tiktok.svg",
+    src: "/socials/tiktok.svg",
     alt: "Tiktok logo",
+    href: "https://tiktok.com",
   },
 ] as const;

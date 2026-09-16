@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { anton } from "@/utils/Fonts";
 import { MapPin, Send } from "lucide-react";
 import { SOCIAL_LINKS, ICON_SIZE } from "@/constants/Footer/Footers";
@@ -15,15 +16,16 @@ export const FOOTER_COLUMNS: {
       "uppercase font-bold leading-none mb-4 text-lg md:text-xl flex gap-2 tracking-tigher",
     content: (
       <div className="flex gap-4">
-        {SOCIAL_LINKS.map(({ src, alt }) => (
-          <Image
-            key={src}
-            src={src}
-            alt={alt}
-            width={ICON_SIZE}
-            height={ICON_SIZE}
-            loading="eager"
-          />
+        {SOCIAL_LINKS.map(({ src, alt, href }) => (
+          <Link key={src} href={href} target="_blank" rel="noopener noreferrer">
+            <Image
+              src={src}
+              alt={alt}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
+              loading="eager"
+            />
+          </Link>
         ))}
       </div>
     ),

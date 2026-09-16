@@ -38,7 +38,7 @@ function Contact() {
               className="messenger-cta group flex items-center gap-5 border border-teal-400/40 bg-teal-400/5 p-6 transition-colors duration-300 hover:bg-teal-400/10 sm:p-8"
             >
               <Image
-                src="/messenger.svg"
+                src="/socials/messenger.svg"
                 alt="Messenger"
                 width={56}
                 height={56}
