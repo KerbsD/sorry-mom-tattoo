@@ -1,3 +1,4 @@
+// useAnimateHomeAbout.tsx
 import gsap from "gsap";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
@@ -8,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 function useAnimateHomeAbout() {
   const textRef = useRef<HTMLParagraphElement>(null);
+  const textPanelRef = useRef<HTMLDivElement>(null); // new
   const sectionRef = useRef<HTMLDivElement>(null);
   const cellsRef = useRef<HTMLDivElement[]>([]);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
@@ -40,10 +42,7 @@ function useAnimateHomeAbout() {
         duration: 0.6,
         transformOrigin: "top",
         ease: "power2.out",
-        stagger: {
-          each: 0.015,
-          from: "random",
-        },
+        stagger: { each: 0.015, from: "random" },
         scrollTrigger: {
           trigger: imageWrapperRef.current,
           start: "top 90%",
@@ -51,12 +50,21 @@ function useAnimateHomeAbout() {
         },
       });
 
+      // Pin the text panel while the section scrolls past
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "+=600", // how long (in px) the text stays locked — tune to taste
+        pin: textPanelRef.current,
+        pinSpacing: false, // section is flex-row; text panel doesn't need reserved space
+      });
+
       return () => split.revert();
     },
     { scope: sectionRef },
   );
 
-  return { textRef, sectionRef, cellsRef, imageWrapperRef };
+  return { textRef, textPanelRef, sectionRef, cellsRef, imageWrapperRef };
 }
 
 export default useAnimateHomeAbout;

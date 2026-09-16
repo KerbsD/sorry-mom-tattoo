@@ -17,7 +17,7 @@ export const designs: Design[] = [
       "The ability to see people, objects, locations, or events in the past, present or future.",
     style: "Minimalist",
     placement: "Forearm / Chest",
-    image: "/designs/clear-vision.png",
+    image: "/design/dfs-1.png",
     category: "Minimalist",
   },
   {
@@ -27,7 +27,7 @@ export const designs: Design[] = [
       "A symbol of death, the end of time on Earth, but also a symbol of rebirth and new beginnings when turned over.",
     style: "Black & Grey Illustrative",
     placement: "Forearm / Calf",
-    image: "/designs/sands-of-time.png",
+    image: "/design/dfs-2.png",
     category: "Black & Grey",
   },
   {
@@ -36,7 +36,7 @@ export const designs: Design[] = [
     description: "Change how you feel by changing the way you think.",
     style: "Minimalist",
     placement: "Forearm / Spine",
-    image: "/designs/change-your-mind.png",
+    image: "/design/dfs-3.png",
     category: "Minimalist",
   },
   {
@@ -46,7 +46,7 @@ export const designs: Design[] = [
       "Trusting in God's plan and facing our fears but not allowing them to control or consume us.",
     style: "Illustrative",
     placement: "Arm / Shoulder",
-    image: "/designs/faith-over-fear.png",
+    image: "/design/dfs-4.png",
     category: "Illustrative",
   },
   // ...add the rest of your real designs here

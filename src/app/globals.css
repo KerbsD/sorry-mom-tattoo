@@ -50,16 +50,42 @@ body {
   color: var(--foreground);
 }
 
-html {
+/* html {
   overflow-x: scroll;
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
 }
 
 html::-webkit-scrollbar {
   display: none;
-  /* Chrome, Safari, Opera */
+} */
+
+html {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  /* keeps layout from shifting when scrollbar appears */
+}
+
+html::-webkit-scrollbar {
+  width: 6px;
+  /* thin, like the image */
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+  /* no visible track */
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  /* light purple, matches your screenshot */
+  border-radius: 9999px;
+  /* fully rounded pill shape */
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background-color: #bdbdbd;
+  /* slightly lighter on hover */
 }
 
 .rdp-month_grid {

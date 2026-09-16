@@ -4,6 +4,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useRef, useState } from "react";
 import { PortfolioImages } from "@/constants/Portfolio/Images";
 
+import useClickOutside from "@/components/hooks/useClickOutside";
+
 function usePortfolio() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
@@ -19,8 +21,13 @@ function usePortfolio() {
     [emblaApi],
   );
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen, setIsOpen } = useClickOutside();
+
   const currentTattoo = PortfolioImages[selectedIndex] ?? null;
+
+  const toggleModal = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   const animateSlides = useCallback(() => {
     if (!emblaApi) return;
@@ -84,8 +91,8 @@ function usePortfolio() {
     scrollNext,
     scrollTo,
     slideRefs,
-    isModalOpen,
-    setIsModalOpen,
+    isOpen,
+    toggleModal,
     currentTattoo,
   };
 }

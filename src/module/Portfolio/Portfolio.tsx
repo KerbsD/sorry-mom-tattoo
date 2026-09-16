@@ -17,8 +17,8 @@ function Portfolio() {
     scrollNext,
     scrollTo,
     slideRefs,
-    isModalOpen,
-    setIsModalOpen,
+    isOpen,
+    toggleModal,
     currentTattoo,
   } = usePortfolio();
 
@@ -58,7 +58,7 @@ function Portfolio() {
           >
             {PortfolioImages.map(({ src, title, style }, index) => (
               <div
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => toggleModal()}
                 key={style}
                 className="min-w-0 flex-[0_0_70%] lg:flex-[0_0_40%]"
               >
@@ -110,8 +110,8 @@ function Portfolio() {
 
       <PortfolioModal
         tattoo={currentTattoo}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isOpen}
+        onClose={() => toggleModal()}
       />
     </section>
   );

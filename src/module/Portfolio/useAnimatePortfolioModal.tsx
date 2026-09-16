@@ -5,12 +5,11 @@ import { useEffect, useRef } from "react";
 
 import { PortfolioModalProps } from "./PortfolioModal";
 
-function useAnimatePortfolioModal({ isOpen, onClose }: PortfolioModalProps) {
+function useAnimatePortfolioModal({ isOpen }: PortfolioModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
 
-  // Animate open/close
   useGSAP(
     () => {
       if (!overlayRef.current || !panelRef.current) return;
@@ -29,7 +28,7 @@ function useAnimatePortfolioModal({ isOpen, onClose }: PortfolioModalProps) {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.2,
+            duration: 0.3,
             ease: "power2.out",
           },
         );
@@ -58,19 +57,6 @@ function useAnimatePortfolioModal({ isOpen, onClose }: PortfolioModalProps) {
     { dependencies: [isOpen], scope: overlayRef },
   );
 
-  // Close on Escape key
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
-
-  // Lock Lenis (and native) scroll while open
   useEffect(() => {
     if (!lenis) return;
 

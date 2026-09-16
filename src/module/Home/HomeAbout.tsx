@@ -10,7 +10,7 @@ const GRID_ROWS = 5;
 const TOTAL_CELLS = GRID_COLS * GRID_ROWS;
 
 function HomeAbout() {
-  const { textRef, sectionRef, cellsRef, imageWrapperRef } =
+  const { textRef, textPanelRef, sectionRef, cellsRef, imageWrapperRef } =
     useAnimateHomeAbout();
 
   return (
@@ -19,7 +19,11 @@ function HomeAbout() {
       className="flex min-h-[98vh] flex-col sm:flex-row"
     >
       {/* Text panel */}
-      <div className="flex max-w-2xl items-end px-6 py-12 sm:px-12 sm:py-16">
+
+      <div
+        ref={textPanelRef}
+        className="flex max-w-2xl items-start px-6 py-12 sm:px-8 sm:py-20"
+      >
         <p
           ref={textRef}
           className="text-center text-2xl leading-snug font-light text-white sm:text-start sm:text-3xl"

@@ -42,7 +42,7 @@ function Design() {
               key={category}
               type="button"
               onClick={() => setActiveCategory(category)}
-              className={`text-sm font-semibold tracking-wide uppercase transition ${
+              className={`text-sm font-semibold tracking-wide uppercase ${
                 activeCategory === category
                   ? "border-b-2 border-teal-400 pb-1 text-teal-400"
                   : "pb-1 text-white/50 hover:text-white"
@@ -56,7 +56,7 @@ function Design() {
         {/* Design grid */}
         <div
           ref={gridRef}
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4"
         >
           {filteredDesigns.map((design) => (
             <DesignCard key={design.id} design={design} />

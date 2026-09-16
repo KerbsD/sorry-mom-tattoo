@@ -27,11 +27,16 @@ function useAnimateDesign() {
 
       tl.from(".design-heading", { y: 40, opacity: 0, duration: 0.7 })
         .from(".design-copy", { y: 20, opacity: 0, duration: 0.5 }, "-=0.5")
-        .fromTo(
+        .from(
           filtersRef.current?.children ?? [],
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.09, overwrite: true },
-          "-=0.4",
+          {
+            opacity: 0,
+            y: 12,
+            duration: 0.5,
+            stagger: 0.06,
+            overwrite: true,
+          },
+          "-=0.3",
         )
         .from(
           cards,
@@ -42,7 +47,7 @@ function useAnimateDesign() {
             stagger: 0.06,
             overwrite: true,
           },
-          "-=0.3",
+          "-=0.2",
         );
     },
     { scope: headingRef },
