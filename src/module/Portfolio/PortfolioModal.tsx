@@ -42,7 +42,7 @@ function PortfolioModal({ tattoo, isOpen, onClose }: PortfolioModalProps) {
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-10   text-white/80 transition-colors hover:text-white"
+          className="absolute top-3 right-3 z-10 text-white/80 transition-colors hover:text-white"
           aria-label="Close modal"
         >
           <X size={28} />

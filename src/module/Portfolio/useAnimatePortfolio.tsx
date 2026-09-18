@@ -23,11 +23,11 @@ function usePortfolio() {
 
   const { isOpen, setIsOpen } = useClickOutside();
 
-  const currentTattoo = PortfolioImages[selectedIndex] ?? null;
-
   const toggleModal = () => {
     setIsOpen((prev) => !prev);
   };
+
+  const currentTattoo = PortfolioImages[selectedIndex] ?? null;
 
   const animateSlides = useCallback(() => {
     if (!emblaApi) return;
