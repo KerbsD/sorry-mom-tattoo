@@ -1,11 +1,9 @@
-// components/Modal/Modal.tsx
 "use client";
 
-import { useEffect } from "react";
 import { X } from "lucide-react";
-import { createPortal } from "react-dom";
+import useAnimateModal from "./useAnimateModal";
 
-interface ModalProps {
+export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
@@ -13,50 +11,40 @@ interface ModalProps {
 }
 
 function Modal({ isOpen, onClose, children, title }: ModalProps) {
-  // Lock scroll + close on Escape while open
-  useEffect(() => {
-    if (!isOpen) return;
+  const { overlayRef, panelRef } = useAnimateModal({
+    isOpen,
+  });
 
-    document.body.style.overflow = "hidden";
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
+  // if (!isOpen) return;
 
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  return createPortal(
+  return (
     <div
-      className="fixed inset-0 z-100 flex items-center justify-center px-4"
+      ref={overlayRef}
+      className="fixed inset-0 z-50 hidden items-center justify-center overscroll-contain bg-black/70 backdrop-blur-sm"
+      style={{ display: "none" }}
       role="dialog"
+      onClick={(e) => {
+        if (e.target === overlayRef.current) onClose();
+      }}
       aria-modal="true"
-      aria-label={title}
+      labelledby-label={title}
+      data-lenis-prevent
     >
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
       {/* Content */}
-      <div className="relative z-10 w-full max-w-xl">
+      <div
+        ref={panelRef}
+        className="relative mx-4 flex h-120 w-full max-w-4xl flex-col rounded-lg bg-neutral-900 md:h-125 md:flex-row"
+      >
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute -top-10 right-0 text-white/70 transition-colors hover:text-white"
+          className="absolute z-1000 -top-10 right-0 text-white/70 transition-colors hover:text-white"
         >
           <X size={28} />
         </button>
         {children}
       </div>
-    </div>,
-    document.body,
+    </div>
   );
 }
 

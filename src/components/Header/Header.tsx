@@ -21,10 +21,6 @@ interface HeaderNavProps {
   onBookNowClick: () => void;
 }
 
-interface HeaderMobileProps extends HeaderNavProps {
-  wrapperRef: RefObject<HTMLDivElement | null>;
-}
-
 function HeaderDesktop(props: HeaderNavProps) {
   const { pathname, isHome, onBookNowClick } = props;
 
@@ -75,14 +71,13 @@ function HeaderDesktop(props: HeaderNavProps) {
   );
 }
 
-function HeaderMobile(props: HeaderMobileProps) {
-  const { isOpen, setIsOpen, pathname, wrapperRef, isHome, onBookNowClick } =
+function HeaderMobile(props: HeaderNavProps) {
+  const { isOpen, setIsOpen, pathname, isHome, onBookNowClick } =
     props;
 
   return (
     <div
       className={`relative lg:hidden ${isHome ? "block!" : ""}`}
-      ref={wrapperRef}
     >
       <button
         className={`z-50 text-white lg:hidden ${isHome ? "block!" : ""}`}
@@ -141,7 +136,6 @@ function Header() {
     pathname,
     isScrolled,
     headerRef,
-    wrapperRef,
     isHome,
     isBookingOpen,
     toggleBooking,
@@ -171,7 +165,6 @@ function Header() {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             pathname={pathname}
-            wrapperRef={wrapperRef}
             isHome={isHome}
             onBookNowClick={() => toggleBooking()}
           />
