@@ -10,7 +10,7 @@ interface MerchCardProps {
 function MerchCard({ product }: MerchCardProps) {
   return (
     <div className="merch-card z-10 flex max-w-75 flex-col">
-      <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-white">
+      <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-white">
         <Image
           src={product.image}
           alt={product.name}
@@ -29,7 +29,7 @@ function MerchCard({ product }: MerchCardProps) {
 
       <Link
         href={`/merch/${product.slug}`}
-        className="mt-3 flex items-center justify-center rounded-md bg-teal-400 px-4 py-2 text-sm font-semibold text-black transition hover:bg-teal-300"
+        className="mt-3 flex items-center justify-center rounded-sm bg-teal-400 px-4 py-2 text-sm font-semibold text-black transition hover:bg-teal-300"
       >
         View Product
       </Link>

@@ -79,8 +79,6 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar-thumb {
   background-color: #ffffff;
   /* light purple, matches your screenshot */
-  border-radius: 9999px;
-  /* fully rounded pill shape */
 }
 
 html::-webkit-scrollbar-thumb:hover {
@@ -109,4 +107,10 @@ html::-webkit-scrollbar-thumb:hover {
   /* prevents buttons from forcing a min intrinsic width past the column */
   font-size: clamp(0.7rem, 2.5vw, 0.875rem);
   /* shrinks text at narrow widths so numbers don't wrap/clip */
+}
+
+button,
+a {
+  cursor: pointer;
+  ;
 }

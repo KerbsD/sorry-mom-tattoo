@@ -36,7 +36,6 @@ function useAnimateHomeAbout() {
         },
       });
 
-      // Image reveal — randomized cube grid
       gsap.to(cellsRef.current, {
         height: 0,
         duration: 0.6,
@@ -50,13 +49,12 @@ function useAnimateHomeAbout() {
         },
       });
 
-      // Pin the text panel while the section scrolls past
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=600", // how long (in px) the text stays locked — tune to taste
-        pin: textPanelRef.current,
-        pinSpacing: false, // section is flex-row; text panel doesn't need reserved space
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false,
       });
 
       return () => split.revert();

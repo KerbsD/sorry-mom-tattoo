@@ -23,16 +23,16 @@ export const directContacts: ContactMethod[] = [
     value: "0912 345 6789",
   },
   {
-    id: "email",
-    icon: Mail,
-    label: "EMAIL",
-    value: "sorrymomtattoo@gmail.com",
-  },
-  {
     id: "instagram",
     image: "/socials/instagram.svg",
     label: "INSTAGRAM",
     value: "@sorrymom.tattoo",
+  },
+  {
+    id: "email",
+    icon: Mail,
+    label: "EMAIL",
+    value: "sorrymomtattoo@gmail.com",
   },
   {
     id: "facebook",

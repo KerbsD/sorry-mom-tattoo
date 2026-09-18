@@ -24,18 +24,20 @@ function useHomeBooking() {
 
       console.log("Booked:", values);
 
-      resetForm(); // wipes fields back to initialValues
+      resetForm();
       setSubmitting(false);
     },
   });
 
-  const formattedDate = formik.values.date
-    ? formik.values.date.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    : "No date selected";
+  const formattedDate = formik.values.date ? (
+    formik.values.date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })
+  ) : (
+    <span className="text-red-400 transition">No selected date</span>
+  );
 
   return { formik, formattedDate };
 }

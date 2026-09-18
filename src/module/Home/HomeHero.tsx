@@ -66,7 +66,7 @@ function HomeHero() {
       <div className="flex flex-col items-center sm:items-start">
         <h1
           ref={headingRef}
-          className={`hero-text ${anton.className} mb-4 text-center text-5xl tracking-wide text-white sm:text-6xl`}
+          className={`hero-text ${anton.className} mb-4 text-center text-4xl text-white md:text-left md:text-6xl`}
         >
           SORRY MOM TATTOO
         </h1>

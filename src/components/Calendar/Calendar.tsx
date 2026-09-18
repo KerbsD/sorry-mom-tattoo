@@ -64,15 +64,15 @@ function Calendar(props: CalendarProps) {
             "flex justify-center items-center h-9 font-medium text-white mb-2",
           nav: "flex items-center justify-between absolute inset-x-2 top-2",
           button_previous:
-            "h-7 w-7 flex items-center justify-center rounded-md text-white/70 hover:bg-white/10 hover:text-white",
+            "h-7 w-7 flex items-center justify-center rounded-md text-white/70 hover:bg-white/10 hover:text-white  ",
           button_next:
-            "h-7 w-7 flex items-center justify-center rounded-md text-white/70 hover:bg-white/10 hover:text-white",
+            "h-7 w-7 flex items-center justify-center rounded-md text-white/70 hover:bg-white/10 hover:text-white  ",
           weekdays: "flex justify-between",
           weekday: "flex-1 text-center text-xs font-normal text-white/50",
           week: "flex justify-between mt-1",
           day: "flex-1 flex items-center justify-center p-0",
           day_button:
-            "aspect-square w-full max-w-9 rounded-md text-sm font-normal text-white hover:bg-white/10 transition-colors",
+            "aspect-square w-full max-w-9 rounded-md text-sm font-normal text-white hover:bg-white/10 transition-colors  ",
           selected:
             "[&>button]:bg-teal-400 [&>button]:text-black [&>button]:hover:bg-teal-400",
           today: "[&>button]:border [&>button]:border-teal-400",

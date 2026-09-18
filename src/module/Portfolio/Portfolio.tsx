@@ -35,7 +35,7 @@ function Portfolio() {
         </p>
       </div>
 
-      <div className="relative mx-auto mt-12 max-w-5xl px-3 lg:max-w-7xl">
+      <div className="portfolio-images-container relative mx-auto mt-12 max-w-5xl px-3 lg:max-w-7xl">
         <h3 className={`mt-4 text-center text-2xl ${anton.className}`}>
           {PortfolioImages[selectedIndex].title}
         </h3>
@@ -60,7 +60,7 @@ function Portfolio() {
               <div
                 onClick={() => toggleModal()}
                 key={style}
-                className="min-w-0 flex-[0_0_70%] lg:flex-[0_0_40%]"
+                className="min-w-0 flex-[0_0_85%] sm:flex-[0_0_60%] md:flex-[0_0_50%] lg:flex-[0_0_36%]"
               >
                 <div
                   ref={(el) => {
@@ -77,7 +77,7 @@ function Portfolio() {
                     alt={title}
                     width={600}
                     height={600}
-                    className="h-auto max-h-[70vh] w-full object-contain"
+                    className="h-auto max-h-[70vh] w-full rounded-lg object-contain"
                     loading="eager"
                   />
                 </div>

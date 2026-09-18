@@ -14,7 +14,7 @@ function DesignCard({ design }: DesignCardProps) {
   const [isFavorited, setIsFavorited] = useState(false);
 
   return (
-    <div className="design-card flex flex-col rounded-lg">
+    <div className="design-card flex h-full flex-col rounded-lg">
       {/* Badge + favorite */}
       <div className="flex items-center justify-between">
         <span className="rounded-full border border-teal-500 px-3 py-1 text-xs font-semibold text-teal-600">
@@ -53,28 +53,27 @@ function DesignCard({ design }: DesignCardProps) {
 
       {/* Title + description */}
       <h3 className="mt-4 text-lg font-bold text-white">{design.title}</h3>
-      <p className="mt-2 min-h-25 text-sm text-white/70">
-        {design.description}
-      </p>
+      <p className="mt-2 text-sm text-white/70">{design.description}</p>
 
-      {/* Metadata */}
-      <div className="mt-4 space-y-1 text-sm text-white">
-        <p>
-          <span className="font-semibold">Style:</span> {design.style}
-        </p>
-        <p>
-          <span className="font-semibold">Placement:</span> {design.placement}
-        </p>
+      {/* Metadata + CTA — pinned to the bottom of the card */}
+      <div className="mt-auto">
+        <div className="mt-4 space-y-1 text-sm text-white">
+          <p>
+            <span className="font-semibold">Style:</span> {design.style}
+          </p>
+          <p>
+            <span className="font-semibold">Placement:</span> {design.placement}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-md border-2 border-teal-400 px-4 py-2.5 text-sm font-semibold text-teal-600 transition hover:bg-teal-400 hover:text-white"
+        >
+          AVAIL DESIGN
+          <ArrowUpRight size={16} />
+        </button>
       </div>
-
-      {/* CTA */}
-      <button
-        type="button"
-        className="mt-6 flex items-center justify-center gap-2 rounded-md border-2 border-teal-400 px-4 py-2.5 text-sm font-semibold text-teal-600 transition hover:bg-teal-400 hover:text-white"
-      >
-        AVAIL DESIGN
-        <ArrowUpRight size={16} />
-      </button>
     </div>
   );
 }

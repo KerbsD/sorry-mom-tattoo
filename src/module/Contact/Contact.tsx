@@ -14,9 +14,7 @@ function Contact() {
     <section ref={containerRef} className="min-h-screen">
       {/* Hero */}
       <section className="px-6 pt-40 pb-12 text-center">
-        <h1
-          className={`${anton.className} hero-heading text-6xl leading-none`}
-        >
+        <h1 className={`${anton.className} hero-heading text-6xl leading-none`}>
           Let&apos;s Talk
         </h1>
 
@@ -45,7 +43,7 @@ function Contact() {
                 className="h-14 w-14 shrink-0"
               />
 
-              <div>
+              <div className="min-w-0">
                 <p
                   className={`${jetbrainsmono.className} text-xs tracking-[0.2em] text-teal-500`}
                 >
@@ -94,13 +92,13 @@ function Contact() {
                           />
                         )}
                       </span>
-                      <div>
+                      <div className="min-w-0">
                         <p
                           className={`${jetbrainsmono.className} text-[11px] tracking-[0.15em] text-white/50`}
                         >
                           {label}
                         </p>
-                        <p className="text-sm font-medium text-wrap text-white">
+                        <p className="text-xs font-medium wrap-anywhere text-white transition hover:text-teal-400">
                           {value}
                         </p>
                       </div>
@@ -129,9 +127,9 @@ function Contact() {
               {infoStrip.map(({ id, icon: Icon, title, lines }) => (
                 <div key={id} className="info-item flex items-start gap-3 p-5">
                   <Icon size={18} className="mt-0.5 shrink-0 text-white" />
-                  <div>
+                  <div className="min-w-0">
                     <p className={`${anton.className} text-sm`}>{title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-white/60">
+                    <p className="mt-1 text-sm leading-relaxed wrap-anywhere text-white/60">
                       {lines.map((line, i) => (
                         <span key={i}>
                           {line}
