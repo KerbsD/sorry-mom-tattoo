@@ -21,9 +21,6 @@ function BookingCalendar() {
           formik.setFieldTouched("date", true);
         }}
       />
-      {formik.touched.date && formik.errors.date && (
-        <p className="mt-1 text-xs text-red-400">{String(formik.errors.date)}</p>
-      )}
     </>
   );
 }

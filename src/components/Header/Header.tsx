@@ -88,7 +88,11 @@ function HeaderMobile(props: HeaderMobileProps) {
         aria-label="Toggle menu"
         aria-expanded={isOpen}
       >
-        {isOpen ? <X size={28} /> : <Menu size={28} />}
+        {isOpen ? (
+          <X className=" " size={28} />
+        ) : (
+          <Menu className=" " size={28} />
+        )}
       </button>
 
       {/* Mobile menu dropdown */}

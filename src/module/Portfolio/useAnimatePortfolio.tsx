@@ -66,16 +66,18 @@ function usePortfolio() {
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    tl.from(".portfolio-heading", { y: 40, opacity: 0, duration: 1 }).from(
-      ".portfolio-copy",
-      { y: 20, opacity: 0, duration: 0.9 },
-      "-=0.5",
-    );
+    tl.from(".portfolio-heading", { y: 40, opacity: 0, duration: 1 })
+      .from(".portfolio-copy", { y: 20, opacity: 0, duration: 0.9 }, "-=0.5")
+      .from(
+        ".portfolio-images-container",
+        { y: 10, opacity: 0, duration: 0.8 },
+        "-=0.4",
+      );
 
     animateSlides();
     emblaApi.on("select", animateSlides);
     emblaApi.on("reInit", animateSlides);
-    emblaApi.on("scroll", animateSlides); // smoother live updates while dragging
+    emblaApi.on("scroll", animateSlides);
 
     return () => {
       emblaApi.off("select", animateSlides);

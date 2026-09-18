@@ -4,6 +4,7 @@ import LenisProvider from "@/components/Interactions/Lenis/LenisProvider";
 import "./globals.css";
 import Layout from "@/module/Layout/Layout";
 import { poppins } from "@/utils/Fonts";
+import CursorTrail from "@/components/Interactions/CursorTrail";
 
 export const metadata: Metadata = {
   title: "Sorry Mom Tattoo",
@@ -12,8 +13,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${poppins.variable} antialiased`}>
+    <html lang="en" className={`${poppins.variable} antialiased cursor-crosshair`}>
       <body className="flex min-h-screen flex-col">
+        <CursorTrail />
         <LenisProvider>
           <Layout>{children}</Layout>
         </LenisProvider>
