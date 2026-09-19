@@ -13,7 +13,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${poppins.variable} antialiased cursor-crosshair`}>
+    <html
+      lang="en"
+      className={`${poppins.variable} cursor-crosshair scroll-smooth antialiased`}
+    >
       <body className="flex min-h-screen flex-col">
         <CursorTrail />
         <LenisProvider>

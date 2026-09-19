@@ -6,6 +6,8 @@ import Link from "next/link";
 import useHeader from "./useHeader";
 import HeaderButton from "../Buttons/Header/HeaderButton";
 import ScrambleText from "../Interactions/ScrambleText/ScrambleText";
+import Modal from "@/components/Modal/Modal";
+import BookingForm from "@/components/Form/Booking/BookingForm";
 
 import { Menu, X } from "lucide-react";
 import { Dispatch, SetStateAction, RefObject } from "react";
@@ -16,14 +18,11 @@ interface HeaderNavProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   pathname: string;
   isHome: boolean;
-}
-
-interface HeaderMobileProps extends HeaderNavProps {
-  wrapperRef: RefObject<HTMLDivElement | null>;
+  onBookNowClick: () => void;
 }
 
 function HeaderDesktop(props: HeaderNavProps) {
-  const { pathname, isHome } = props;
+  const { pathname, isHome, onBookNowClick } = props;
 
   return (
     <>
@@ -40,7 +39,6 @@ function HeaderDesktop(props: HeaderNavProps) {
         </Link>
       </div>
 
-      {/* Desktop nav — skipped entirely on the home page */}
       {!isHome && (
         <>
           <ul className="hidden gap-13 lg:flex">
@@ -65,7 +63,7 @@ function HeaderDesktop(props: HeaderNavProps) {
           </ul>
 
           <div className="booknow-btn hidden lg:block lg:pr-12">
-            <HeaderButton />
+            <HeaderButton onClick={onBookNowClick} />
           </div>
         </>
       )}
@@ -73,29 +71,20 @@ function HeaderDesktop(props: HeaderNavProps) {
   );
 }
 
-function HeaderMobile(props: HeaderMobileProps) {
-  const { isOpen, setIsOpen, pathname, wrapperRef, isHome } = props;
+function HeaderMobile(props: HeaderNavProps) {
+  const { isOpen, setIsOpen, pathname, isHome, onBookNowClick } = props;
 
   return (
-    <div
-      className={`relative lg:hidden ${isHome ? "block!" : ""}`}
-      ref={wrapperRef}
-    >
-      {/* Mobile toggle button */}
+    <div className={`relative lg:hidden ${isHome ? "block!" : ""}`}>
       <button
         className={`z-50 text-white lg:hidden ${isHome ? "block!" : ""}`}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
       >
-        {isOpen ? (
-          <X className=" " size={28} />
-        ) : (
-          <Menu className=" " size={28} />
-        )}
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Mobile menu dropdown */}
       <div
         className={`absolute top-full right-0 mt-3 w-64 origin-top-right rounded-xl bg-[#1c1c1c] p-4 shadow-xl transition-[transform,opacity,visibility] duration-200 ease-out ${
           isOpen
@@ -125,7 +114,12 @@ function HeaderMobile(props: HeaderMobileProps) {
           })}
         </ul>
         <div className="px-3 py-2 lg:hidden">
-          <HeaderButton />
+          <HeaderButton
+            onClick={() => {
+              setIsOpen(false);
+              onBookNowClick();
+            }}
+          />
         </div>
       </div>
     </div>
@@ -139,37 +133,49 @@ function Header() {
     pathname,
     isScrolled,
     headerRef,
-    wrapperRef,
     isHome,
+    toggleBooking,
   } = useHeader();
 
   return (
-    <nav
-      ref={headerRef}
-      className={`fixed top-0 right-0 left-0 z-50 bg-transparent before:absolute before:inset-0 before:-z-10 before:origin-top before:bg-[#161616] before:transition-transform before:duration-400 before:ease-in-out before:content-[''] ${
-        isScrolled && !isHome ? "before:scale-y-100" : "before:scale-y-0"
-      }`}
-    >
-      <div
-        className={`relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-0 ${
-          isHome ? "px-4!" : ""
+    <>
+      <nav
+        ref={headerRef}
+        className={`fixed top-0 right-0 left-0 z-50 bg-transparent before:absolute before:inset-0 before:-z-10 before:origin-top before:bg-[#161616] before:transition-transform before:duration-400 before:ease-in-out before:content-[''] ${
+          isScrolled && !isHome ? "before:scale-y-100" : "before:scale-y-0"
         }`}
       >
-        <HeaderDesktop
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          pathname={pathname}
-          isHome={isHome}
-        />
-        <HeaderMobile
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          pathname={pathname}
-          wrapperRef={wrapperRef}
-          isHome={isHome}
-        />
-      </div>
-    </nav>
+        <div
+          className={`relative z-10 mx-auto flex w-full max-w-7xl items-center justify-between px-4 lg:px-0 ${
+            isHome ? "px-4!" : ""
+          }`}
+        >
+          <HeaderDesktop
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            pathname={pathname}
+            isHome={isHome}
+            onBookNowClick={() => toggleBooking()}
+          />
+          <HeaderMobile
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            pathname={pathname}
+            isHome={isHome}
+            onBookNowClick={() => toggleBooking()}
+          />
+        </div>
+      </nav>
+
+      <Modal
+        isOpen={isOpen}
+        onClose={() => toggleBooking()}
+        title="Book a session"
+        className="max-w-xl"
+      >
+        <BookingForm />
+      </Modal>
+    </>
   );
 }
 

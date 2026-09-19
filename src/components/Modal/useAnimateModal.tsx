@@ -1,11 +1,15 @@
 import gsap from "gsap";
+import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
-import { useEffect, useRef } from "react";
 
-import { PortfolioModalProps } from "./PortfolioModal";
+interface AnimateModalProps {
+  isOpen: boolean;
+}
 
-function useAnimatePortfolioModal({ isOpen }: PortfolioModalProps) {
+function useAnimateModal(props: AnimateModalProps) {
+  const { isOpen } = props;
+
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
@@ -77,4 +81,4 @@ function useAnimatePortfolioModal({ isOpen }: PortfolioModalProps) {
   };
 }
 
-export default useAnimatePortfolioModal;
+export default useAnimateModal;

@@ -8,11 +8,16 @@ import useClickOutside from "../hooks/useClickOutside";
 
 function useHeader() {
   const pathname = usePathname();
-  const { isOpen, setIsOpen, wrapperRef } = useClickOutside();
   const [isScrolled, setIsScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
   const isHome = pathname === "/";
+
+  const { isOpen, setIsOpen } = useClickOutside();
+
+  const toggleBooking = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   useLenis(({ scroll }) => {
     setIsScrolled(scroll > 20);
@@ -60,8 +65,8 @@ function useHeader() {
     pathname,
     isScrolled,
     headerRef,
-    wrapperRef,
     isHome,
+    toggleBooking,
   };
 }
 

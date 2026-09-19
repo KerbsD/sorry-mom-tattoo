@@ -7,7 +7,8 @@ import { anton } from "@/utils/Fonts";
 import { PortfolioImages } from "@/constants/Portfolio/Images";
 import usePortfolio from "./useAnimatePortfolio";
 
-import PortfolioModal from "./PortfolioModal";
+import Modal from "@/components/Modal/Modal";
+import PortfolioModalContent from "./PortfolioModalContent";
 
 function Portfolio() {
   const {
@@ -108,11 +109,14 @@ function Portfolio() {
         ))}
       </div>
 
-      <PortfolioModal
-        tattoo={currentTattoo}
+      <Modal
         isOpen={isOpen}
         onClose={() => toggleModal()}
-      />
+        title="Portfolio Images"
+        className="relative mx-4 flex h-120 w-full max-w-4xl flex-col rounded-lg bg-neutral-900 md:h-125 md:flex-row"
+      >
+        <PortfolioModalContent tattoo={currentTattoo} />
+      </Modal>
     </section>
   );
 }
