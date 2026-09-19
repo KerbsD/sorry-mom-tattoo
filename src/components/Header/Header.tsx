@@ -72,13 +72,10 @@ function HeaderDesktop(props: HeaderNavProps) {
 }
 
 function HeaderMobile(props: HeaderNavProps) {
-  const { isOpen, setIsOpen, pathname, isHome, onBookNowClick } =
-    props;
+  const { isOpen, setIsOpen, pathname, isHome, onBookNowClick } = props;
 
   return (
-    <div
-      className={`relative lg:hidden ${isHome ? "block!" : ""}`}
-    >
+    <div className={`relative lg:hidden ${isHome ? "block!" : ""}`}>
       <button
         className={`z-50 text-white lg:hidden ${isHome ? "block!" : ""}`}
         onClick={() => setIsOpen((prev) => !prev)}
@@ -137,7 +134,6 @@ function Header() {
     isScrolled,
     headerRef,
     isHome,
-    isBookingOpen,
     toggleBooking,
   } = useHeader();
 
@@ -172,9 +168,10 @@ function Header() {
       </nav>
 
       <Modal
-        isOpen={isBookingOpen}
+        isOpen={isOpen}
         onClose={() => toggleBooking()}
         title="Book a session"
+        className="max-w-xl"
       >
         <BookingForm />
       </Modal>

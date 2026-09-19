@@ -113,6 +113,7 @@ function Portfolio() {
         isOpen={isOpen}
         onClose={() => toggleModal()}
         title="Portfolio Images"
+        className="relative mx-4 flex h-120 w-full max-w-4xl flex-col rounded-lg bg-neutral-900 md:h-125 md:flex-row"
       >
         <PortfolioModalContent tattoo={currentTattoo} />
       </Modal>

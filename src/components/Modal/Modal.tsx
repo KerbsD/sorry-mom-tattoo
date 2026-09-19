@@ -8,14 +8,13 @@ export interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
+  className: string;
 }
 
-function Modal({ isOpen, onClose, children, title }: ModalProps) {
+function Modal({ isOpen, onClose, children, title, className }: ModalProps) {
   const { overlayRef, panelRef } = useAnimateModal({
     isOpen,
   });
-
-  // if (!isOpen) return;
 
   return (
     <div
@@ -33,12 +32,12 @@ function Modal({ isOpen, onClose, children, title }: ModalProps) {
       {/* Content */}
       <div
         ref={panelRef}
-        className="relative mx-4 flex h-120 w-full max-w-4xl flex-col rounded-lg bg-neutral-900 md:h-125 md:flex-row"
+        className={className}
       >
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute z-1000 -top-10 right-0 text-white/70 transition-colors hover:text-white"
+          className="absolute -top-10 right-0 z-1000 text-white/70 transition-colors hover:text-white"
         >
           <X size={28} />
         </button>
