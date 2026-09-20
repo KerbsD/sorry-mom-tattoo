@@ -10,12 +10,11 @@ import Modal from "@/components/Modal/Modal";
 import BookingForm from "@/components/Form/Booking/BookingForm";
 
 import { Menu, X } from "lucide-react";
-import { Dispatch, SetStateAction, RefObject } from "react";
 import { HeaderItems } from "@/constants/Menu/MenuItems";
 
 interface HeaderNavProps {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: () => void;
   pathname: string;
   isHome: boolean;
   onBookNowClick: () => void;
@@ -78,7 +77,7 @@ function HeaderMobile(props: HeaderNavProps) {
     <div className={`relative lg:hidden ${isHome ? "block!" : ""}`}>
       <button
         className={`z-50 text-white lg:hidden ${isHome ? "block!" : ""}`}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => setIsOpen()}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
       >
@@ -100,7 +99,7 @@ function HeaderMobile(props: HeaderNavProps) {
               <li key={item.title}>
                 <Link
                   href={item.link}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => setIsOpen()}
                   className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
                     isActive
                       ? "bg-white/10 text-white"
@@ -113,10 +112,10 @@ function HeaderMobile(props: HeaderNavProps) {
             );
           })}
         </ul>
-        <div className="px-3 py-2 lg:hidden">
+        <div className={`px-3 py-2 lg:hidden ${isHome ? "hidden!" : ""}`}>
           <HeaderButton
             onClick={() => {
-              setIsOpen(false);
+              setIsOpen();
               onBookNowClick();
             }}
           />
@@ -129,12 +128,13 @@ function HeaderMobile(props: HeaderNavProps) {
 function Header() {
   const {
     isOpen,
-    setIsOpen,
     pathname,
     isScrolled,
     headerRef,
     isHome,
     toggleBooking,
+    isMenuOpen,
+    toggleMenu,
   } = useHeader();
 
   return (
@@ -151,15 +151,15 @@ function Header() {
           }`}
         >
           <HeaderDesktop
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            isOpen={isMenuOpen}
+            setIsOpen={toggleMenu}
             pathname={pathname}
             isHome={isHome}
             onBookNowClick={() => toggleBooking()}
           />
           <HeaderMobile
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            isOpen={isMenuOpen}
+            setIsOpen={toggleMenu}
             pathname={pathname}
             isHome={isHome}
             onBookNowClick={() => toggleBooking()}
@@ -171,7 +171,7 @@ function Header() {
         isOpen={isOpen}
         onClose={() => toggleBooking()}
         title="Book a session"
-        className="max-w-xl"
+        className="mx-5 max-w-xl"
       >
         <BookingForm />
       </Modal>

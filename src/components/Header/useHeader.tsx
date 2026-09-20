@@ -9,11 +9,16 @@ import useClickOutside from "../hooks/useClickOutside";
 function useHeader() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
   const isHome = pathname === "/";
 
-  const { isOpen, setIsOpen } = useClickOutside();
+  const { isOpen, setIsOpen} = useClickOutside();
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   const toggleBooking = () => {
     setIsOpen((prev) => !prev);
@@ -61,12 +66,13 @@ function useHeader() {
 
   return {
     isOpen,
-    setIsOpen,
     pathname,
     isScrolled,
     headerRef,
     isHome,
     toggleBooking,
+    isMenuOpen,
+    toggleMenu,
   };
 }
 
