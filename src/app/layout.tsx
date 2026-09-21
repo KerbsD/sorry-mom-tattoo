@@ -17,6 +17,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${poppins.variable} cursor-crosshair scroll-smooth antialiased`}
+      data-scroll-behavior="smooth"
     >
       <body className="flex min-h-screen flex-col">
         <CursorTrail />

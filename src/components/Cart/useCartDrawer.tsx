@@ -13,7 +13,6 @@ function useCartDrawer() {
   const [notice, setNotice] = useState<string | null>(null);
   const channels = availableChannels();
 
-  // Close the drawer on Escape while it's open
   useEffect(() => {
     if (!isOpen) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeCart();
