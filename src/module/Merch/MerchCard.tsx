@@ -1,13 +1,16 @@
-// components/Merch/MerchCard.tsx
-import Image from "next/image";
-import Link from "next/link";
-import { Product } from "@/constants/Merch/Products";
+"use client";
 
+import Image from "next/image";
+import { formatPHP, type Product } from "@/constants/Merch/Products";
+import { useCart, toCartItem } from "@/context/CartContext";
 interface MerchCardProps {
   product: Product;
 }
 
 function MerchCard({ product }: MerchCardProps) {
+  const { add, lines } = useCart();
+  const inCart = lines.find((l) => l.key === `merch:${product.id}`)?.qty ?? 0;
+
   return (
     <div className="merch-card z-10 flex max-w-75 flex-col">
       <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-white">
@@ -23,16 +26,16 @@ function MerchCard({ product }: MerchCardProps) {
       <h3 className="mt-3 text-left text-sm font-semibold text-white sm:text-base">
         {product.name}
       </h3>
-      <p className="text-left text-xs text-white/60 sm:text-sm">
-        PHP {product.price.toLocaleString()}.00
-      </p>
+      <strong className="text-left text-xs text-white/60 sm:text-sm">
+        {formatPHP(product.price)}
+      </strong>
 
-      <Link
-        href={`/merch/${product.slug}`}
+      <button
+        onClick={() => add(toCartItem.merch(product))}
         className="mt-3 flex items-center justify-center rounded-sm bg-teal-400 px-4 py-2 text-sm font-semibold text-black transition hover:bg-teal-300"
       >
-        View Product
-      </Link>
+        {inCart > 0 ? `Add another (${inCart} in cart)` : "Add to cart"}
+      </button>
     </div>
   );
 }

@@ -1,10 +1,11 @@
-import "lenis/dist/lenis.css";
 import type { Metadata } from "next";
-import LenisProvider from "@/components/Interactions/Lenis/LenisProvider";
 import "./globals.css";
-import Layout from "@/module/Layout/Layout";
+import "lenis/dist/lenis.css";
 import { poppins } from "@/utils/Fonts";
+import Layout from "@/module/Layout/Layout";
+import LenisProvider from "@/components/Interactions/Lenis/LenisProvider";
 import CursorTrail from "@/components/Interactions/CursorTrail";
+import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
   title: "Sorry Mom Tattoo",
@@ -19,9 +20,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-screen flex-col">
         <CursorTrail />
-        <LenisProvider>
-          <Layout>{children}</Layout>
-        </LenisProvider>
+        <CartProvider>
+          <LenisProvider>
+            <Layout>{children}</Layout>
+          </LenisProvider>
+        </CartProvider>
       </body>
     </html>
   );

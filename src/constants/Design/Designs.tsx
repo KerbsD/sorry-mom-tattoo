@@ -7,6 +7,7 @@ export interface Design {
   placement: string;
   image: string;
   category: string;
+  price: 0
 }
 
 export const designs: Design[] = [
@@ -19,6 +20,7 @@ export const designs: Design[] = [
     placement: "Forearm / Chest",
     image: "/design/dfs-1.png",
     category: "Minimalist",
+    price: 0
   },
   {
     id: "2",
@@ -29,6 +31,7 @@ export const designs: Design[] = [
     placement: "Forearm / Calf",
     image: "/design/dfs-2.png",
     category: "Black & Grey",
+    price: 0
   },
   {
     id: "3",
@@ -38,6 +41,7 @@ export const designs: Design[] = [
     placement: "Forearm / Spine",
     image: "/design/dfs-3.png",
     category: "Minimalist",
+    price: 0
   },
   {
     id: "4",
@@ -48,6 +52,7 @@ export const designs: Design[] = [
     placement: "Arm / Shoulder",
     image: "/design/dfs-4.png",
     category: "Illustrative",
+    price: 0
   },
   // ...add the rest of your real designs here
 ];

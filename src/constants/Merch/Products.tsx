@@ -47,3 +47,8 @@ export const categories = [
   "All",
   ...new Set(products.map((products) => products.category)),
 ];
+
+export const formatPHP = (amount: number) =>
+  new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP" }).format(
+    amount,
+  );
