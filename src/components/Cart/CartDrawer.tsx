@@ -46,6 +46,7 @@ export function CartDrawer() {
         </header>
 
         <CartDrawerContent
+          closeCart={closeCart}
           lines={lines}
           setQty={setQty}
           remove={remove}

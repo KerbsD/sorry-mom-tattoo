@@ -16,6 +16,7 @@ interface CartDrawerContentProps {
   handleCheckout: (c: Channel) => void;
   notice: string | null;
   clear: () => void;
+  closeCart: () => void;
 }
 
 const CHANNEL_STYLES: Partial<Record<Channel, string>> = {
@@ -38,6 +39,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     handleCheckout,
     notice,
     clear,
+    closeCart,
   } = props;
 
   console.log(CartLinks);
@@ -46,15 +48,26 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     <>
       {lines.length === 0 ? (
         <div className="flex h-[70vh] flex-col justify-center">
-          <p className="py-10 text-center text-sm text-white/60">
+          <p className="py-5 text-center text-sm text-white/60">
             Your cart is empty. Add a product to start an order.
           </p>
-          <Link
-            href="/merch"
-            className={`"mix-blend-difference hover:after:scale-x-100" relative inline-block uppercase transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-teal-300 after:transition-transform after:duration-300 after:content-[''] hover:text-teal-300`}
-          >
-            Merch
-          </Link>
+          <p className="text-center text-xs text-white/40">
+            Explore our Merch and Designs
+          </p>
+          <div className="mx-auto mt-5 flex gap-3">
+            {CartLinks.map((item) => {
+              return (
+                <button onClick={closeCart} className="header-items" key={item.title}>
+                  <Link
+                    href={item.link}
+                    className={`relative inline-block uppercase transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-teal-300 after:transition-transform after:duration-300 after:content-['']`}
+                  >
+                    {item.title}
+                  </Link>
+                </button>
+              );
+            })}
+          </div>
         </div>
       ) : (
         <>
