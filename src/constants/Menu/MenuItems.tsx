@@ -25,3 +25,6 @@ export const HeaderItems = [
   },
 ];
 
+export const CartLinks = HeaderItems.filter((item) =>
+  ["/design", "/merch"].includes(item.link),
+);

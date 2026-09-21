@@ -3,6 +3,7 @@ import { CartLine } from "@/context/CartContext";
 import { CHANNELS, type Channel } from "@/lib/checkout";
 import { formatPHP } from "@/constants/Merch/Products";
 import Link from "next/link";
+import { CartLinks } from "@/constants/Menu/MenuItems";
 
 interface CartDrawerContentProps {
   lines: CartLine[];
@@ -38,6 +39,8 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     notice,
     clear,
   } = props;
+
+  console.log(CartLinks);
 
   return (
     <>
