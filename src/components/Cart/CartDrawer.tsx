@@ -76,7 +76,6 @@ export function CartDrawer() {
         <ConfirmRedirectModal
           channel={pendingChannel}
           willCopy={pendingCopies}
-          notice={notice}
           onConfirm={confirmCheckout}
           onCancel={cancelCheckout}
         />
