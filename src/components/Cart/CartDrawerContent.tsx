@@ -1,9 +1,13 @@
 import { Trash, HeartCrack } from "lucide-react";
 import { CartLine } from "@/context/CartContext";
-import { CHANNELS, type Channel } from "@/lib/checkout";
+import { CHANNELS, type Channel } from "@/utils/Channels";
 import { formatPHP } from "@/constants/Merch/Products";
 import Link from "next/link";
 import { CartLinks } from "@/constants/Menu/MenuItems";
+import {
+  CHANNEL_STYLES,
+  DEFAULT_CHANNEL_STYLE,
+} from "@/constants/Channels/Channel";
 interface CartDrawerContentProps {
   lines: CartLine[];
   setQty: (id: string, qty: number) => void;
@@ -12,19 +16,11 @@ interface CartDrawerContentProps {
   setNote: (value: string) => void;
   total: number;
   channels: Channel[];
-  handleCheckout: (c: Channel) => void;
+  requestCheckout: (c: Channel) => void; // was handleCheckout
   notice: string | null;
   clear: () => void;
   closeCart: () => void;
 }
-
-const CHANNEL_STYLES: Partial<Record<Channel, string>> = {
-  whatsapp: "bg-[#25D366] text-black hover:bg-[#1ebe5b]",
-  messenger: "bg-[#0084ff] text-white hover:bg-[#0073e6]",
-  telegram: "bg-[#27a7e7] text-white hover:bg-[#1d96d3]",
-};
-
-const DEFAULT_CHANNEL_STYLE = "bg-teal-300 text-black hover:bg-teal-200";
 
 function CartDrawerContent(props: CartDrawerContentProps) {
   const {
@@ -35,7 +31,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     setNote,
     total,
     channels,
-    handleCheckout,
+    requestCheckout, // was handleCheckout
     notice,
     clear,
     closeCart,
@@ -151,7 +147,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                     className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none ${
                       CHANNEL_STYLES[c] ?? DEFAULT_CHANNEL_STYLE
                     }`}
-                    onClick={() => handleCheckout(c)}
+                    onClick={() => requestCheckout(c)}
                   >
                     {CHANNELS[c].label}
                   </button>

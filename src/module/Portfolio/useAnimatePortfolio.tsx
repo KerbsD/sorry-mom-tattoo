@@ -4,7 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useRef, useState } from "react";
 import { PortfolioImages } from "@/constants/Portfolio/Images";
 
-import useClickOutside from "@/components/hooks/useClickOutside";
+import useClickOutside from "@/utils/useClickOutside";
 
 function usePortfolio() {
   const [emblaRef, emblaApi] = useEmblaCarousel({

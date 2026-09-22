@@ -2,17 +2,33 @@
 "use client";
 
 import { FormikProvider } from "formik";
-import useHomeBooking from "@/components/hooks/useHomeBooking";
+import {
+  CHANNEL_STYLES,
+  DEFAULT_CHANNEL_STYLE,
+} from "@/constants/Channels/Channel";
+import useHomeBooking from "@/components/Form/Booking/useHomeBooking";
 import FormInput from "@/components/Form/Booking/FormInput";
 import BookingCalendar from "@/components/Form/Booking/BookingCalendar";
 import BookingFormButton from "@/components/Form/Booking/BookingFormButton";
-
+import { CHANNELS } from "@/lib/booking";
+import ConfirmRedirectModal from "@/components/Modal/ConfirmRedirectModal";
 interface BookingFormProps {
   className?: string;
 }
 
 function BookingForm({ className = "" }: BookingFormProps) {
-  const { formik, formattedDate } = useHomeBooking();
+  const {
+    formik,
+    formattedDate,
+    channels,
+    requestSend,
+    cancelSend,
+    confirmSend,
+    pendingChannel,
+    pendingCopies,
+    notice,
+    isConfirmed,
+  } = useHomeBooking();
 
   return (
     <FormikProvider value={formik}>
@@ -44,7 +60,47 @@ function BookingForm({ className = "" }: BookingFormProps) {
           </p>
           <BookingFormButton />
         </div>
+
+        {isConfirmed && (
+          <div className="mt-6 border-t border-white/10 pt-4">
+            {channels.length === 0 ? (
+              <p className="text-sm text-amber-400">
+                No chat app is set up yet. Add one in your environment settings.
+              </p>
+            ) : (
+              <>
+                <p className="mb-3 text-sm text-white/70">
+                  Send your booking request via:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {channels.map((c) => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => requestSend(c)}
+                      className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none ${
+                        CHANNEL_STYLES[c] ?? DEFAULT_CHANNEL_STYLE
+                      }`}
+                    >
+                      {CHANNELS[c].label}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+            {notice && <p className="mt-3 text-sm text-white/60">{notice}</p>}
+          </div>
+        )}
       </form>
+
+      {pendingChannel && (
+        <ConfirmRedirectModal
+          channel={pendingChannel}
+          willCopy={pendingCopies}
+          onConfirm={confirmSend}
+          onCancel={cancelSend}
+        />
+      )}
     </FormikProvider>
   );
 }

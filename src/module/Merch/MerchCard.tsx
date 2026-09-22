@@ -18,8 +18,9 @@ function MerchCard({ product }: MerchCardProps) {
           src={product.image}
           alt={product.name}
           fill
-          sizes="(min-width: 1024px) 300px, 50vw"
+          sizes="(min-width: 1024px) 300px, 50vw" 
           className="object-contain p-4"
+          loading="eager"
         />
       </div>
 

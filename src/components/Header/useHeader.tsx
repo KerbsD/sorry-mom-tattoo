@@ -4,7 +4,7 @@ import { useLenis } from "lenis/react";
 import { useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 
-import useClickOutside from "../hooks/useClickOutside";
+import useClickOutside from "../../utils/useClickOutside";
 
 function useHeader() {
   const pathname = usePathname();

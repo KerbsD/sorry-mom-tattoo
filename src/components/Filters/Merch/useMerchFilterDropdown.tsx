@@ -1,4 +1,4 @@
-import useClickOutside from "@/components/hooks/useClickOutside";
+import useClickOutside from "@/utils/useClickOutside";
 
 interface MerchFilterDropdownProps {
   onChange: (category: string) => void;
