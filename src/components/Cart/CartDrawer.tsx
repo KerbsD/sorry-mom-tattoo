@@ -2,6 +2,7 @@
 
 import useCartDrawer from "./useCartDrawer";
 import CartDrawerContent from "./CartDrawerContent";
+import useAnimateCart from "./useAnimateCart";
 
 import { X } from "lucide-react";
 
@@ -21,14 +22,18 @@ export function CartDrawer() {
     handleCheckout,
   } = useCartDrawer();
 
-  if (!isOpen) return null;
+  const { visible, overlayRef, panelRef } = useAnimateCart({ isOpen });
+
+  if (!visible) return null;
 
   return (
     <div
+      ref={overlayRef}
       className="fixed inset-0 z-50 flex justify-end bg-black/60"
       onClick={closeCart}
     >
       <aside
+        ref={panelRef}
         className="flex h-full w-full max-w-md flex-col gap-5 overflow-y-auto bg-[#1c1c1c] p-5 text-white shadow-2xl"
         role="dialog"
         aria-modal="true"

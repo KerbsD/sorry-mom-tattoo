@@ -1,10 +1,9 @@
-import { Trash } from "lucide-react";
+import { Trash, HeartCrack } from "lucide-react";
 import { CartLine } from "@/context/CartContext";
 import { CHANNELS, type Channel } from "@/lib/checkout";
 import { formatPHP } from "@/constants/Merch/Products";
 import Link from "next/link";
 import { CartLinks } from "@/constants/Menu/MenuItems";
-
 interface CartDrawerContentProps {
   lines: CartLine[];
   setQty: (id: string, qty: number) => void;
@@ -42,29 +41,31 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     closeCart,
   } = props;
 
-  console.log(CartLinks);
-
   return (
     <>
       {lines.length === 0 ? (
-        <div className="flex h-[70vh] flex-col justify-center">
-          <p className="py-5 text-center text-sm text-white/60">
-            Your cart is empty. Add a product to start an order.
+        <div className="flex h-[80vh] flex-col items-center justify-center">
+          <HeartCrack size={48} className="mb-3" />
+          <p className="py-3 text-center text-sm text-white/60">
+            Your cart's empty for now
           </p>
           <p className="text-center text-xs text-white/40">
-            Explore our Merch and Designs
+            Find something you like and it'll show up here.
           </p>
+          <span className="mt-8 text-center text-xs text-white/40">
+            Start browsing
+          </span>
           <div className="mx-auto mt-5 flex gap-3">
             {CartLinks.map((item) => {
               return (
-                <button onClick={closeCart} className="header-items" key={item.title}>
-                  <Link
-                    href={item.link}
-                    className={`relative inline-block uppercase transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-teal-300 after:transition-transform after:duration-300 after:content-['']`}
-                  >
-                    {item.title}
-                  </Link>
-                </button>
+                <Link
+                  onClick={closeCart}
+                  className="rounded-full border border-teal-400 px-3 py-1 text-teal-400 transition hover:bg-teal-400 hover:text-black/80"
+                  key={item.title}
+                  href={item.link}
+                >
+                  {item.title}
+                </Link>
               );
             })}
           </div>
