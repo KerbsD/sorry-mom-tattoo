@@ -11,7 +11,8 @@ import BookingForm from "@/components/Form/Booking/BookingForm";
 
 import { Menu, X } from "lucide-react";
 import { HeaderItems } from "@/constants/Menu/MenuItems";
-
+import { CartButton } from "../Buttons/Header/CartButton";
+import { CartDrawer } from "../Cart/CartDrawer";
 interface HeaderNavProps {
   isOpen: boolean;
   setIsOpen: () => void;
@@ -40,7 +41,7 @@ function HeaderDesktop(props: HeaderNavProps) {
 
       {!isHome && (
         <>
-          <ul className="hidden gap-13 lg:flex">
+          <ul className="hidden gap-13 xl:flex">
             {HeaderItems.map((item) => {
               const isActive = pathname === item.link;
 
@@ -61,7 +62,8 @@ function HeaderDesktop(props: HeaderNavProps) {
             })}
           </ul>
 
-          <div className="booknow-btn hidden lg:block lg:pr-12">
+          <div className="booknow-btn hidden xl:flex lg:items-center lg:gap-4 lg:pr-12">
+            <CartButton />
             <HeaderButton onClick={onBookNowClick} />
           </div>
         </>
@@ -74,15 +76,19 @@ function HeaderMobile(props: HeaderNavProps) {
   const { isOpen, setIsOpen, pathname, isHome, onBookNowClick } = props;
 
   return (
-    <div className={`relative lg:hidden ${isHome ? "block!" : ""}`}>
-      <button
-        className={`z-50 text-white lg:hidden ${isHome ? "block!" : ""}`}
-        onClick={() => setIsOpen()}
-        aria-label="Toggle menu"
-        aria-expanded={isOpen}
-      >
-        {isOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
+    <div className={`relative xl:hidden ${isHome ? "block!" : ""}`}>
+      <div className="flex gap-2 lg:pr-12">
+        <button
+          className={`z-50 text-white xl:hidden ${isHome ? "block!" : ""}`}
+          onClick={() => setIsOpen()}
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+
+        <CartButton />
+      </div>
 
       <div
         className={`absolute top-full right-0 mt-3 w-64 origin-top-right rounded-xl bg-[#1c1c1c] p-4 shadow-xl transition-[transform,opacity,visibility] duration-200 ease-out ${
@@ -112,7 +118,7 @@ function HeaderMobile(props: HeaderNavProps) {
             );
           })}
         </ul>
-        <div className={`px-3 py-2 lg:hidden ${isHome ? "hidden!" : ""}`}>
+        <div className={`px-3 py-2 xl:hidden ${isHome ? "hidden!" : ""}`}>
           <HeaderButton
             onClick={() => {
               setIsOpen();
@@ -166,6 +172,8 @@ function Header() {
           />
         </div>
       </nav>
+
+      <CartDrawer />
 
       <Modal
         isOpen={isOpen}

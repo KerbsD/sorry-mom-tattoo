@@ -5,13 +5,15 @@ import { useState } from "react";
 import Image from "next/image";
 import { Heart, ArrowUpRight } from "lucide-react";
 import { Design } from "@/constants/Design/Designs";
-
+import { useCart, toCartItem } from "@/context/CartContext";
 interface DesignCardProps {
   design: Design;
 }
 
 function DesignCard({ design }: DesignCardProps) {
+  const { add, lines } = useCart();
   const [isFavorited, setIsFavorited] = useState(false);
+  const inCart = lines.find((l) => l.key === `design:${design.id}`)?.qty ?? 0;
 
   return (
     <div className="design-card flex h-full flex-col rounded-lg">
@@ -67,10 +69,11 @@ function DesignCard({ design }: DesignCardProps) {
         </div>
 
         <button
+          onClick={() => add(toCartItem.design(design))}
           type="button"
           className="mt-6 flex w-full items-center justify-center gap-2 rounded-md border-2 border-teal-400 px-4 py-2.5 text-sm font-semibold text-teal-600 transition hover:bg-teal-400 hover:text-white"
         >
-          AVAIL DESIGN
+          {inCart > 0 ? `Add another (${inCart} in cart)` : "Add to cart"}
           <ArrowUpRight size={16} />
         </button>
       </div>
