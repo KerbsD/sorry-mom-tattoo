@@ -3,7 +3,7 @@
 import useCartDrawer from "./useCartDrawer";
 import CartDrawerContent from "./CartDrawerContent";
 import useAnimateCart from "./useAnimateCart";
-import ConfirmRedirectModal from "../Modal/ConfirmRedirectModal";
+import ConfirmRedirectModal from "../Modal/ConfirmModal/ConfirmRedirectModal";
 
 import { X } from "lucide-react";
 
@@ -18,7 +18,6 @@ export function CartDrawer() {
     clear,
     note,
     setNote,
-    notice,
     channels,
     requestCheckout,
     pendingChannel,
@@ -40,7 +39,8 @@ export function CartDrawer() {
       >
         <aside
           ref={panelRef}
-          className="flex h-full w-full max-w-md flex-col gap-5 overflow-y-auto bg-[#1c1c1c] p-5 text-white shadow-2xl"
+          data-lenis-prevent
+          className="flex h-full w-full max-w-md flex-col gap-5 overflow-y-auto overscroll-contain bg-[#161616] p-5 text-white shadow-2xl"
           role="dialog"
           aria-modal="true"
           aria-label="Your cart"
@@ -66,7 +66,6 @@ export function CartDrawer() {
             total={total}
             channels={channels}
             requestCheckout={requestCheckout}
-            notice={notice}
             clear={clear}
           />
         </aside>

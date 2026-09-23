@@ -1,15 +1,8 @@
 // components/hooks/useHomeBooking.ts
-import { useState } from "react";
 import { useFormik } from "formik";
 import { bookingSchema } from "@/schemas/bookingSchema";
-import {
-  sendBooking,
-  availableChannels,
-  CHANNELS,
-  type Channel,
-} from "@/lib/booking";
-import { willCopyToClipboard } from "@/utils/chatSend";
-
+import { sendBooking, availableChannels, CHANNELS } from "@/lib/booking";
+import useConfirmModal from "@/components/Modal/ConfirmModal/useConfirmModal";
 interface BookingValues {
   fullName: string;
   email: string;
@@ -23,9 +16,6 @@ const initialValues: BookingValues = {
 };
 
 function useHomeBooking() {
-  const [notice, setNotice] = useState<string | null>(null);
-  const [pendingChannel, setPendingChannel] = useState<Channel | null>(null);
-
   const formik = useFormik<BookingValues>({
     initialValues,
     validationSchema: bookingSchema,
@@ -37,32 +27,30 @@ function useHomeBooking() {
 
       setStatus("confirmed"); // reveals the channel buttons
       setSubmitting(false);
-      setNotice("");
-      // no resetForm here — handleSend resets once the message is actually sent
+      // no resetForm here — confirmSend resets once the message is actually sent
     },
   });
 
-  const channels = availableChannels();
-
-  function requestSend(channel: Channel) {
-    setPendingChannel(channel);
-  }
-
-  function cancelSend() {
-    setPendingChannel(null);
-  }
+  const {
+    pendingChannel,
+    pendingCopies,
+    request: requestSend,
+    cancel: cancelSend,
+    confirm,
+  } = useConfirmModal((channel) => sendBooking(channel, formik.values));
 
   function confirmSend() {
-    if (!pendingChannel) return;
-    const { copied } = sendBooking(pendingChannel, formik.values);
-    setNotice(
-      copied
-        ? `Copied. Paste it into ${CHANNELS[pendingChannel].label} if the message box is empty.`
-        : `Opening ${CHANNELS[pendingChannel].label} with your booking details.`,
-    );
-    setPendingChannel(null);
-    formik.resetForm();
+    const result = confirm();
+    if (result) formik.resetForm();
   }
+
+  // Dismisses the "booking confirmed, pick a channel" modal without
+  // discarding what the user typed — just drops back to the editable form.
+  function closeConfirmation() {
+    formik.setStatus(undefined);
+  }
+
+  const channels = availableChannels();
 
   const formattedDate = formik.values.date
     ? formik.values.date.toLocaleDateString("en-US", {
@@ -80,9 +68,9 @@ function useHomeBooking() {
     cancelSend,
     confirmSend,
     pendingChannel,
-    pendingCopies: pendingChannel ? willCopyToClipboard(pendingChannel) : false,
-    notice,
+    pendingCopies,
     isConfirmed: formik.status === "confirmed",
+    closeConfirmation,
   };
 }
 

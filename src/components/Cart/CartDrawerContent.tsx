@@ -17,7 +17,6 @@ interface CartDrawerContentProps {
   total: number;
   channels: Channel[];
   requestCheckout: (c: Channel) => void; // was handleCheckout
-  notice: string | null;
   clear: () => void;
   closeCart: () => void;
 }
@@ -32,7 +31,6 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     total,
     channels,
     requestCheckout, // was handleCheckout
-    notice,
     clear,
     closeCart,
   } = props;
@@ -77,7 +75,9 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                 <div>
                   <strong className="font-medium">{l.name}</strong>
                   <div className="text-sm text-white/60">
-                    {formatPHP(l.price)} each
+                    {l.key.split(":")[0] === "design"
+                      ? "Reach out to see price"
+                      : `${formatPHP(l.price)} each`}
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -125,7 +125,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
           <div className="flex items-center justify-between border-t border-white/10 pt-4 text-lg">
             <span>Total</span>
             <strong className="font-semibold text-teal-300">
-              {formatPHP(total)}
+              {!total ? "Price varies" : formatPHP(total)}
             </strong>
           </div>
 
@@ -156,17 +156,8 @@ function CartDrawerContent(props: CartDrawerContentProps) {
             </div>
           )}
 
-          {notice && (
-            <p
-              className="rounded-lg bg-teal-300/10 p-3 text-sm text-teal-200"
-              role="status"
-            >
-              {notice}
-            </p>
-          )}
-
           <button
-            className="self-start text-xs text-white/50 underline underline-offset-2 transition-colors hover:text-red-400"
+            className="self-start text-sm text-white/80 underline underline-offset-2 transition-colors hover:text-red-400"
             onClick={clear}
           >
             Clear cart

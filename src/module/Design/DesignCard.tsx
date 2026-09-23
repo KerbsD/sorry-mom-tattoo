@@ -1,7 +1,6 @@
 // Design/DesignCard.tsx
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { Heart, ArrowUpRight } from "lucide-react";
 import { Design } from "@/constants/Design/Designs";
@@ -12,36 +11,20 @@ interface DesignCardProps {
 
 function DesignCard({ design }: DesignCardProps) {
   const { add, lines } = useCart();
-  const [isFavorited, setIsFavorited] = useState(false);
   const inCart = lines.find((l) => l.key === `design:${design.id}`)?.qty ?? 0;
 
   return (
     <div className="design-card flex h-full flex-col rounded-lg">
-      {/* Badge + favorite */}
       <div className="flex items-center justify-between">
-        <span className="rounded-full border border-teal-500 px-3 py-1 text-xs font-semibold text-teal-600">
-          FOR SALE
-        </span>
-        <button
-          type="button"
-          onClick={() => setIsFavorited((prev) => !prev)}
-          aria-label={
-            isFavorited ? "Remove from favorites" : "Add to favorites"
-          }
-          aria-pressed={isFavorited}
+        <span
+          className={`rounded-full border border-teal-400 px-3 py-1 text-xs transition font-semibold ${
+            inCart > 0 ? "bg-teal-400 text-gray-900" : "text-teal-400"
+          }`}
         >
-          <Heart
-            size={20}
-            className={
-              isFavorited
-                ? "fill-white text-white"
-                : "text-white/60 hover:text-white"
-            }
-          />
-        </button>
+          {inCart > 0 ? `${inCart} IN CART` : "FOR SALE"}
+        </span>
       </div>
 
-      {/* Illustration */}
       <div className="relative mt-4 aspect-square w-full">
         <Image
           src={design.image}
@@ -53,11 +36,9 @@ function DesignCard({ design }: DesignCardProps) {
         />
       </div>
 
-      {/* Title + description */}
       <h3 className="mt-4 text-lg font-bold text-white">{design.title}</h3>
       <p className="mt-2 text-sm text-white/70">{design.description}</p>
 
-      {/* Metadata + CTA — pinned to the bottom of the card */}
       <div className="mt-auto">
         <div className="mt-4 space-y-1 text-sm text-white">
           <p>
@@ -71,9 +52,9 @@ function DesignCard({ design }: DesignCardProps) {
         <button
           onClick={() => add(toCartItem.design(design))}
           type="button"
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-md border-2 border-teal-400 px-4 py-2.5 text-sm font-semibold text-teal-600 transition hover:bg-teal-400 hover:text-white"
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-md border-2 border-teal-400 px-4 py-2.5 text-sm font-semibold text-teal-400 transition hover:bg-teal-400 hover:text-black"
         >
-          {inCart > 0 ? `Add another (${inCart} in cart)` : "Add to cart"}
+          {inCart > 0 ? `ADD ANOTHER` : "ADD TO CART"}
           <ArrowUpRight size={16} />
         </button>
       </div>

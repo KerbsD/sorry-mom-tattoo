@@ -7,7 +7,7 @@ import { anton } from "@/utils/Fonts";
 import { PortfolioImages } from "@/constants/Portfolio/Images";
 import usePortfolio from "./useAnimatePortfolio";
 
-import Modal from "@/components/Modal/Modal";
+import Modal from "@/components/Modal/CommonModal/Modal";
 import PortfolioModalContent from "./PortfolioModalContent";
 
 function Portfolio() {

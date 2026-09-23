@@ -1,43 +1,52 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useCart } from "@/context/CartContext";
 import { CHANNELS, availableChannels, type Channel } from "@/utils/Channels";
 import { checkout } from "@/lib/checkout";
 import { willCopyToClipboard } from "@/utils/chatSend";
+import { useLenis } from "lenis/react";
+
+import useConfirmModal from "../Modal/ConfirmModal/useConfirmModal";
 
 function useCartDrawer() {
   const { lines, total, isOpen, closeCart, setQty, remove, clear } = useCart();
 
-  const [note, setNote] = useState("");
-  const [notice, setNotice] = useState<string | null>(null);
-  const [pendingChannel, setPendingChannel] = useState<Channel | null>(null);
+  const lenis = useLenis();
 
-  const channels = availableChannels();
+  const [note, setNote] = useState("");
+  const channels = useMemo(() => availableChannels(), []);
+
+  const {
+    pendingChannel,
+    pendingCopies,
+    request: requestCheckout,
+    cancel: cancelCheckout,
+    confirm: confirmCheckout,
+  } = useConfirmModal((channel) => checkout(channel, lines, note));
 
   useEffect(() => {
     if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeCart();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (pendingChannel) return;
+      closeCart();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [isOpen, closeCart]);
+  }, [isOpen, closeCart, pendingChannel]);
 
-  function requestCheckout(channel: Channel) {
-    setPendingChannel(channel);
-  }
+  useEffect(() => {
+    if (!lenis) return;
 
-  function cancelCheckout() {
-    setPendingChannel(null);
-  }
+    if (isOpen) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
 
-  function confirmCheckout() {
-    if (!pendingChannel) return;
-    const { copied } = checkout(pendingChannel, lines, note);
-    setNotice(
-      copied
-        ? `Your order was copied. Paste it into the ${CHANNELS[pendingChannel].label} chat if the message box is empty.`
-        : `Opening ${CHANNELS[pendingChannel].label} with your order.`,
-    );
-    setPendingChannel(null);
-  }
+    return () => {
+      lenis.start();
+    };
+  }, [isOpen, lenis]);
 
   return {
     // cart state
@@ -51,12 +60,11 @@ function useCartDrawer() {
     // drawer state
     note,
     setNote,
-    notice,
     channels,
     requestCheckout,
     // confirm modal state
     pendingChannel,
-    pendingCopies: pendingChannel ? willCopyToClipboard(pendingChannel) : false,
+    pendingCopies,
     cancelCheckout,
     confirmCheckout,
   };
