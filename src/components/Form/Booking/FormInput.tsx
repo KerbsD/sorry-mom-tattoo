@@ -1,6 +1,6 @@
 // components/FormInput.tsx
 import { useFormikContext, getIn } from "formik"
-import { FormInputProps } from "@/types/booking";
+import type { FormInputProps } from "@/types/booking";
 
 function FormInput({ name, label, className = "", ...props }: FormInputProps) {
   const formik = useFormikContext<Record<string, unknown>>();

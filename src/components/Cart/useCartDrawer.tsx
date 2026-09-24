@@ -1,8 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useCart } from "@/context/CartContext";
-import { CHANNELS, availableChannels, type Channel } from "@/utils/Channels";
+import { availableChannels } from "@/utils/Channels";
 import { checkout } from "@/lib/checkout";
-import { willCopyToClipboard } from "@/utils/chatSend";
 import { useLenis } from "lenis/react";
 
 import useConfirmModal from "../Modal/ConfirmModal/useConfirmModal";

@@ -2,7 +2,7 @@
 import { sendToChat } from "@/utils/chatSend";
 import { CHANNELS, availableChannels, type Channel } from "@/utils/Channels";
 import { formatDateRange } from "@/utils/dates";
-import { BookingValues } from "@/types/booking";
+import type { BookingValues } from "@/types/booking";
 
 export function buildBookingMessage(values: BookingValues): string {
   const ref = Date.now().toString(36).toUpperCase();
@@ -22,4 +22,3 @@ export function sendBooking(channel: Channel, values: BookingValues) {
 }
 
 export { availableChannels, CHANNELS };
-export type { Channel };

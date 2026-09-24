@@ -1,13 +1,7 @@
 "use client";
 
-import { CHANNELS, type Channel } from "@/utils/Channels";
-
-interface ConfirmRedirectModalProps {
-  channel: Channel;
-  willCopy: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
-}
+import { CHANNELS } from "@/utils/Channels";
+import { ConfirmRedirectModalProps } from "@/types/modal";
 
 function ConfirmRedirectModal({
   channel,

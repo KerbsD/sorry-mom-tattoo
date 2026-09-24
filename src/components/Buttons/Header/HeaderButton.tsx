@@ -1,7 +1,5 @@
 import { CircleArrowRight } from "lucide-react";
-interface HeaderButtonProps {
-  onClick?: () => void;
-}
+import type { HeaderButtonProps } from "@/types/headers";
 
 function HeaderButton({ onClick }: HeaderButtonProps) {
   return (

@@ -1,4 +1,4 @@
-import { BookingValues } from "@/types/booking";
+import type { BookingValues } from "@/types/booking";
 import { getNextAvailableDate } from "@/utils/dates";
 import { availableChannels } from "@/utils/Channels";
 

@@ -5,7 +5,7 @@ import { FormikProvider } from "formik";
 import {
   CHANNEL_STYLES,
   DEFAULT_CHANNEL_STYLE,
-} from "@/constants/Channels/Channel";
+} from "@/constants/channel";
 import useHomeBooking from "@/components/Form/Booking/useHomeBooking";
 import FormInput from "@/components/Form/Booking/FormInput";
 import BookingCalendar from "@/components/Form/Booking/BookingCalendar";
@@ -13,7 +13,7 @@ import BookingFormButton from "@/components/Form/Booking/BookingFormButton";
 import { CHANNELS } from "@/lib/booking";
 import ConfirmRedirectModal from "@/components/Modal/ConfirmModal/ConfirmRedirectModal";
 import Modal from "@/components/Modal/CommonModal/Modal";
-import { BookingFormProps } from "@/types/booking";
+import type { BookingFormProps } from "@/types/booking";
 
 function BookingForm({ className = "" }: BookingFormProps) {
   const {

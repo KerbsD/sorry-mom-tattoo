@@ -13,13 +13,7 @@ import { Menu, X } from "lucide-react";
 import { HeaderItems } from "@/constants/Menu/MenuItems";
 import { CartButton } from "../Buttons/Header/CartButton";
 import { CartDrawer } from "../Cart/CartDrawer";
-interface HeaderNavProps {
-  isOpen: boolean;
-  setIsOpen: () => void;
-  pathname: string;
-  isHome: boolean;
-  onBookNowClick: () => void;
-}
+import { HeaderNavProps } from "@/types/headers";
 
 function HeaderDesktop(props: HeaderNavProps) {
   const { pathname, isHome, onBookNowClick } = props;

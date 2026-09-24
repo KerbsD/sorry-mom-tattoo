@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { bookingSchema } from "@/schemas/bookingSchema";
 import { sendBooking } from "@/lib/booking";
 import useConfirmModal from "@/components/Modal/ConfirmModal/useConfirmModal";
-import { BookingValues } from "@/types/booking";
+import type { BookingValues } from "@/types/booking";
 import { getInitialValues, formatDate, channels } from "@/constants/booking";
 
 function useHomeBooking() {

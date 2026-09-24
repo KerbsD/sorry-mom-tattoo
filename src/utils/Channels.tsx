@@ -19,7 +19,7 @@ export const CHANNELS: Record<Channel, { label: string; target?: string }> = {
 
 /** Only channels that have a number / username / page set in .env.local */
 export function availableChannels(): Channel[] {
-    return (Object.keys(CHANNELS) as Channel[]).filter((c) =>
-      Boolean(CHANNELS[c].target),
-    );
-  }
+  return (Object.keys(CHANNELS) as Channel[]).filter((c) =>
+    Boolean(CHANNELS[c].target),
+  );
+}

@@ -1,25 +1,13 @@
 import { Trash, HeartCrack } from "lucide-react";
-import { CartLine } from "@/context/CartContext";
-import { CHANNELS, type Channel } from "@/utils/Channels";
+import { CHANNELS } from "@/utils/Channels";
 import { formatPHP } from "@/constants/Merch/Products";
 import Link from "next/link";
 import { CartLinks } from "@/constants/Menu/MenuItems";
 import {
   CHANNEL_STYLES,
   DEFAULT_CHANNEL_STYLE,
-} from "@/constants/Channels/Channel";
-interface CartDrawerContentProps {
-  lines: CartLine[];
-  setQty: (id: string, qty: number) => void;
-  remove: (id: string) => void;
-  note: string;
-  setNote: (value: string) => void;
-  total: number;
-  channels: Channel[];
-  requestCheckout: (c: Channel) => void; // was handleCheckout
-  clear: () => void;
-  closeCart: () => void;
-}
+} from "@/constants/channel";
+import type { CartDrawerContentProps } from "@/types/cart";
 
 function CartDrawerContent(props: CartDrawerContentProps) {
   const {

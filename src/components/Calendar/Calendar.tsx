@@ -1,8 +1,8 @@
 import "react-day-picker/style.css";
 
 import { DayPicker } from "react-day-picker";
-import { CalendarProps } from "@/types/calendar";
 import { QUICK_SELECT_OPTIONS } from "@/constants/calendar";
+import type { CalendarProps } from "@/types/calendar";
 
 import useCalendar from "./useCalendar";
 

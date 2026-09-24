@@ -2,7 +2,7 @@
 
 import { Check, X } from "lucide-react";
 import { anton, jetbrainsmono } from "@/utils/Fonts";
-import { steps, dos, donts } from "@/constants/Aftercare/Aftercare";
+import { steps, dos, donts } from "@/constants/aftercare";
 
 import useAnimateAftercare from "./useAnimateAftercare";
 

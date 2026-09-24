@@ -2,7 +2,7 @@
 import { useFormikContext } from "formik";
 import type { DateRange } from "react-day-picker";
 import Calendar from "@/components/Calendar/Calendar";
-import { BookingValues } from "@/types/booking";
+import type { BookingValues } from "@/types/booking";
 
 function BookingCalendar() {
   const formik = useFormikContext<BookingValues>();

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { addDays, differenceInCalendarDays, subDays } from "date-fns";
 import { getNextAvailableDate } from "@/utils/dates";
 import { MAX_DAYS } from "@/constants/calendar";
-import { CalendarProps } from "@/types/calendar";
+import type { CalendarProps } from "@/types/calendar";
 
 function useCalendar(props: CalendarProps) {
   const { date, setDate } = props;
