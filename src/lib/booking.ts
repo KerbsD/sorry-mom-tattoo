@@ -1,7 +1,7 @@
 // lib/booking.ts
 import { sendToChat } from "@/utils/chatSend";
 import { CHANNELS, availableChannels, type Channel } from "@/utils/Channels";
-import { formatDateRange } from "@/utils/dates";
+import { formatDateRange, getNextAvailableDate } from "@/utils/dates";
 import type { BookingValues } from "@/types/booking";
 
 export function buildBookingMessage(values: BookingValues): string {
@@ -21,4 +21,19 @@ export function sendBooking(channel: Channel, values: BookingValues) {
   return sendToChat(channel, buildBookingMessage(values));
 }
 
-export { availableChannels, CHANNELS };
+const getInitialValues = (): BookingValues => ({
+  fullName: "",
+  email: "",
+  date: { from: getNextAvailableDate(new Date()), to: undefined },
+});
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+const channels = availableChannels();
+
+export { availableChannels, CHANNELS, getInitialValues, formatDate, channels };

@@ -1,10 +1,9 @@
 // components/hooks/useHomeBooking.ts
 import { useFormik } from "formik";
 import { bookingSchema } from "@/schemas/bookingSchema";
-import { sendBooking } from "@/lib/booking";
+import { sendBooking,  getInitialValues, formatDate, channels } from "@/lib/booking";
 import useConfirmModal from "@/components/Modal/ConfirmModal/useConfirmModal";
 import type { BookingValues } from "@/types/booking";
-import { getInitialValues, formatDate, channels } from "@/constants/booking";
 
 function useHomeBooking() {
   const formik = useFormik<BookingValues>({
