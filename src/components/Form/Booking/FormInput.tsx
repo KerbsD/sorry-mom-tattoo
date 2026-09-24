@@ -1,14 +1,6 @@
 // components/FormInput.tsx
-import { useFormikContext, getIn } from "formik";
-import { InputHTMLAttributes } from "react";
-
-interface FormInputProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>,
-  "name"
-> {
-  name: string;
-  label?: string;
-}
+import { useFormikContext, getIn } from "formik"
+import { FormInputProps } from "@/types/booking";
 
 function FormInput({ name, label, className = "", ...props }: FormInputProps) {
   const formik = useFormikContext<Record<string, unknown>>();

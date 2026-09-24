@@ -13,10 +13,7 @@ import BookingFormButton from "@/components/Form/Booking/BookingFormButton";
 import { CHANNELS } from "@/lib/booking";
 import ConfirmRedirectModal from "@/components/Modal/ConfirmModal/ConfirmRedirectModal";
 import Modal from "@/components/Modal/CommonModal/Modal";
-
-interface BookingFormProps {
-  className?: string;
-}
+import { BookingFormProps } from "@/types/booking";
 
 function BookingForm({ className = "" }: BookingFormProps) {
   const {

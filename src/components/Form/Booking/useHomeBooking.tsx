@@ -1,33 +1,20 @@
 // components/hooks/useHomeBooking.ts
 import { useFormik } from "formik";
 import { bookingSchema } from "@/schemas/bookingSchema";
-import { sendBooking, availableChannels, CHANNELS } from "@/lib/booking";
+import { sendBooking } from "@/lib/booking";
 import useConfirmModal from "@/components/Modal/ConfirmModal/useConfirmModal";
-interface BookingValues {
-  fullName: string;
-  email: string;
-  date: Date | undefined;
-}
-
-const initialValues: BookingValues = {
-  fullName: "",
-  email: "",
-  date: new Date(),
-};
+import { BookingValues } from "@/types/booking";
+import { getInitialValues, formatDate, channels } from "@/constants/booking";
 
 function useHomeBooking() {
   const formik = useFormik<BookingValues>({
-    initialValues,
+    initialValues: getInitialValues(),
     validationSchema: bookingSchema,
     onSubmit: async (values, { setSubmitting, setStatus }) => {
-      // fake submit — replace with your real API call later
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
       console.log("Booked:", values);
-
-      setStatus("confirmed"); // reveals the channel buttons
+      setStatus("confirmed");
       setSubmitting(false);
-      // no resetForm here — confirmSend resets once the message is actually sent
     },
   });
 
@@ -39,6 +26,14 @@ function useHomeBooking() {
     confirm,
   } = useConfirmModal((channel) => sendBooking(channel, formik.values));
 
+  const { from, to } = formik.values.date ?? {};
+
+  const formattedDate = from
+    ? to && to.getTime() !== from.getTime()
+      ? `${formatDate(from)} – ${formatDate(to)}`
+      : formatDate(from)
+    : null;
+
   function confirmSend() {
     const result = confirm();
     if (result) formik.resetForm();
@@ -49,16 +44,6 @@ function useHomeBooking() {
   function closeConfirmation() {
     formik.setStatus(undefined);
   }
-
-  const channels = availableChannels();
-
-  const formattedDate = formik.values.date
-    ? formik.values.date.toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    : null;
 
   return {
     formik,
