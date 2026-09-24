@@ -2,7 +2,7 @@
 
 import { Check, X } from "lucide-react";
 import { anton, jetbrainsmono } from "@/utils/Fonts";
-import { steps, dos, donts } from "@/constants/aftercare";
+import { STEPS, DOS, DONTS } from "@/constants/aftercare";
 
 import useAnimateAftercare from "./useAnimateAftercare";
 
@@ -47,7 +47,7 @@ function Aftercare() {
           </div>
 
           <div className="steps-grid grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3">
-            {steps.map(({ num, icon: Icon, title, text }) => (
+            {STEPS.map(({ num, icon: Icon, title, text }) => (
               <div
                 key={num}
                 className="step-card group relative flex flex-col gap-4 bg-[#0a0a0a] p-8 transition-colors duration-300 hover:bg-[#121212]"
@@ -100,7 +100,7 @@ function Aftercare() {
                 <div className="h-px flex-1 bg-teal-400/20" />
               </div>
               <ul className="space-y-4">
-                {dos.map((item) => (
+                {DOS.map((item) => (
                   <li
                     key={item}
                     className="rule-item flex items-start gap-3 text-sm text-white/75"
@@ -127,7 +127,7 @@ function Aftercare() {
                 <div className="h-px flex-1 bg-red-400/20" />
               </div>
               <ul className="space-y-4">
-                {donts.map((item) => (
+                {DONTS.map((item) => (
                   <li
                     key={item}
                     className="rule-item flex items-start gap-3 text-sm text-white/75"

@@ -7,7 +7,7 @@ import {
   Heart,
 } from "lucide-react";
 
-const steps = [
+const STEPS = [
   {
     num: "01",
     icon: Droplet,
@@ -46,7 +46,7 @@ const steps = [
   },
 ];
 
-const dos = [
+const DOS = [
   "Wash your tattoo 2–3 times a day",
   "Keep it clean and moisturized",
   "Use fragrance-free aftercare products",
@@ -54,7 +54,7 @@ const dos = [
   "Let it heal naturally",
 ];
 
-const donts = [
+const DONTS = [
   "Scratch, pick, or peel your tattoo",
   "Use alcohol, peroxide, or scented ointments",
   "Soak in water — pools, sea, or bath",
@@ -62,4 +62,4 @@ const donts = [
   "Wear tight or dirty clothing",
 ];
 
-export { steps, dos, donts };
+export { STEPS, DOS, DONTS };
