@@ -1,9 +1,13 @@
 import { Trash, HeartCrack } from "lucide-react";
 import { CartLine } from "@/context/CartContext";
-import { CHANNELS, type Channel } from "@/lib/checkout";
+import { CHANNELS, type Channel } from "@/utils/Channels";
 import { formatPHP } from "@/constants/Merch/Products";
 import Link from "next/link";
 import { CartLinks } from "@/constants/Menu/MenuItems";
+import {
+  CHANNEL_STYLES,
+  DEFAULT_CHANNEL_STYLE,
+} from "@/constants/Channels/Channel";
 interface CartDrawerContentProps {
   lines: CartLine[];
   setQty: (id: string, qty: number) => void;
@@ -12,19 +16,10 @@ interface CartDrawerContentProps {
   setNote: (value: string) => void;
   total: number;
   channels: Channel[];
-  handleCheckout: (c: Channel) => void;
-  notice: string | null;
+  requestCheckout: (c: Channel) => void; // was handleCheckout
   clear: () => void;
   closeCart: () => void;
 }
-
-const CHANNEL_STYLES: Partial<Record<Channel, string>> = {
-  whatsapp: "bg-[#25D366] text-black hover:bg-[#1ebe5b]",
-  messenger: "bg-[#0084ff] text-white hover:bg-[#0073e6]",
-  telegram: "bg-[#27a7e7] text-white hover:bg-[#1d96d3]",
-};
-
-const DEFAULT_CHANNEL_STYLE = "bg-teal-300 text-black hover:bg-teal-200";
 
 function CartDrawerContent(props: CartDrawerContentProps) {
   const {
@@ -35,8 +30,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     setNote,
     total,
     channels,
-    handleCheckout,
-    notice,
+    requestCheckout, // was handleCheckout
     clear,
     closeCart,
   } = props;
@@ -81,7 +75,9 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                 <div>
                   <strong className="font-medium">{l.name}</strong>
                   <div className="text-sm text-white/60">
-                    {formatPHP(l.price)} each
+                    {l.key.split(":")[0] === "design"
+                      ? "Reach out to see price"
+                      : `${formatPHP(l.price)} each`}
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -129,7 +125,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
           <div className="flex items-center justify-between border-t border-white/10 pt-4 text-lg">
             <span>Total</span>
             <strong className="font-semibold text-teal-300">
-              {formatPHP(total)}
+              {!total ? "Price varies" : formatPHP(total)}
             </strong>
           </div>
 
@@ -151,7 +147,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                     className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none ${
                       CHANNEL_STYLES[c] ?? DEFAULT_CHANNEL_STYLE
                     }`}
-                    onClick={() => handleCheckout(c)}
+                    onClick={() => requestCheckout(c)}
                   >
                     {CHANNELS[c].label}
                   </button>
@@ -160,17 +156,8 @@ function CartDrawerContent(props: CartDrawerContentProps) {
             </div>
           )}
 
-          {notice && (
-            <p
-              className="rounded-lg bg-teal-300/10 p-3 text-sm text-teal-200"
-              role="status"
-            >
-              {notice}
-            </p>
-          )}
-
           <button
-            className="self-start text-xs text-white/50 underline underline-offset-2 transition-colors hover:text-red-400"
+            className="self-start text-sm text-white/80 underline underline-offset-2 transition-colors hover:text-red-400"
             onClick={clear}
           >
             Clear cart

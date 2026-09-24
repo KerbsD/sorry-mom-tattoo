@@ -13,6 +13,7 @@ function useAnimateCart(props: AnimateCartProps) {
   const [mounted, setMounted] = useState(isOpen);
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (isOpen) setMounted(true);
@@ -22,7 +23,12 @@ function useAnimateCart(props: AnimateCartProps) {
     () => {
       if (!mounted || !overlayRef.current || !panelRef.current) return;
 
+      gsap.killTweensOf([overlayRef.current, panelRef.current]);
+
       if (isOpen) {
+        previouslyFocused.current =
+          document.activeElement as HTMLElement | null;
+
         gsap.set(overlayRef.current, { opacity: 0 });
         gsap.set(panelRef.current, { x: "100%" });
 
@@ -37,10 +43,17 @@ function useAnimateCart(props: AnimateCartProps) {
             panelRef.current,
             { x: "0%", duration: 0.3, ease: "power3.out" },
             "<0.05",
-          );
+          )
+          .call(() => panelRef.current?.focus());
       } else {
         gsap
-          .timeline({ onComplete: () => setMounted(false) })
+          .timeline({
+            onComplete: () => {
+              setMounted(false);
+
+              previouslyFocused.current?.focus();
+            },
+          })
           .to(panelRef.current, {
             x: "100%",
             duration: 0.3,

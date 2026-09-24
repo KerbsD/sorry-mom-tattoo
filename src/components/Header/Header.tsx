@@ -6,7 +6,7 @@ import Link from "next/link";
 import useHeader from "./useHeader";
 import HeaderButton from "../Buttons/Header/HeaderButton";
 import ScrambleText from "../Interactions/ScrambleText/ScrambleText";
-import Modal from "@/components/Modal/Modal";
+import Modal from "@/components/Modal/CommonModal/Modal";
 import BookingForm from "@/components/Form/Booking/BookingForm";
 
 import { Menu, X } from "lucide-react";
