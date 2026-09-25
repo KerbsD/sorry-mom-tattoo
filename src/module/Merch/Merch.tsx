@@ -1,9 +1,9 @@
 // Merch.tsx
 "use client";
 
-import { anton } from "@/utils/Fonts";
+import { anton } from "@/utils/fonts";
 import MerchCard from "@/module/Merch/MerchCard";
-import { categories } from "@/constants/Merch/Products";
+import { CATEGORIES } from "@/constants/merch";
 import useAnimateMerch from "@/module/Merch/useAnimateMerch";
 import MerchFilterDropdown from "@/components/Filters/Merch/MerchFilterDropdown";
 
@@ -36,7 +36,7 @@ function Merch() {
         {/* Filter buttons */}
         <div ref={filtersRef} className="relative z-30 mt-10">
           <MerchFilterDropdown
-            categories={categories}
+            categories={CATEGORIES}
             activeCategory={activeCategory}
             onChange={setActiveCategory}
           />

@@ -1,10 +1,7 @@
-import useClickOutside from "@/utils/useClickOutside";
+import useClickOutside from "@/utils/Interactions/useClickOutside";
+import type { useMerchFilterDropdownProps } from "@/types/filters";
 
-interface MerchFilterDropdownProps {
-  onChange: (category: string) => void;
-}
-
-function useMerchFilterDropdown(props: MerchFilterDropdownProps) {
+function useMerchFilterDropdown(props: useMerchFilterDropdownProps) {
   const { onChange } = props;
 
   const { isOpen, setIsOpen, wrapperRef } = useClickOutside();

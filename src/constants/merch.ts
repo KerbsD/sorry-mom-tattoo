@@ -1,14 +1,6 @@
-// constants/Merch/Products.ts
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  slug: string;
-  category: string;
-}
+import type { Product } from "@/types/merch";
 
-export const products: Product[] = [
+const PRODUCTS: Product[] = [
   {
     id: "1",
     name: "Sorry Mom Hoodie",
@@ -43,12 +35,9 @@ export const products: Product[] = [
   },
 ];
 
-export const categories = [
+const CATEGORIES = [
   "All",
-  ...new Set(products.map((products) => products.category)),
+  ...new Set(PRODUCTS.map((products) => products.category)),
 ];
 
-export const formatPHP = (amount: number) =>
-  new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP" }).format(
-    amount,
-  );
+export { PRODUCTS, CATEGORIES };

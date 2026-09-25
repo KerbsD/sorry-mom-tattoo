@@ -2,9 +2,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useRef, useState } from "react";
-import { PortfolioImages } from "@/constants/Portfolio/Images";
+import { PORTFOLIO_IMAGES } from "@/constants/portfolio";
 
-import useClickOutside from "@/utils/useClickOutside";
+import useClickOutside from "@/utils/Interactions/useClickOutside";
 
 function usePortfolio() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -27,7 +27,7 @@ function usePortfolio() {
     setIsOpen((prev) => !prev);
   };
 
-  const currentTattoo = PortfolioImages[selectedIndex] ?? null;
+  const currentTattoo = PORTFOLIO_IMAGES[selectedIndex] ?? null;
 
   const animateSlides = useCallback(() => {
     if (!emblaApi) return;

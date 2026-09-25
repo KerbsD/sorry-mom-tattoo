@@ -1,4 +1,4 @@
-export const HeaderItems = [
+const HEADER_ITEMS = [
   {
     title: "Home",
     link: "/",
@@ -25,6 +25,8 @@ export const HeaderItems = [
   },
 ];
 
-export const CartLinks = HeaderItems.filter((item) =>
+const CART_LINKS = HEADER_ITEMS.filter((item) =>
   ["/design", "/merch"].includes(item.link),
 );
+
+export { HEADER_ITEMS, CART_LINKS };

@@ -3,12 +3,7 @@
 
 import { ChevronDown } from "lucide-react";
 import useMerchFilterDropdown from "./useMerchFilterDropdown";
-
-interface MerchFilterDropdownProps {
-  categories: string[];
-  activeCategory: string;
-  onChange: (category: string) => void;
-}
+import type { MerchFilterDropdownProps } from "@/types/filters";
 
 function MerchFilterDropdown({
   categories,

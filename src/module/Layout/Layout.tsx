@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import ScrollToTop from "@/utils/ScrollToTop";
+import ScrollToTop from "@/utils/Interactions/ScrollToTop";
 interface Props {
   children: ReactNode;
 }

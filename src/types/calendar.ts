@@ -1,8 +1,6 @@
-import type { DateRange } from "react-day-picker";
-
 interface CalendarProps {
-  date: DateRange | undefined;
-  setDate: (date: DateRange | undefined) => void;
+  date: Date[] | undefined;
+  setDate: (date: Date[] | undefined) => void;
 }
 
 export type { CalendarProps };

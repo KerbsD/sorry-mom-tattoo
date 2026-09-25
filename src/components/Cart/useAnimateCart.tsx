@@ -2,10 +2,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { useEffect, useState, useRef } from "react";
-
-interface AnimateCartProps {
-  isOpen: boolean;
-}
+import type { AnimateCartProps } from "@/types/cart";
 
 function useAnimateCart(props: AnimateCartProps) {
   const { isOpen } = props;

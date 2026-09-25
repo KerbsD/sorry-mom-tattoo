@@ -1,10 +1,10 @@
 // components/hooks/useHomeBooking.ts
 import { useFormik } from "formik";
+import type { BookingValues } from "@/types/booking";
 import { bookingSchema } from "@/schemas/bookingSchema";
-import { sendBooking } from "@/lib/booking";
+import { sendBooking, getInitialValues } from "@/lib/booking";
+import { formatDates } from "@/utils/dates";
 import useConfirmModal from "@/components/Modal/ConfirmModal/useConfirmModal";
-import { BookingValues } from "@/types/booking";
-import { getInitialValues, formatDate, channels } from "@/constants/booking";
 
 function useHomeBooking() {
   const formik = useFormik<BookingValues>({
@@ -26,21 +26,13 @@ function useHomeBooking() {
     confirm,
   } = useConfirmModal((channel) => sendBooking(channel, formik.values));
 
-  const { from, to } = formik.values.date ?? {};
-
-  const formattedDate = from
-    ? to && to.getTime() !== from.getTime()
-      ? `${formatDate(from)} – ${formatDate(to)}`
-      : formatDate(from)
-    : null;
+  const formattedDate = formatDates(formik.values.date);
 
   function confirmSend() {
     const result = confirm();
     if (result) formik.resetForm();
   }
 
-  // Dismisses the "booking confirmed, pick a channel" modal without
-  // discarding what the user typed — just drops back to the editable form.
   function closeConfirmation() {
     formik.setStatus(undefined);
   }
@@ -48,7 +40,6 @@ function useHomeBooking() {
   return {
     formik,
     formattedDate,
-    channels,
     requestSend,
     cancelSend,
     confirmSend,

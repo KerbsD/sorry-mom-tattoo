@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 
 function useClickOutside() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

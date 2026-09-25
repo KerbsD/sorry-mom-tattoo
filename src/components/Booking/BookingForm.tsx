@@ -1,25 +1,27 @@
-// components/Form/Booking/BookingForm.tsx
 "use client";
 
 import { FormikProvider } from "formik";
+import type { BookingFormProps } from "@/types/booking";
+
 import {
   CHANNEL_STYLES,
   DEFAULT_CHANNEL_STYLE,
-} from "@/constants/Channels/Channel";
-import useHomeBooking from "@/components/Form/Booking/useHomeBooking";
-import FormInput from "@/components/Form/Booking/FormInput";
-import BookingCalendar from "@/components/Form/Booking/BookingCalendar";
-import BookingFormButton from "@/components/Form/Booking/BookingFormButton";
-import { CHANNELS } from "@/lib/booking";
+  CHANNELS,
+} from "@/constants/channel";
+
+import { channels } from "@/utils/channels";
+
+import useHomeBooking from "@/components/Booking/useHomeBooking";
+import FormInput from "@/components/Form/FormInput";
+import BookingCalendar from "@/components/Booking/BookingCalendar";
+import BookingFormButton from "@/components/Booking/BookingFormButton";
 import ConfirmRedirectModal from "@/components/Modal/ConfirmModal/ConfirmRedirectModal";
 import Modal from "@/components/Modal/CommonModal/Modal";
-import { BookingFormProps } from "@/types/booking";
 
 function BookingForm({ className = "" }: BookingFormProps) {
   const {
     formik,
     formattedDate,
-    channels,
     requestSend,
     cancelSend,
     confirmSend,
@@ -55,7 +57,7 @@ function BookingForm({ className = "" }: BookingFormProps) {
 
         <div className="mt-6 flex items-center justify-between">
           <p className="text-sm font-semibold text-white/90">
-            Date: {formattedDate}
+            Date: {!formattedDate ? <span className="font-light text-red-400">Select Date/s</span> : formattedDate}
           </p>
           <BookingFormButton />
         </div>

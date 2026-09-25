@@ -1,15 +1,15 @@
 // Design/Design.tsx
 "use client";
 
-import { anton } from "@/utils/Fonts";
+import { anton } from "@/utils/fonts";
 import DesignCard from "./DesignCard";
 import useAnimateDesign from "./useAnimateDesign";
+import { DESIGN_CATEGORIES } from "@/constants/design";
 
 function Design() {
   const {
     activeCategory,
     setActiveCategory,
-    designCategories,
     headingRef,
     filtersRef,
     gridRef,
@@ -37,7 +37,7 @@ function Design() {
           ref={filtersRef}
           className="mt-10 flex flex-wrap justify-center gap-8 border-b border-black/10 pb-4"
         >
-          {designCategories.map((category) => (
+          {DESIGN_CATEGORIES.map((category) => (
             <button
               key={category}
               type="button"

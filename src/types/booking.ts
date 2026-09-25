@@ -1,10 +1,9 @@
-import type { DateRange } from "react-day-picker";
 import { InputHTMLAttributes } from "react";
 
 interface BookingValues {
   fullName: string;
   email: string;
-  date: DateRange | undefined;
+  date: Date[] | undefined; // was DateRange | undefined
 }
 
 interface BookingFormProps {

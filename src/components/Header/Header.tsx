@@ -5,21 +5,15 @@ import Link from "next/link";
 
 import useHeader from "./useHeader";
 import HeaderButton from "../Buttons/Header/HeaderButton";
-import ScrambleText from "../Interactions/ScrambleText/ScrambleText";
+import ScrambleText from "../../utils/Interactions/ScrambleText/ScrambleText";
 import Modal from "@/components/Modal/CommonModal/Modal";
-import BookingForm from "@/components/Form/Booking/BookingForm";
+import BookingForm from "@/components/Booking/BookingForm";
 
 import { Menu, X } from "lucide-react";
-import { HeaderItems } from "@/constants/Menu/MenuItems";
+import { HEADER_ITEMS } from "@/constants/menu";
 import { CartButton } from "../Buttons/Header/CartButton";
 import { CartDrawer } from "../Cart/CartDrawer";
-interface HeaderNavProps {
-  isOpen: boolean;
-  setIsOpen: () => void;
-  pathname: string;
-  isHome: boolean;
-  onBookNowClick: () => void;
-}
+import type { HeaderNavProps } from "@/types/headers";
 
 function HeaderDesktop(props: HeaderNavProps) {
   const { pathname, isHome, onBookNowClick } = props;
@@ -42,7 +36,7 @@ function HeaderDesktop(props: HeaderNavProps) {
       {!isHome && (
         <>
           <ul className="hidden gap-13 xl:flex">
-            {HeaderItems.map((item) => {
+            {HEADER_ITEMS.map((item) => {
               const isActive = pathname === item.link;
 
               return (
@@ -98,7 +92,7 @@ function HeaderMobile(props: HeaderNavProps) {
         }`}
       >
         <ul className="flex flex-col gap-1">
-          {HeaderItems.map((item) => {
+          {HEADER_ITEMS.map((item) => {
             const isActive = pathname === item.link;
 
             return (

@@ -1,12 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { anton } from "@/utils/Fonts";
-import { PortfolioImage } from "@/constants/Portfolio/Images";
-
-export interface PortfolioModalContentProps {
-  tattoo: PortfolioImage | null;
-}
+import { anton } from "@/utils/fonts";
+import type { PortfolioModalContentProps } from "@/types/portfolio";
 
 function PortfolioModalContent({ tattoo }: PortfolioModalContentProps) {
   if (!tattoo) return null;
@@ -19,7 +15,7 @@ function PortfolioModalContent({ tattoo }: PortfolioModalContentProps) {
           src={tattoo.src}
           alt={tattoo.title}
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 768px) 100vw, 50vw"   
           className="object-cover"
         />
       </div>

@@ -1,25 +1,31 @@
 // lib/booking.ts
-import { sendToChat } from "@/utils/chatSend";
-import { CHANNELS, availableChannels, type Channel } from "@/utils/Channels";
-import { formatDateRange } from "@/utils/dates";
-import { BookingValues } from "@/types/booking";
+import { sendToChat } from "@/utils/chat";
+import { type Channel,  } from "@/utils/channels";
+import { formatDates } from "@/utils/dates";
+import type { BookingValues } from "@/types/booking";
 
-export function buildBookingMessage(values: BookingValues): string {
+function buildBookingMessage(values: BookingValues): string {
   const ref = Date.now().toString(36).toUpperCase();
-  const dateText = formatDateRange(values.date) ?? "No date selected";
+  const dateText = formatDates(values.date) ?? "No date selected";
+  const label = (values.date?.length ?? 0) > 1 ? "Dates" : "Date";
 
   return [
-    `Hi! I'd like to book an appointment (Ref ${ref}):`,
+    `Hello, SMT! I'd like to book an appointment (Ref ${ref}):`,
     "",
     `Name: ${values.fullName}`,
     `Email: ${values.email}`,
-    `Date: ${dateText.split(" - ")}`,
+    `${label}: ${dateText}`,
   ].join("\n");
 }
 
-export function sendBooking(channel: Channel, values: BookingValues) {
+function sendBooking(channel: Channel, values: BookingValues) {
   return sendToChat(channel, buildBookingMessage(values));
 }
 
-export { availableChannels, CHANNELS };
-export type { Channel };
+const getInitialValues = (): BookingValues => ({
+  fullName: "",
+  email: "",
+  date: [],
+});
+
+export { getInitialValues, sendBooking };
