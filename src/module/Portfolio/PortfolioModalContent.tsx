@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { anton } from "@/utils/fonts";
 import type { PortfolioModalContentProps } from "@/types/portfolio";
+import ZoomableImage from "@/utils/Interactions/ZoomableImage/ZoomableImage";
 
 function PortfolioModalContent({ tattoo }: PortfolioModalContentProps) {
   if (!tattoo) return null;
@@ -11,12 +11,10 @@ function PortfolioModalContent({ tattoo }: PortfolioModalContentProps) {
     <>
       {/* Image side */}
       <div className="relative h-64 w-full shrink-0 md:h-auto md:w-1/2">
-        <Image
+        <ZoomableImage
           src={tattoo.src}
           alt={tattoo.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"   
-          className="object-cover"
+          className="h-full w-full"
         />
       </div>
 
