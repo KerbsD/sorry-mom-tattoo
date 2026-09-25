@@ -1,15 +1,3 @@
-import type { DateRange } from "react-day-picker";
-
-export function getNextAvailableDate(input: Date): Date {
-  const date = new Date(input);
-  const day = date.getDay();
-
-  if (day === 6) date.setDate(date.getDate() + 2);
-  else if (day === 0) date.setDate(date.getDate() + 1);
-
-  return date;
-}
-
 const formatDate = (d: Date) =>
   d.toLocaleDateString("en-US", {
     month: "long",
@@ -17,10 +5,9 @@ const formatDate = (d: Date) =>
     year: "numeric",
   });
 
-export function formatDateRange(range: DateRange | undefined): string | null {
-  const { from, to } = range ?? {};
-  if (!from) return null;
-  return to && to.getTime() !== from.getTime()
-    ? `${formatDate(from)} – ${formatDate(to)}`
-    : formatDate(from);
+export function formatDates(dates: Date[] | undefined): string | null {
+  if (!dates || dates.length === 0) return null;
+
+  const sorted = [...dates].sort((a, b) => a.getTime() - b.getTime());
+  return sorted.map(formatDate).join(", ");
 }

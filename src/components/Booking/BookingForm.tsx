@@ -1,4 +1,3 @@
-// components/Form/Booking/BookingForm.tsx
 "use client";
 
 import { FormikProvider } from "formik";
@@ -9,6 +8,8 @@ import {
   DEFAULT_CHANNEL_STYLE,
   CHANNELS,
 } from "@/constants/channel";
+
+import { channels } from "@/utils/channels";
 
 import useHomeBooking from "@/components/Booking/useHomeBooking";
 import FormInput from "@/components/Form/FormInput";
@@ -21,7 +22,6 @@ function BookingForm({ className = "" }: BookingFormProps) {
   const {
     formik,
     formattedDate,
-    channels,
     requestSend,
     cancelSend,
     confirmSend,
@@ -57,7 +57,7 @@ function BookingForm({ className = "" }: BookingFormProps) {
 
         <div className="mt-6 flex items-center justify-between">
           <p className="text-sm font-semibold text-white/90">
-            Date: {formattedDate}
+            Date: {!formattedDate ? <span className="font-light text-red-400">Select Date/s</span> : formattedDate}
           </p>
           <BookingFormButton />
         </div>

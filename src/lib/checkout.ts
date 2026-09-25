@@ -1,4 +1,4 @@
-import type { CartLine } from "@/context/CartContext";
+import { CartLine } from "@/types/cart";
 import { formatPHP } from "@/utils/formatPhp";
 import { sendToChat } from "@/utils/chat";
 import { type Channel } from "@/utils/channels";
@@ -11,7 +11,7 @@ export function buildOrderMessage(lines: CartLine[], note?: string): string {
   );
 
   return [
-    `Hi! I'd like to place an order (Ref ${ref}):`,
+    `Hello, SMT! I'd like to pre-order (Ref ${ref}):`,
     "",
     ...items,
     "",

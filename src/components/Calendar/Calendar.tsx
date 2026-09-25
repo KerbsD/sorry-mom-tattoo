@@ -2,32 +2,25 @@ import "react-day-picker/style.css";
 
 import { DayPicker } from "react-day-picker";
 import { QUICK_SELECT_OPTIONS } from "@/constants/calendar";
+import { MAX_DAYS } from "@/constants/calendar";
 import type { CalendarProps } from "@/types/calendar";
 
 import useCalendar from "./useCalendar";
 
 function Calendar(props: CalendarProps) {
-  const {
-    date,
-    setDate,
-    handleSelect,
-    limitMatchers,
-    displayMonth,
-    setDisplayMonth,
-  } = useCalendar(props);
+  const { date, setDate, displayMonth, setDisplayMonth } = useCalendar(props);
 
   return (
     <div className="w-full">
       <DayPicker
-        mode="range"
+        mode="multiple"
+        max={MAX_DAYS}
         selected={date}
-        onSelect={handleSelect}
+        onSelect={setDate}
         month={displayMonth}
         onMonthChange={setDisplayMonth}
         disabled={[
-          { before: new Date() },
-          (day) => day.getDay() === 0 || day.getDay() === 6,
-          ...limitMatchers,
+          { before: new Date() }
         ]}
         className="w-full rounded-lg border border-white/10 bg-[#2a2a2a] p-3 text-white"
         classNames={{
@@ -46,14 +39,8 @@ function Calendar(props: CalendarProps) {
           day: "flex-1 flex items-center justify-center p-0",
           day_button:
             "aspect-square w-full max-w-9 rounded-md text-sm font-normal text-white hover:bg-white/10 transition-colors",
-          // Range styling: `selected` is left out on purpose so the
-          // start/end/middle classes don't fight each other
-          range_start:
+          selected:
             "[&>button]:bg-teal-400 [&>button]:text-black [&>button]:hover:bg-teal-400",
-          range_end:
-            "[&>button]:bg-teal-400 [&>button]:text-black [&>button]:hover:bg-teal-400",
-          range_middle:
-            "[&>button]:bg-teal-400/30 [&>button]:text-white [&>button]:hover:bg-teal-400/40",
           today: "[&>button]:border [&>button]:border-teal-400",
           outside: "[&>button]:text-white/20",
           disabled: "[&>button]:text-white/20 [&>button]:cursor-not-allowed",
@@ -68,7 +55,7 @@ function Calendar(props: CalendarProps) {
             onClick={() => {
               const next = getRange();
               setDate(next);
-              if (next.from) setDisplayMonth(next.from);
+              if (next[0]) setDisplayMonth(next[0]);
             }}
             className="flex-1 rounded-md border border-white/10 bg-[#2a2a2a] px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
