@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, X } from "lucide-react";
-import { anton, jetbrainsmono } from "@/utils/Fonts";
+import { anton, jetbrainsmono } from "@/utils/fonts";
 import { STEPS, DOS, DONTS } from "@/constants/aftercare";
 
 import useAnimateAftercare from "./useAnimateAftercare";

@@ -1,21 +1,7 @@
-import {
-  Phone,
-  Mail,
-  MapPin,
-  Car,
-  type LucideIcon,
-} from "lucide-react";
+import { Phone, Mail, MapPin, Car } from "lucide-react";
+import type { ContactMethod } from "@/types/contact";
 
-type ContactMethod = {
-  id: string;
-  label: string;
-  value: string;
-} & (
-  | { icon: LucideIcon; image?: never }
-  | { icon?: never; image: string }
-);
-
-export const directContacts: ContactMethod[] = [
+const DIRECT_CONTACTS: ContactMethod[] = [
   {
     id: "phone",
     icon: Phone,
@@ -48,7 +34,7 @@ export const directContacts: ContactMethod[] = [
   },
 ];
 
-export const infoStrip = [
+const INFO_STRIP = [
   {
     id: "location",
     icon: MapPin,
@@ -67,4 +53,4 @@ export const infoStrip = [
   },
 ];
 
-
+export { DIRECT_CONTACTS, INFO_STRIP };

@@ -1,4 +1,4 @@
-import useClickOutside from "@/utils/useClickOutside";
+import useClickOutside from "@/utils/Interactions/useClickOutside";
 import type { useMerchFilterDropdownProps } from "@/types/filters";
 
 function useMerchFilterDropdown(props: useMerchFilterDropdownProps) {

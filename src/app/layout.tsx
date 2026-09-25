@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "lenis/dist/lenis.css";
-import { poppins } from "@/utils/Fonts";
+import { poppins } from "@/utils/fonts";
 import Layout from "@/module/Layout/Layout";
-import LenisProvider from "@/components/Interactions/Lenis/LenisProvider";
-import CursorTrail from "@/components/Interactions/CursorTrail";
+import LenisProvider from "@/utils/Interactions/Lenis/LenisProvider";
+import CursorTrail from "@/utils/Interactions/CursorTrail";
 import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {

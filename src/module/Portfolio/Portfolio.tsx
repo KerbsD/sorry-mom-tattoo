@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { anton } from "@/utils/Fonts";
-import { PortfolioImages } from "@/constants/Portfolio/Images";
+import { anton } from "@/utils/fonts";
+import { PORTFOLIO_IMAGES } from "@/constants/portfolio";
 import usePortfolio from "./useAnimatePortfolio";
 
 import Modal from "@/components/Modal/CommonModal/Modal";
@@ -38,7 +38,7 @@ function Portfolio() {
 
       <div className="portfolio-images-container relative mx-auto mt-12 max-w-5xl px-3 lg:max-w-7xl">
         <h3 className={`mt-4 text-center text-2xl ${anton.className}`}>
-          {PortfolioImages[selectedIndex].title}
+          {PORTFOLIO_IMAGES[selectedIndex].title}
         </h3>
         <button
           onClick={scrollPrev}
@@ -57,7 +57,7 @@ function Portfolio() {
             className="my-15 flex lg:my-10"
             style={{ transformStyle: "preserve-3d" }}
           >
-            {PortfolioImages.map(({ src, title, style }, index) => (
+            {PORTFOLIO_IMAGES.map(({ src, title, style }, index) => (
               <div
                 onClick={() => toggleModal()}
                 key={style}
@@ -97,7 +97,7 @@ function Portfolio() {
       </div>
 
       <div className="mt-8 flex justify-center gap-2 pb-40">
-        {PortfolioImages.map((_, index) => (
+        {PORTFOLIO_IMAGES.map((_, index) => (
           <button
             key={index}
             onClick={() => scrollTo(index)}

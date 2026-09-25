@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { formatPHP, type Product } from "@/constants/Merch/Products";
-import { useCart, toCartItem } from "@/context/CartContext";
-interface MerchCardProps {
-  product: Product;
-}
+import { formatPHP } from "@/utils/formatPhp";
+import { useCart } from "@/context/CartContext";
+import { toCartItem } from "@/constants/cart";
+
+import type { MerchCardProps } from "@/types/merch";
 
 function MerchCard({ product }: MerchCardProps) {
   const { add, lines } = useCart();
@@ -18,7 +18,7 @@ function MerchCard({ product }: MerchCardProps) {
           src={product.image}
           alt={product.name}
           fill
-          sizes="(min-width: 1024px) 300px, 50vw" 
+          sizes="(min-width: 1024px) 300px, 50vw"
           className="object-contain p-4"
           loading="eager"
         />

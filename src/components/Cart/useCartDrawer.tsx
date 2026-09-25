@@ -1,8 +1,8 @@
-import { useEffect, useState, useMemo } from "react";
-import { useCart } from "@/context/CartContext";
-import { availableChannels } from "@/utils/Channels";
-import { checkout } from "@/lib/checkout";
 import { useLenis } from "lenis/react";
+import { useEffect, useState } from "react";
+import { checkout } from "@/lib/checkout";
+import { channels } from "@/utils/channels";
+import { useCart } from "@/context/CartContext";
 
 import useConfirmModal from "../Modal/ConfirmModal/useConfirmModal";
 
@@ -12,7 +12,6 @@ function useCartDrawer() {
   const lenis = useLenis();
 
   const [note, setNote] = useState("");
-  const channels = useMemo(() => availableChannels(), []);
 
   const {
     pendingChannel,

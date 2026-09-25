@@ -1,11 +1,8 @@
 // hooks/useChannelSend.ts
 import { useState } from "react";
-import { type Channel } from "@/utils/Channels"; // adjust if your canonical Channel type lives elsewhere
-import { willCopyToClipboard } from "@/utils/chatSend";
-
-interface SendResult {
-  copied: boolean;
-}
+import { type Channel } from "@/utils/channels"; // adjust if your canonical Channel type lives elsewhere
+import { willCopyToClipboard } from "@/utils/chat";
+import type { SendResult } from "@/types/modal";
 
 /**
  * Shared "pick a channel -> confirm -> send -> notice" flow used by both
@@ -13,9 +10,7 @@ interface SendResult {
  * `send` function (the actual side effect) and message copy; this hook only
  * owns the pending/notice state machine that was previously duplicated.
  */
-function useConfirmModal<T extends SendResult>(
-  send: (channel: Channel) => T,
-) {
+function useConfirmModal<T extends SendResult>(send: (channel: Channel) => T) {
   const [pendingChannel, setPendingChannel] = useState<Channel | null>(null);
 
   function request(channel: Channel) {

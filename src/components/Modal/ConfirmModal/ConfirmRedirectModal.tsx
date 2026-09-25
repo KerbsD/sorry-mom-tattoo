@@ -1,7 +1,7 @@
 "use client";
 
-import { CHANNELS } from "@/utils/Channels";
-import { ConfirmRedirectModalProps } from "@/types/modal";
+import { CHANNELS } from "@/constants/channel";
+import type { ConfirmRedirectModalProps } from "@/types/modal";
 
 function ConfirmRedirectModal({
   channel,

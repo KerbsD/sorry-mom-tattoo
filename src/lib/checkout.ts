@@ -1,7 +1,7 @@
 import type { CartLine } from "@/context/CartContext";
-import { formatPHP } from "@/constants/Merch/Products";
-import { sendToChat } from "@/utils/chatSend";
-import { type Channel } from "@/utils/Channels";
+import { formatPHP } from "@/utils/formatPhp";
+import { sendToChat } from "@/utils/chat";
+import { type Channel } from "@/utils/channels";
 
 export function buildOrderMessage(lines: CartLine[], note?: string): string {
   const ref = Date.now().toString(36).toUpperCase();

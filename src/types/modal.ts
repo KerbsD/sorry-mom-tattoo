@@ -1,4 +1,4 @@
-import type { Channel } from "@/utils/Channels";
+import type { Channel } from "@/utils/channels";
 
 interface ModalProps {
   isOpen: boolean;
@@ -15,6 +15,15 @@ interface ConfirmRedirectModalProps {
   onCancel: () => void;
 }
 
+interface SendResult {
+  copied: boolean;
+}
+
 type AnimateModalProps = Pick<ModalProps, "isOpen">;
 
-export type { ModalProps, AnimateModalProps, ConfirmRedirectModalProps };
+export type {
+  ModalProps,
+  AnimateModalProps,
+  ConfirmRedirectModalProps,
+  SendResult,
+};

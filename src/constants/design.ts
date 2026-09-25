@@ -1,16 +1,6 @@
-// constants/Design/Designs.ts
-export interface Design {
-  id: string;
-  title: string;
-  description: string;
-  style: string;
-  placement: string;
-  image: string;
-  category: string;
-  price: 0
-}
+import type { Design } from "@/types/design";
 
-export const designs: Design[] = [
+const DESIGN: Design[] = [
   {
     id: "1",
     title: "Clear Vision",
@@ -20,7 +10,7 @@ export const designs: Design[] = [
     placement: "Forearm / Chest",
     image: "/design/dfs-1.png",
     category: "Minimalist",
-    price: 0
+    price: 0,
   },
   {
     id: "2",
@@ -31,7 +21,7 @@ export const designs: Design[] = [
     placement: "Forearm / Calf",
     image: "/design/dfs-2.png",
     category: "Black & Grey",
-    price: 0
+    price: 0,
   },
   {
     id: "3",
@@ -41,7 +31,7 @@ export const designs: Design[] = [
     placement: "Forearm / Spine",
     image: "/design/dfs-3.png",
     category: "Minimalist",
-    price: 0
+    price: 0,
   },
   {
     id: "4",
@@ -52,12 +42,14 @@ export const designs: Design[] = [
     placement: "Arm / Shoulder",
     image: "/design/dfs-4.png",
     category: "Illustrative",
-    price: 0
+    price: 0,
   },
   // ...add the rest of your real designs here
 ];
 
-export const designCategories = [
+const DESIGN_CATEGORIES = [
   "All Designs",
-  ...new Set(designs.map((d) => d.category)),
+  ...new Set(DESIGN.map((d) => d.category)),
 ];
+
+export { DESIGN, DESIGN_CATEGORIES };

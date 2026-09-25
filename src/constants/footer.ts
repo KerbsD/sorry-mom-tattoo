@@ -1,6 +1,6 @@
-export const ICON_SIZE = 30;
+const ICON_SIZE = 30;
 
-export const SOCIAL_LINKS = [
+const SOCIAL_LINKS = [
   {
     src: "/socials/instagram.svg",
     alt: "Instagram logo",
@@ -17,3 +17,5 @@ export const SOCIAL_LINKS = [
     href: "https://tiktok.com",
   },
 ] as const;
+
+export { ICON_SIZE, SOCIAL_LINKS };

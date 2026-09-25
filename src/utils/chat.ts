@@ -1,6 +1,7 @@
-import { CHANNELS, type Channel } from "@/utils/Channels";
+import { Channel } from "./channels";
+import { CHANNELS } from "@/constants/channel";
 
-export function buildChatLink(channel: Channel, message: string): string {
+function buildChatLink(channel: Channel, message: string): string {
   const target = CHANNELS[channel].target ?? "";
   const text = encodeURIComponent(message);
 
@@ -14,14 +15,16 @@ export function buildChatLink(channel: Channel, message: string): string {
   }
 }
 
-export function willCopyToClipboard(channel: Channel): boolean {
+function willCopyToClipboard(channel: Channel): boolean {
   return channel === "messenger" || channel === "telegram";
 }
 
-export function sendToChat(channel: Channel, message: string) {
+function sendToChat(channel: Channel, message: string) {
   const copied = willCopyToClipboard(channel);
   if (copied) void navigator.clipboard?.writeText(message).catch(() => {});
 
   window.open(buildChatLink(channel, message), "_blank", "noopener,noreferrer");
   return { copied };
 }
+
+export { buildChatLink, willCopyToClipboard, sendToChat };

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { anton, jetbrainsmono } from "@/utils/Fonts";
-import { directContacts, infoStrip } from "@/constants/Contact/Contact";
+import { anton, jetbrainsmono } from "@/utils/fonts";
+import { DIRECT_CONTACTS, INFO_STRIP } from "@/constants/contact";
 
 import useAnimateContact from "./useAnimateContact";
 
@@ -73,7 +73,7 @@ function Contact() {
               </h2>
 
               <div className="contacts-grid mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-                {directContacts.map(
+                {DIRECT_CONTACTS.map(
                   ({ id, icon: Icon, image, label, value }) => (
                     <div
                       key={id}
@@ -124,7 +124,7 @@ function Contact() {
 
             {/* Info strip */}
             <div className="info-strip grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
-              {infoStrip.map(({ id, icon: Icon, title, lines }) => (
+              {INFO_STRIP.map(({ id, icon: Icon, title, lines }) => (
                 <div key={id} className="info-item flex items-start gap-3 p-5">
                   <Icon size={18} className="mt-0.5 shrink-0 text-white" />
                   <div className="min-w-0">

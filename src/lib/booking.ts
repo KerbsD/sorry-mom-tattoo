@@ -1,10 +1,10 @@
 // lib/booking.ts
-import { sendToChat } from "@/utils/chatSend";
-import { CHANNELS, availableChannels, type Channel } from "@/utils/Channels";
+import { sendToChat } from "@/utils/chat";
+import { type Channel } from "@/utils/channels";
 import { formatDateRange, getNextAvailableDate } from "@/utils/dates";
 import type { BookingValues } from "@/types/booking";
 
-export function buildBookingMessage(values: BookingValues): string {
+function buildBookingMessage(values: BookingValues): string {
   const ref = Date.now().toString(36).toUpperCase();
   const dateText = formatDateRange(values.date) ?? "No date selected";
 
@@ -17,7 +17,7 @@ export function buildBookingMessage(values: BookingValues): string {
   ].join("\n");
 }
 
-export function sendBooking(channel: Channel, values: BookingValues) {
+function sendBooking(channel: Channel, values: BookingValues) {
   return sendToChat(channel, buildBookingMessage(values));
 }
 
@@ -34,6 +34,4 @@ const formatDate = (d: Date) =>
     year: "numeric",
   });
 
-const channels = availableChannels();
-
-export { availableChannels, CHANNELS, getInitialValues, formatDate, channels };
+export { getInitialValues, formatDate, sendBooking };

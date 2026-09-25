@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { emgaramond } from "@/utils/Fonts";
+import { emgaramond } from "@/utils/fonts";
 import useAnimateHomeAbout from "./animations/useAnimateHomeAbout";
 
 const GRID_COLS = 8;

@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
-import { AnimateModalProps } from "@/types/modal";
+import type { AnimateModalProps } from "@/types/modal";
 
 function useAnimateModal(props: AnimateModalProps) {
   const { isOpen } = props;

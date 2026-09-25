@@ -1,12 +1,9 @@
 import { Trash, HeartCrack } from "lucide-react";
-import { CHANNELS } from "@/utils/Channels";
-import { formatPHP } from "@/constants/Merch/Products";
+import { CHANNELS } from "@/constants/channel";
+import { formatPHP } from "@/utils/formatPhp";
 import Link from "next/link";
-import { CartLinks } from "@/constants/Menu/MenuItems";
-import {
-  CHANNEL_STYLES,
-  DEFAULT_CHANNEL_STYLE,
-} from "@/constants/channel";
+import { CART_LINKS } from "@/constants/menu";
+import { CHANNEL_STYLES, DEFAULT_CHANNEL_STYLE } from "@/constants/channel";
 import type { CartDrawerContentProps } from "@/types/cart";
 
 function CartDrawerContent(props: CartDrawerContentProps) {
@@ -38,7 +35,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
             Start browsing
           </span>
           <div className="mx-auto mt-5 flex gap-3">
-            {CartLinks.map((item) => {
+            {CART_LINKS.map((item) => {
               return (
                 <Link
                   onClick={closeCart}

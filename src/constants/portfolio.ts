@@ -1,14 +1,6 @@
-export interface PortfolioImage {
-  src: string;
-  title: string;
-  style: string;
-  description?: string;
-  artist?: string;
-  duration?: string;
-  date?: string;
-}
+import type { PortfolioImageProps } from "@/types/portfolio";
 
-export const PortfolioImages: PortfolioImage[] = [
+const PORTFOLIO_IMAGES: PortfolioImageProps[] = [
   {
     src: "/portfolio/TP2.jpg",
     title: "Lorem Ipsum",
@@ -43,8 +35,7 @@ export const PortfolioImages: PortfolioImage[] = [
     src: "/portfolio/TP4.jpg",
     title: "Shattered",
     style: "illustrative",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. .",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. .",
     artist: "Sorry Mom",
     duration: "3 hours",
     date: "September 5, 2026",
@@ -60,3 +51,5 @@ export const PortfolioImages: PortfolioImage[] = [
     date: "September 5, 2026",
   },
 ];
+
+export { PORTFOLIO_IMAGES };

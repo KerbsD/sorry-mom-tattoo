@@ -2,8 +2,8 @@
 "use client";
 
 import Image from "next/image";
-import { anton } from "@/utils/Fonts";
-import BookingForm from "@/components/Form/Booking/BookingForm";
+import { anton } from "@/utils/fonts";
+import BookingForm from "@/components/Booking/BookingForm";
 
 function HomeBooking() {
   return (

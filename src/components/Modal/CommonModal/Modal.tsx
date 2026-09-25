@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react";
 import useAnimateModal from "./useAnimateModal";
-import { ModalProps } from "@/types/modal";
+import type { ModalProps } from "@/types/modal";
 
 function Modal({ isOpen, onClose, children, title, className }: ModalProps) {
   const { overlayRef, panelRef } = useAnimateModal({

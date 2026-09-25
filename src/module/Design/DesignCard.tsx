@@ -2,12 +2,10 @@
 "use client";
 
 import Image from "next/image";
-import { Heart, ArrowUpRight } from "lucide-react";
-import { Design } from "@/constants/Design/Designs";
-import { useCart, toCartItem } from "@/context/CartContext";
-interface DesignCardProps {
-  design: Design;
-}
+import { ArrowUpRight } from "lucide-react";
+import { DesignCardProps } from "@/types/design";
+import { useCart } from "@/context/CartContext";
+import { toCartItem } from "@/constants/cart";
 
 function DesignCard({ design }: DesignCardProps) {
   const { add, lines } = useCart();
@@ -17,7 +15,7 @@ function DesignCard({ design }: DesignCardProps) {
     <div className="design-card flex h-full flex-col rounded-lg">
       <div className="flex items-center justify-between">
         <span
-          className={`rounded-full border border-teal-400 px-3 py-1 text-xs transition font-semibold ${
+          className={`rounded-full border border-teal-400 px-3 py-1 text-xs font-semibold transition ${
             inCart > 0 ? "bg-teal-400 text-gray-900" : "text-teal-400"
           }`}
         >
