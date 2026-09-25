@@ -74,7 +74,7 @@ function Contact() {
 
               <div className="contacts-grid mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 {DIRECT_CONTACTS.map(
-                  ({ id, icon: Icon, image, label, value }) => (
+                  ({ id, icon: Icon, image, label, value, href }) => (
                     <div
                       key={id}
                       className="contact-item flex items-start gap-4"
@@ -98,9 +98,14 @@ function Contact() {
                         >
                           {label}
                         </p>
-                        <p className="text-xs font-medium wrap-anywhere text-white transition hover:text-teal-400">
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-center tracking-wide transition hover:text-teal-500 md:text-left"
+                        >
                           {value}
-                        </p>
+                        </a>
                       </div>
                     </div>
                   ),
@@ -124,19 +129,21 @@ function Contact() {
 
             {/* Info strip */}
             <div className="info-strip grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
-              {INFO_STRIP.map(({ id, icon: Icon, title, lines }) => (
+              {INFO_STRIP.map(({ id, icon: Icon, title, lines, href }) => (
                 <div key={id} className="info-item flex items-start gap-3 p-5">
                   <Icon size={18} className="mt-0.5 shrink-0 text-white" />
                   <div className="min-w-0">
                     <p className={`${anton.className} text-sm`}>{title}</p>
-                    <p className="mt-1 text-sm leading-relaxed wrap-anywhere text-white/60">
-                      {lines.map((line, i) => (
-                        <span key={i}>
-                          {line}
-                          {i < lines.length - 1 && <br />}
-                        </span>
-                      ))}
-                    </p>
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      <p className="mt-1 text-sm leading-relaxed wrap-anywhere text-white/60">
+                        {lines.map((line, i) => (
+                          <span key={i}>
+                            {line}
+                            {i < lines.length - 1 && <br />}
+                          </span>
+                        ))}
+                      </p>
+                    </a>
                   </div>
                 </div>
               ))}
