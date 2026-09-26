@@ -21,9 +21,29 @@ function willCopyToClipboard(channel: Channel): boolean {
 
 function sendToChat(channel: Channel, message: string) {
   const copied = willCopyToClipboard(channel);
-  if (copied) void navigator.clipboard?.writeText(message).catch(() => {});
+  const url = buildChatLink(channel, message);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  window.open(buildChatLink(channel, message), "_blank", "noopener,noreferrer");
+  // Do the gesture-gated navigation FIRST, synchronously, so it still
+  // has user-activation. Clipboard write happens after, fire-and-forget.
+  if (isMobile) {
+    // location.href is far more reliable than window.open for app handoff on mobile
+    window.location.href = url;
+  } else {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  if (copied) {
+    if (!navigator.clipboard) {
+      console.warn("Clipboard API unavailable — insecure context?");
+      // maybe surface a toast to the user here
+    } else {
+      void navigator.clipboard.writeText(message).catch((err) => {
+        console.warn("Clipboard write failed:", err);
+      });
+    }
+  }
+
   return { copied };
 }
 

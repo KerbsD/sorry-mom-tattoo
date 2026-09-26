@@ -32,7 +32,7 @@ function Contact() {
           <div className="flex flex-col gap-10">
             {/* Messenger CTA */}
             <a
-              href="https://m.me/jhomarmustnit12"
+              href="https://m.me/jhomarmusnit12"
               target="_blank"
               rel="noopener noreferrer"
               className="messenger-cta group flex items-center gap-5 border border-teal-400/40 bg-teal-400/5 p-6 transition-colors duration-300 hover:bg-teal-400/10 sm:p-8"
@@ -74,7 +74,7 @@ function Contact() {
                 Other Ways to Reach Us
               </h2>
 
-              <div className="contacts-grid mt-6 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+              <div className="contacts-grid mt-6 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
                 {DIRECT_CONTACTS.map(
                   ({ id, icon: Icon, image, label, value, href }) => (
                     <div
@@ -104,7 +104,7 @@ function Contact() {
                           href={href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-center tracking-wide transition hover:text-teal-500 md:text-left"
+                          className="block tracking-wide break-all transition hover:text-teal-500 md:text-left"
                         >
                           {value}
                         </a>

@@ -21,6 +21,7 @@ function Portfolio() {
     isOpen,
     toggleModal,
     currentTattoo,
+    modalInstanceKey,
   } = usePortfolio();
 
   return (
@@ -115,7 +116,7 @@ function Portfolio() {
         title="Portfolio Images"
         className="relative mx-4 flex h-120 w-full max-w-4xl flex-col rounded-lg bg-neutral-900 md:h-125 md:flex-row"
       >
-        <PortfolioModalContent tattoo={currentTattoo} />
+        <PortfolioModalContent key={modalInstanceKey} tattoo={currentTattoo} />
       </Modal>
     </section>
   );
