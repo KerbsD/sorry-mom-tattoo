@@ -22,6 +22,12 @@ function MerchCard({ product }: MerchCardProps) {
           className="object-contain p-4"
           loading="eager"
         />
+
+        {inCart > 0 && (
+          <span className="absolute top-1 right-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-teal-400 px-1 text-xs font-bold text-black shadow transition">
+            {inCart}
+          </span>
+        )}
       </div>
 
       <h3 className="mt-3 text-left text-sm font-semibold text-white sm:text-base">
@@ -35,7 +41,7 @@ function MerchCard({ product }: MerchCardProps) {
         onClick={() => add(toCartItem.merch(product))}
         className="mt-3 flex items-center justify-center rounded-sm bg-teal-400 px-4 py-2 text-sm font-semibold text-black transition hover:bg-teal-300"
       >
-        {inCart > 0 ? `Add another (${inCart} in cart)` : "Add to cart"}
+        {inCart > 0 ? `Add another` : "Add to cart"}
       </button>
     </div>
   );
