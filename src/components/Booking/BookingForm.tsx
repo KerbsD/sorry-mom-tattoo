@@ -35,7 +35,7 @@ function BookingForm({ className = "" }: BookingFormProps) {
     <FormikProvider value={formik}>
       <form
         onSubmit={formik.handleSubmit}
-        className={`max-h-full overflow-y-auto overscroll-contain rounded-2xl border border-white/10 bg-[#161616] p-6 ${className}`}
+        className={`rounded-2xl border border-white/10 bg-[#161616] p-6 ${className}`}
       >
         <div className="mb-4 flex flex-col gap-4 sm:flex-row">
           <FormInput

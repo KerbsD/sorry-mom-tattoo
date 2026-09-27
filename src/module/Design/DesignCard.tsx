@@ -50,7 +50,7 @@ function DesignCard({ design }: DesignCardProps) {
         <button
           onClick={() => add(toCartItem.design(design))}
           type="button"
-          className="mt-6 flex w-full items-center justify-center gap-2 rounded-md border-2 border-teal-400 px-4 py-2.5 text-sm font-semibold text-teal-400 transition hover:bg-teal-400 hover:text-black"
+          className="mt-6 flex w-full items-center justify-center gap-2 rounded-md border-2 border-teal-400 px-4 py-2.5 text-sm font-semibold text-teal-400 transition hover:bg-teal-400 hover:text-black text-nowrap"
         >
           {inCart > 0 ? `ADD ANOTHER` : "ADD TO CART"}
           <ArrowUpRight size={16} />
