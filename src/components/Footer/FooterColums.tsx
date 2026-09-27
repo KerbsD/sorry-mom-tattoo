@@ -54,12 +54,16 @@ const FOOTER_COLUMNS: {
       <>
         <a
           href="tel:+639123456789"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-center tracking-wide transition hover:text-teal-500 md:text-left"
         >
           (+63)912-345-6789
         </a>
         <a
           href="mailto:sorrymomtattoo@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-center tracking-wide transition hover:text-teal-500 md:text-left"
         >
           sorrymomtattoo@gmail.com

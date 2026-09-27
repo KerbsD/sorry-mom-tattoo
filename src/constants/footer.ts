@@ -4,17 +4,17 @@ const SOCIAL_LINKS = [
   {
     src: "/socials/instagram.svg",
     alt: "Instagram logo",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/sorrymomtatt00?stkn=NXZheTFyYnBoc2Y2",
   },
   {
     src: "/socials/facebook.svg",
     alt: "Facebook logo",
-    href: "https://facebook.com",
+    href: "https://www.facebook.com/share/18XKsZEVxp/",
   },
   {
     src: "/socials/tiktok.svg",
     alt: "Tiktok logo",
-    href: "https://tiktok.com",
+    href: "https://www.tiktok.com/@sorrymomtatt00?_r=1&_t=ZS-9A1PLRPNH2T",
   },
 ] as const;
 

@@ -22,9 +22,14 @@ function usePortfolio() {
   );
 
   const { isOpen, setIsOpen } = useClickOutside();
+  const [modalInstanceKey, setModalInstanceKey] = useState(0);
 
   const toggleModal = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpen((prev) => {
+      const next = !prev;
+      if (next) setModalInstanceKey((k) => k + 1); // bump only when opening
+      return next;
+    });
   };
 
   const currentTattoo = PORTFOLIO_IMAGES[selectedIndex] ?? null;
@@ -96,6 +101,7 @@ function usePortfolio() {
     isOpen,
     toggleModal,
     currentTattoo,
+    modalInstanceKey
   };
 }
 
