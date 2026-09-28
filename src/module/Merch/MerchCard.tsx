@@ -39,7 +39,7 @@ function MerchCard({ product }: MerchCardProps) {
 
       <button
         onClick={() => add(toCartItem.merch(product))}
-        className="mt-3 flex items-center justify-center rounded-sm bg-teal-400 px-4 py-2 text-sm font-semibold text-black transition hover:bg-teal-300"
+        className="mt-3 flex items-center justify-center rounded-sm bg-teal-400 px-4 py-2 text-sm font-semibold text-black uppercase transition hover:bg-teal-300 active:bg-teal-600"
       >
         {inCart > 0 ? `Add another` : "Add to cart"}
       </button>

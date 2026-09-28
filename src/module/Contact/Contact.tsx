@@ -7,6 +7,8 @@ import { DIRECT_CONTACTS, INFO_STRIP } from "@/constants/contact";
 
 import useAnimateContact from "./useAnimateContact";
 
+import ZoomableImage from "@/utils/Interactions/ZoomableImage/ZoomableImage";
+
 function Contact() {
   const { containerRef } = useAnimateContact();
 
@@ -104,7 +106,7 @@ function Contact() {
                           href={href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block tracking-wide break-all transition hover:text-teal-500 md:text-left"
+                          className="block tracking-wide break-all transition hover:text-teal-500 active:text-teal-400 md:text-left"
                         >
                           {value}
                         </a>
@@ -119,35 +121,44 @@ function Contact() {
           {/* Right column: map */}
           <div className="map-card flex flex-col gap-px border border-white/10">
             <div className="relative aspect-505/308 w-full overflow-hidden bg-[#dcdcdc]">
-              <Image
+              <ZoomableImage
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 src="/bg-map.png"
                 alt="Map showing Sorry Mom Tattoo's location in Antipolo"
                 className="absolute inset-0 h-full w-full object-cover"
-                fill
-                loading="eager"
               />
             </div>
 
             {/* Info strip */}
             <div className="info-strip grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
               {INFO_STRIP.map(({ id, icon: Icon, title, lines, href }) => (
-                <div key={id} className="info-item flex items-start gap-3 p-5">
-                  <Icon size={18} className="mt-0.5 shrink-0 text-white" />
+                <a
+                  key={id}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="info-item group flex items-start gap-3 p-5 transition-colors duration-300 hover:bg-white/5 active:bg-white/10"
+                >
+                  <Icon
+                    size={18}
+                    className="mt-0.5 shrink-0 text-white transition-colors duration-300 group-hover:text-teal-400 group-active:text-teal-400"
+                  />
                   <div className="min-w-0">
-                    <p className={`${anton.className} text-sm`}>{title}</p>
-                    <a href={href} target="_blank" rel="noopener noreferrer">
-                      <p className="mt-1 text-sm leading-relaxed wrap-anywhere text-white/60">
-                        {lines.map((line, i) => (
-                          <span key={i}>
-                            {line}
-                            {i < lines.length - 1 && <br />}
-                          </span>
-                        ))}
-                      </p>
-                    </a>
+                    <p
+                      className={`${anton.className} text-sm transition-colors duration-300 group-hover:text-teal-400 group-active:text-teal-400`}
+                    >
+                      {title}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed wrap-anywhere text-white/60 transition-colors duration-300 group-hover:text-white group-active:text-white">
+                      {lines.map((line, i) => (
+                        <span key={i}>
+                          {line}
+                          {i < lines.length - 1 && <br />}
+                        </span>
+                      ))}
+                    </p>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

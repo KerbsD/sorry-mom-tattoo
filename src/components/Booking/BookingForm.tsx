@@ -57,7 +57,12 @@ function BookingForm({ className = "" }: BookingFormProps) {
 
         <div className="mt-6 flex items-center justify-between">
           <p className="text-sm font-semibold text-white/90">
-            Date: {!formattedDate ? <span className="font-light text-red-400">Select Date/s</span> : formattedDate}
+            Date:{" "}
+            {!formattedDate ? (
+              <span className="font-light text-red-400">Select Date/s</span>
+            ) : (
+              formattedDate
+            )}
           </p>
           <BookingFormButton />
         </div>

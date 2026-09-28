@@ -4,7 +4,7 @@ function BookButton() {
   return (
     <a
       href="#home-booking"
-      className="flex max-h-20 max-w-56.25 items-center justify-center gap-1.5 rounded-lg border-2 border-teal-400 px-1 py-1 text-sm text-teal-300 transition hover:bg-teal-400 hover:text-black sm:gap-2 sm:border-3 md:gap-4 md:px-2"
+      className="flex max-h-20 max-w-56.25 items-center justify-center gap-1.5 rounded-lg border-2 border-teal-400 px-1 py-1 text-sm text-teal-300 transition hover:bg-teal-400 hover:text-black active:bg-teal-400 active:text-black sm:gap-2 sm:border-3 md:gap-4 md:px-2"
     >
       <span className="text-base font-semibold tracking-tight text-nowrap sm:text-xl">
         Book Now

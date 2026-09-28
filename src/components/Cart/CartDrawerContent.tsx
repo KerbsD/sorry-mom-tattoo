@@ -68,7 +68,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                 <div className="flex items-center gap-2">
                   <div className="flex items-center gap-1 rounded-full border border-white/15 p-0.5">
                     <button
-                      className="flex size-7 items-center justify-center rounded-full text-lg leading-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-teal-300 focus-visible:outline-none"
+                      className="flex size-7 items-center justify-center rounded-full text-lg leading-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-teal-300 focus-visible:outline-none active:text-teal-400"
                       aria-label={`Remove one ${l.name}`}
                       onClick={() => setQty(l.key, l.qty - 1)}
                     >
@@ -78,7 +78,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                       {l.qty}
                     </span>
                     <button
-                      className="flex size-7 items-center justify-center rounded-full text-lg leading-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-teal-300 focus-visible:outline-none"
+                      className="flex size-7 items-center justify-center rounded-full text-lg leading-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-teal-300 focus-visible:outline-none active:text-teal-400"
                       aria-label={`Add one ${l.name}`}
                       onClick={() => setQty(l.key, l.qty + 1)}
                     >
@@ -86,7 +86,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                     </button>
                   </div>
                   <button
-                    className="mr-2 transition-colors hover:text-red-400"
+                    className="mr-2 transition-colors hover:text-red-400 active:text-red-400"
                     onClick={() => remove(l.key)}
                   >
                     <Trash size={18} />

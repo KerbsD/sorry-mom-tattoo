@@ -38,10 +38,11 @@ const FOOTER_COLUMNS: {
         href="https://maps.app.goo.gl/jgwFcM7n8pnfUiKbA"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-center tracking-wide transition hover:text-teal-500 md:text-left"
+        className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
       >
-        CAMLON SILKSCREEN PRINTING SERVICES, <br />
-        960 Onyx Ln, Antipolo City, 1870 Rizal
+        CAMLON SILKSCREEN PRINTING SERVICES,
+        <br /> 960 Onyx Ln,
+        <br /> Antipolo City, 1870 Rizal
       </a>
     ),
     icon: <MapPin className="h-4 md:h-5" />,
@@ -56,7 +57,7 @@ const FOOTER_COLUMNS: {
           href="tel:+639123456789"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center tracking-wide transition hover:text-teal-500 md:text-left"
+          className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
         >
           (+63)912-345-6789
         </a>
@@ -64,7 +65,7 @@ const FOOTER_COLUMNS: {
           href="mailto:sorrymomtattoo@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-center tracking-wide transition hover:text-teal-500 md:text-left"
+          className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
         >
           sorrymomtattoo@gmail.com
         </a>

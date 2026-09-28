@@ -22,7 +22,7 @@ function HomeAbout() {
 
       <div
         ref={textPanelRef}
-        className="flex max-w-2xl items-start px-6 py-12 sm:px-8 sm:py-20"
+        className="px-6 py-12 sm:max-w-2xl sm:px-8 sm:py-25"
       >
         <p
           ref={textRef}
