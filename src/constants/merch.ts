@@ -8,11 +8,12 @@ const PRODUCTS: Product[] = [
     image: "/merch/HOODIE.png",
     slug: "sorry-mom-hoodie",
     category: "Hoodies",
+    preorder: true,
   },
   {
     id: "2",
     name: "Sorry Mom Shirt",
-    price: 800,
+    price: 500,
     image: "/merch/SHIRT.png",
     slug: "sorry-mom-shirt",
     category: "Shirts",
@@ -20,18 +21,10 @@ const PRODUCTS: Product[] = [
   {
     id: "3",
     name: "Sorry Mom Sticker Pack",
-    price: 800,
+    price: 100,
     image: "/merch/STICKERPACK.png",
     slug: "sorry-mom-sticker-pack",
     category: "Accessories",
-  },
-  {
-    id: "4",
-    name: "Sorry Mom Art Prints",
-    price: 800,
-    image: "/merch/ART-PRINTS.png",
-    slug: "sorry-mom-art-prints",
-    category: "Prints",
   },
 ];
 

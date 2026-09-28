@@ -14,6 +14,12 @@ function MerchCard({ product }: MerchCardProps) {
   return (
     <div className="merch-card z-10 flex max-w-75 flex-col">
       <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-white">
+        {product.preorder && (
+          <div className="absolute top-1 left-1 z-30 flex h-6 min-w-12 items-center justify-center rounded-full bg-teal-600 border-2 border-black px-2 text-xs font-semibold text-white shadow transition">
+            <p>PRE-ORDER</p>
+          </div>
+        )}
+
         <Image
           src={product.image}
           alt={product.name}
@@ -33,9 +39,9 @@ function MerchCard({ product }: MerchCardProps) {
       <h3 className="mt-3 text-left text-sm font-semibold text-white sm:text-base">
         {product.name}
       </h3>
-      <strong className="text-left text-xs text-white/60 sm:text-sm">
+      <p className="text-left tracking-wide text-xs text-white/60 sm:text-sm">
         {formatPHP(product.price)}
-      </strong>
+      </p>
 
       <button
         onClick={() => add(toCartItem.merch(product))}

@@ -5,6 +5,7 @@ interface Product {
   image: string;
   slug: string;
   category: string;
+  preorder?: boolean;
 }
 
 interface MerchCardProps {

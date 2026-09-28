@@ -6,22 +6,22 @@ const DIRECT_CONTACTS: ContactMethod[] = [
     id: "phone",
     icon: Phone,
     label: "PHONE",
-    value: "0912 345 6789",
-    href: "tel:+639123456789",
+    value: "0929 825 7646",
+    href: "tel:+639298257646",
   },
   {
     id: "instagram",
     image: "/socials/instagram.svg",
     label: "INSTAGRAM",
-    value: "@sorrymom.tattoo",
+    value: "@sorrymomtatt00",
     href: "https://www.instagram.com/sorrymomtatt00?stkn=NXZheTFyYnBoc2Y2",
   },
   {
     id: "email",
     icon: Mail,
     label: "EMAIL",
-    value: "sorrymomtattoo@gmail.com",
-    href: "mailto:sorrymomtattoo@gmail.com",
+    value: "sorrymomtatt00@gmail.com",
+    href: "mailto:sorrymomtatt00@gmail.com",
   },
   {
     id: "facebook",
@@ -34,7 +34,7 @@ const DIRECT_CONTACTS: ContactMethod[] = [
     id: "tiktok",
     image: "/socials/tiktok.svg", // no lucide icon for TikTok, falls back to next/image
     label: "TIKTOK",
-    value: "@sorrymom.tattoo",
+    value: "@sorrymomtatt00",
     href: "https://www.tiktok.com/@sorrymomtatt00?_r=1&_t=ZS-9A1PLRPNH2T",
   },
 ];
