@@ -27,9 +27,9 @@ function Modal({ isOpen, onClose, children, title, className }: ModalProps) {
         <button
           onClick={onClose}
           aria-label="Close modal"
-          className="absolute top-1 right-1 text-white/70 transition-colors hover:text-white"
+          className="absolute top-1 right-1 text-white/70 transition-colors hover:text-white z-50"
         >
-          <X size={28} />
+          <X size={22} />
         </button>
         {children}
       </div>

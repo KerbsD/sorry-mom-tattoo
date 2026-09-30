@@ -6,10 +6,16 @@ interface HeaderButtonProps {
 
 interface HeaderNavProps {
   isOpen: boolean;
-  setIsOpen: () => void;
+  toggleMenu: () => void;
   pathname: string;
   isHome: boolean;
   onBookNowClick: () => void;
+  menuRef: RefObject<HTMLDivElement>;
 }
 
-export type { HeaderButtonProps, HeaderNavProps };
+type HeaderDesktopNavProps = Pick<
+  HeaderNavProps,
+  "pathname" | "isHome" | "onBookNowClick"
+>;
+
+export type { HeaderButtonProps, HeaderNavProps, HeaderDesktopNavProps };

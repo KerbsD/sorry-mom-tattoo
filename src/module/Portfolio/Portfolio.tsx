@@ -61,7 +61,7 @@ function Portfolio() {
             {PORTFOLIO_IMAGES.map(({ src, title, style }, index) => (
               <div
                 onClick={() => toggleModal()}
-                key={style}
+                key={title}
                 className="min-w-0 flex-[0_0_85%] sm:flex-[0_0_60%] md:flex-[0_0_50%] lg:flex-[0_0_36%]"
               >
                 <div
