@@ -1,3 +1,5 @@
+import { RefObject } from "react";
+
 interface HeaderButtonProps {
   onClick?: () => void;
 }

@@ -8,7 +8,8 @@ import type { CalendarProps } from "@/types/calendar";
 import useCalendar from "./useCalendar";
 
 function Calendar(props: CalendarProps) {
-  const { date, setDate, displayMonth, setDisplayMonth } = useCalendar(props);
+  const { date, setDate, displayMonth, setDisplayMonth, applyQuickSelect } =
+    useCalendar(props);
 
   return (
     <div className="w-full">
@@ -19,9 +20,7 @@ function Calendar(props: CalendarProps) {
         onSelect={setDate}
         month={displayMonth}
         onMonthChange={setDisplayMonth}
-        disabled={[
-          { before: new Date() }
-        ]}
+        disabled={[{ before: new Date() }]}
         className="w-full rounded-lg border border-white/10 bg-[#2a2a2a] p-3 text-white"
         classNames={{
           months: "",
@@ -52,11 +51,7 @@ function Calendar(props: CalendarProps) {
           <button
             key={label}
             type="button"
-            onClick={() => {
-              const next = getRange();
-              setDate(next);
-              if (next[0]) setDisplayMonth(next[0]);
-            }}
+            onClick={() => applyQuickSelect(getRange)}
             className="flex-1 rounded-md border border-white/10 bg-[#2a2a2a] px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10 hover:text-white"
           >
             {label}

@@ -21,6 +21,7 @@ function useHomeBooking() {
   const {
     pendingChannel,
     pendingCopies,
+    isConfirming,
     request: requestSend,
     cancel: cancelSend,
     confirm,
@@ -29,8 +30,8 @@ function useHomeBooking() {
   const formattedDate = formatDates(formik.values.date);
 
   function confirmSend() {
-    const result = confirm();
-    if (result) formik.resetForm();
+    confirm();
+    if (!isConfirming) formik.resetForm();
   }
 
   function closeConfirmation() {
@@ -47,6 +48,7 @@ function useHomeBooking() {
     pendingCopies,
     isConfirmed: formik.status === "confirmed",
     closeConfirmation,
+    isConfirming,
   };
 }
 

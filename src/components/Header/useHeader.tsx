@@ -14,7 +14,7 @@ function useHeader() {
 
   const isHome = pathname === "/";
 
-  const { isOpen, setIsOpen} = useClickOutside();
+  const { isOpen, setIsOpen } = useClickOutside();
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);

@@ -56,7 +56,7 @@ function HeaderDesktop(props: HeaderNavProps) {
             })}
           </ul>
 
-          <div className="booknow-btn hidden xl:flex lg:items-center lg:gap-4 lg:pr-12">
+          <div className="booknow-btn hidden lg:items-center lg:gap-4 lg:pr-12 xl:flex">
             <CartButton />
             <HeaderButton onClick={onBookNowClick} />
           </div>

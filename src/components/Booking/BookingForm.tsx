@@ -29,6 +29,7 @@ function BookingForm({ className = "" }: BookingFormProps) {
     pendingCopies,
     isConfirmed,
     closeConfirmation,
+    isConfirming,
   } = useHomeBooking();
 
   return (
@@ -110,6 +111,7 @@ function BookingForm({ className = "" }: BookingFormProps) {
         <ConfirmRedirectModal
           channel={pendingChannel}
           willCopy={pendingCopies}
+          isLoading={isConfirming}
           onConfirm={confirmSend}
           onCancel={cancelSend}
         />

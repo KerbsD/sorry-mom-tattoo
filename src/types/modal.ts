@@ -11,6 +11,7 @@ interface ModalProps {
 interface ConfirmRedirectModalProps {
   channel: Channel;
   willCopy: boolean;
+  isLoading: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }

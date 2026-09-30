@@ -31,9 +31,9 @@ function HomeBooking() {
         src="/booking-bg.JPG"
         alt="Tattoo studio table with ink and equipment"
         fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        sizes="100vw"
+        quality={50}
         className="object-cover grayscale"
-        loading="eager"
       />
       <div className="absolute inset-0 bg-black/70" />
 
