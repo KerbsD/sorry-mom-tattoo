@@ -16,6 +16,7 @@ function useCartDrawer() {
   const {
     pendingChannel,
     pendingCopies,
+    isConfirming,
     request: requestCheckout,
     cancel: cancelCheckout,
     confirm: confirmCheckout,
@@ -65,6 +66,7 @@ function useCartDrawer() {
     pendingCopies,
     cancelCheckout,
     confirmCheckout,
+    isConfirming
   };
 }
 

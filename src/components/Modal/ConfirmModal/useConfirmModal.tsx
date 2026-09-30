@@ -1,38 +1,41 @@
-// hooks/useChannelSend.ts
 import { useState } from "react";
-import { type Channel } from "@/utils/channels"; // adjust if your canonical Channel type lives elsewhere
+import { type Channel } from "@/utils/channels";
 import { willCopyToClipboard } from "@/utils/chat";
 import type { SendResult } from "@/types/modal";
 
-/**
- * Shared "pick a channel -> confirm -> send -> notice" flow used by both
- * the cart checkout and the home booking form. Each caller supplies its own
- * `send` function (the actual side effect) and message copy; this hook only
- * owns the pending/notice state machine that was previously duplicated.
- */
+const CONFIRM_DELAY_MS = 1500;
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function useConfirmModal<T extends SendResult>(send: (channel: Channel) => T) {
   const [pendingChannel, setPendingChannel] = useState<Channel | null>(null);
+  const [isConfirming, setIsConfirming] = useState(false);
 
   function request(channel: Channel) {
     setPendingChannel(channel);
   }
 
   function cancel() {
+    if (isConfirming) return;
     setPendingChannel(null);
   }
 
-  // Returns the send() result so the caller can run its own follow-up side
-  // effect (e.g. formik.resetForm()) only when a send actually happened.
-  function confirm(): T | undefined {
-    if (!pendingChannel) return undefined;
-    const result = send(pendingChannel);
-    setPendingChannel(null);
-    return result;
+  async function confirm(): Promise<T | undefined> {
+    if (!pendingChannel || isConfirming) return undefined;
+
+    setIsConfirming(true);
+    try {
+      await wait(CONFIRM_DELAY_MS);
+      return send(pendingChannel);
+    } finally {
+      setIsConfirming(false);
+      setPendingChannel(null);
+    }
   }
 
   return {
     pendingChannel,
     pendingCopies: pendingChannel ? willCopyToClipboard(pendingChannel) : false,
+    isConfirming,
     request,
     cancel,
     confirm,

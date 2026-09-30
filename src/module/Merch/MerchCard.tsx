@@ -26,7 +26,6 @@ function MerchCard({ product }: MerchCardProps) {
           fill
           sizes="(min-width: 1024px) 300px, 50vw"
           className="object-contain p-4"
-          loading="eager"
         />
 
         {inCart > 0 && (

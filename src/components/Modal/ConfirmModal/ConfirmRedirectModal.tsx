@@ -2,13 +2,13 @@
 
 import { CHANNELS } from "@/constants/channel";
 import type { ConfirmRedirectModalProps } from "@/types/modal";
+import useConfirmModalDelayButton from "./useConfirmModalDelayButton";
 
-function ConfirmRedirectModal({
-  channel,
-  willCopy,
-  onConfirm,
-  onCancel,
-}: ConfirmRedirectModalProps) {
+function ConfirmRedirectModal(props: ConfirmRedirectModalProps) {
+  const { channel, willCopy, isLoading = false, onConfirm, onCancel } = props;
+  const { isConfirmDisabled, isWaiting, secondsLeft } =
+    useConfirmModalDelayButton({ isLoading, channel });
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
@@ -39,6 +39,7 @@ function ConfirmRedirectModal({
           <button
             type="button"
             onClick={onCancel}
+            disabled={isLoading}
             className="rounded-lg px-4 py-2 text-sm font-medium text-white/70 transition hover:bg-white/10"
           >
             Cancel
@@ -46,9 +47,22 @@ function ConfirmRedirectModal({
           <button
             type="button"
             onClick={onConfirm}
-            className="rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20"
+            disabled={isConfirmDisabled}
+            className="flex min-w-27.5 items-center justify-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white/10"
           >
-            Continue
+            {isLoading ? (
+              <>
+                <span
+                  className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
+                  aria-hidden="true"
+                />
+                Opening…
+              </>
+            ) : isWaiting ? (
+              `Continue (${secondsLeft})`
+            ) : (
+              "Continue"
+            )}
           </button>
         </div>
       </div>

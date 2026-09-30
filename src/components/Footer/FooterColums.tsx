@@ -17,13 +17,7 @@ const FOOTER_COLUMNS: {
       <div className="flex gap-4">
         {SOCIAL_LINKS.map(({ src, alt, href }) => (
           <Link key={src} href={href} target="_blank" rel="noopener noreferrer">
-            <Image
-              src={src}
-              alt={alt}
-              width={ICON_SIZE}
-              height={ICON_SIZE}
-              loading="eager"
-            />
+            <Image src={src} alt={alt} width={ICON_SIZE} height={ICON_SIZE} />
           </Link>
         ))}
       </div>

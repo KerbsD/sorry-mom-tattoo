@@ -24,6 +24,7 @@ export function CartDrawer() {
     pendingCopies,
     cancelCheckout,
     confirmCheckout,
+    isConfirming,
   } = useCartDrawer();
 
   const { visible, overlayRef, panelRef } = useAnimateCart({ isOpen });
@@ -75,6 +76,7 @@ export function CartDrawer() {
         <ConfirmRedirectModal
           channel={pendingChannel}
           willCopy={pendingCopies}
+          isLoading={isConfirming}
           onConfirm={confirmCheckout}
           onCancel={cancelCheckout}
         />

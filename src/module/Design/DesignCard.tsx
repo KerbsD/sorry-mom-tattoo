@@ -30,7 +30,6 @@ function DesignCard({ design }: DesignCardProps) {
           fill
           sizes="(min-width: 1024px) 300px, 50vw"
           className="object-contain"
-          priority
         />
       </div>
 

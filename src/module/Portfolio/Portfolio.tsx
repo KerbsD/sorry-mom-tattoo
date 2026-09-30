@@ -61,7 +61,7 @@ function Portfolio() {
             {PORTFOLIO_IMAGES.map(({ src, title, style }, index) => (
               <div
                 onClick={() => toggleModal()}
-                key={style}
+                key={title}
                 className="min-w-0 flex-[0_0_85%] sm:flex-[0_0_60%] md:flex-[0_0_50%] lg:flex-[0_0_36%]"
               >
                 <div
@@ -79,8 +79,9 @@ function Portfolio() {
                     alt={title}
                     width={600}
                     height={600}
+                    sizes="(min-width: 1024px) 36vw, (min-width: 768px) 50vw, (min-width: 640px) 60vw, 85vw"
                     className="h-auto max-h-[70vh] w-full rounded-lg object-contain"
-                    loading="eager"
+                    priority
                   />
                 </div>
               </div>

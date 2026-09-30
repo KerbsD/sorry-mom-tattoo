@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLenis } from "lenis/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 import useClickOutside from "../../utils/Interactions/useClickOutside";
@@ -11,14 +11,37 @@ function useHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement | undefined>(null);
 
   const isHome = pathname === "/";
 
-  const { isOpen, setIsOpen} = useClickOutside();
+  const { isOpen, setIsOpen } = useClickOutside();
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+  
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    }
+  
+    function handleEscape(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsMenuOpen(false);
+    }
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isMenuOpen]);
 
   const toggleBooking = () => {
     setIsOpen((prev) => !prev);
@@ -73,6 +96,7 @@ function useHeader() {
     toggleBooking,
     isMenuOpen,
     toggleMenu,
+    menuRef,
   };
 }
 
