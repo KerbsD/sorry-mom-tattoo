@@ -11,7 +11,7 @@ function useHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
-  const menuRef = useRef<HTMLDivElement | undefined>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const isHome = pathname === "/";
 

@@ -10,7 +10,7 @@ interface HeaderNavProps {
   pathname: string;
   isHome: boolean;
   onBookNowClick: () => void;
-  menuRef: RefObject<HTMLDivElement>;
+  menuRef: RefObject<HTMLDivElement | null>;
 }
 
 type HeaderDesktopNavProps = Pick<
