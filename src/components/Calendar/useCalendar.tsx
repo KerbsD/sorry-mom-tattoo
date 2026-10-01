@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { CalendarProps } from "@/types/calendar";
 
 function useCalendar(props: CalendarProps) {

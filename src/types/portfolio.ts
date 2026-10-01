@@ -16,7 +16,6 @@ interface ZoomableImageProps {
   src: string;
   alt: string;
   className?: string;
-  /** How much to scale the image when zoomed in. */
   zoomScale?: number;
   sizes?: string;
 }

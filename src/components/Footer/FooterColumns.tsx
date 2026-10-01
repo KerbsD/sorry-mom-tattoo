@@ -12,7 +12,7 @@ const FOOTER_COLUMNS: {
   {
     title: "Follow",
     headingClassName:
-      "uppercase font-bold leading-none mb-4 text-lg md:text-xl flex gap-2 tracking-tigher",
+      "uppercase font-bold leading-none mb-4 text-lg md:text-xl flex gap-2 tracking-tightest",
     content: (
       <div className="flex gap-4">
         {SOCIAL_LINKS.map(({ src, alt, href }) => (
@@ -26,7 +26,7 @@ const FOOTER_COLUMNS: {
   {
     title: "Studio",
     headingClassName:
-      "uppercase font-bold leading-none mb-4 text-lg md:text-xl flex gap-1 tracking-tigher",
+      "uppercase font-bold leading-none mb-4 text-lg md:text-xl flex gap-1 tracking-tightest",
     content: (
       <a
         href="https://maps.app.goo.gl/jgwFcM7n8pnfUiKbA"
@@ -44,7 +44,7 @@ const FOOTER_COLUMNS: {
   {
     title: "Contact",
     headingClassName:
-      "uppercase font-bold leading-none mb-4 text-lg md:text-xl flex gap-1 tracking-tigher",
+      "uppercase font-bold leading-none mb-4 text-lg md:text-xl flex gap-1 tracking-tightest",
     content: (
       <>
         <a

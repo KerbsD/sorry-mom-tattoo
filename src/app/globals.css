@@ -50,16 +50,6 @@ body {
   color: var(--foreground);
 }
 
-/* html {
-  overflow-x: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-html::-webkit-scrollbar {
-  display: none;
-} */
-
 html {
   overflow-y: auto;
   scrollbar-gutter: stable;
@@ -112,5 +102,4 @@ html::-webkit-scrollbar-thumb:hover {
 button,
 a {
   cursor: pointer;
-  ;
 }

@@ -2,7 +2,7 @@
 
 import { anton } from "@/utils/fonts";
 import { usePathname } from "next/navigation";
-import FOOTER_COLUMNS from "./FooterColums";
+import FOOTER_COLUMNS from "./FooterColumns";
 
 function Footer() {
   const currentYear = new Date().getFullYear();

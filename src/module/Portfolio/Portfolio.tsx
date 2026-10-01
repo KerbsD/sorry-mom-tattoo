@@ -58,7 +58,7 @@ function Portfolio() {
             className="my-15 flex lg:my-10"
             style={{ transformStyle: "preserve-3d" }}
           >
-            {PORTFOLIO_IMAGES.map(({ src, title, style }, index) => (
+            {PORTFOLIO_IMAGES.map(({ src, title }, index) => (
               <div
                 onClick={() => toggleModal()}
                 key={title}

@@ -1,7 +1,7 @@
 // components/BookingSubmitButton.tsx
 import { useFormikContext } from "formik";
 
-function BookingFomrButtons() {
+function BookingFormButtons() {
   const { isSubmitting } = useFormikContext();
 
   return (
@@ -15,4 +15,4 @@ function BookingFomrButtons() {
   );
 }
 
-export default BookingFomrButtons;
+export default BookingFormButtons;
