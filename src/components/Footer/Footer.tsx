@@ -3,6 +3,7 @@
 import { anton } from "@/utils/fonts";
 import { usePathname } from "next/navigation";
 import FOOTER_COLUMNS from "./FooterColumns";
+import { siteConfig } from "@/constants/site";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,7 +20,7 @@ function Footer() {
         <footer className="flex min-h-50 w-full flex-col-reverse items-center bg-[#ebebeb] text-[#161616] md:flex-row">
           <div className="flex items-center justify-center lg:w-[35dvw]">
             <span
-              className={`-translate-x-1 p-10 text-center text-[clamp(48px,58px,68px)] leading-[0.90] tracking-[-1px] ${anton.className}`}
+              className={`-translate-x-1 p-10 text-center text-[clamp(48px,58px,68px)] leading-[0.90] tracking-[-1px] uppercase ${anton.className}`}
               style={
                 {
                   textBoxTrim: "trim-both",
@@ -27,7 +28,7 @@ function Footer() {
                 } as React.CSSProperties
               }
             >
-              SORRY MOM TATTOO
+              {siteConfig.name}
             </span>
           </div>
 
@@ -56,7 +57,10 @@ function Footer() {
           Built with passion by <b>KerbsDev</b>
         </span>
         <span className="tracking-tighter">
-          <b>© {currentYear} Sorry Mom Tattoo</b>. All rights reserved.
+          <b>
+            © {currentYear} {siteConfig.name}
+          </b>
+          . All rights reserved.
         </span>
       </div>
     </>
