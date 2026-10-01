@@ -14,7 +14,7 @@ const DIRECT_CONTACTS: ContactMethod[] = [
     image: "/socials/instagram.svg",
     label: "INSTAGRAM",
     value: "@sorrymomtatt00",
-    href: "https://www.instagram.com/sorrymomtatt00?stkn=NXZheTFyYnBoc2Y2",
+    href: "https://www.instagram.com/sorrymomtatt00",
   },
   {
     id: "email",
@@ -28,14 +28,14 @@ const DIRECT_CONTACTS: ContactMethod[] = [
     image: "/socials/facebook.svg",
     label: "FACEBOOK",
     value: "Sorry Mom Tattoo",
-    href: "https://www.facebook.com/share/18XKsZEVxp/",
+    href: "https://www.facebook.com/share/18XKsZEVxp",
   },
   {
     id: "tiktok",
-    image: "/socials/tiktok.svg", // no lucide icon for TikTok, falls back to next/image
+    image: "/socials/tiktok.svg",
     label: "TIKTOK",
     value: "@sorrymomtatt00",
-    href: "https://www.tiktok.com/@sorrymomtatt00?_r=1&_t=ZS-9A1PLRPNH2T",
+    href: "https://www.tiktok.com/@sorrymomtatt00",
   },
 ];
 

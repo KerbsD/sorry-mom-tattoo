@@ -122,7 +122,7 @@ function Aftercare() {
                 <span
                   className={`${jetbrainsmono.className} rounded-full border border-red-400/40 px-2.5 py-1 text-[11px] text-red-400`}
                 >
-                  DON'T
+                  DON&apos;T
                 </span>
                 <div className="h-px flex-1 bg-red-400/20" />
               </div>

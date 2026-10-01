@@ -48,20 +48,20 @@ const FOOTER_COLUMNS: {
     content: (
       <>
         <a
-          href="tel:+639123456789"
+          href="tel:+639298257646"
           target="_blank"
           rel="noopener noreferrer"
           className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
         >
-          (+63)912-345-6789
+          (+63)929 8257 646
         </a>
         <a
-          href="mailto:sorrymomtattoo@gmail.com"
+          href="mailto:sorrymomtatt00@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
           className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
         >
-          sorrymomtattoo@gmail.com
+          sorrymomtatt00@gmail.com
         </a>
       </>
     ),

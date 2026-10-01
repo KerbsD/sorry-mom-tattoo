@@ -10,24 +10,31 @@ import {
   type ReactNode,
 } from "react";
 
-import { CartLine, CartItemInput, CartContextValue } from "@/types/cart";
-
+import type {
+  CartLine,
+  CartItemInput,
+  CartContextValue,
+  StoredCartLine,
+} from "@/types/cart";
 import { makeKey } from "@/constants/cart";
+import { clampQty, resolveLine, sanitizeStored } from "@/lib/cart";
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-const STORAGE_KEY = "shop-cart-v2";
+// Bumped from v2 so old carts with stored prices are ignored
+const STORAGE_KEY = "shop-cart-v3";
+const LEGACY_KEY = "shop-cart-v2";
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [lines, setLines] = useState<CartLine[]>([]);
+  const [items, setItems] = useState<StoredCartLine[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
-  // Load the saved cart after mount (avoids server/client hydration mismatch)
   useEffect(() => {
     try {
+      localStorage.removeItem(LEGACY_KEY);
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setLines(JSON.parse(raw));
+      if (raw) setItems(sanitizeStored(JSON.parse(raw)));
     } catch {}
     setHydrated(true);
   }, []);
@@ -35,33 +42,43 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!hydrated) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch {}
-  }, [lines, hydrated]);
+  }, [items, hydrated]);
+
+  // Always derived from the current constants, never from storage
+  const lines = useMemo<CartLine[]>(
+    () => items.flatMap((i) => resolveLine(i) ?? []),
+    [items],
+  );
 
   const add = useCallback((item: CartItemInput) => {
     const key = makeKey(item);
-    setLines((prev) =>
-      prev.some((l) => l.key === key)
-        ? prev.map((l) => (l.key === key ? { ...l, qty: l.qty + 1 } : l))
-        : [...prev, { ...item, key, qty: 1 }],
+    setItems((prev) =>
+      prev.some((l) => makeKey(l) === key)
+        ? prev.map((l) =>
+            makeKey(l) === key ? { ...l, qty: clampQty(l.qty + 1) } : l,
+          )
+        : [...prev, { kind: item.kind, id: item.id, qty: 1 }],
     );
   }, []);
 
   const setQty = useCallback((key: string, qty: number) => {
-    setLines((prev) =>
+    setItems((prev) =>
       qty <= 0
-        ? prev.filter((l) => l.key !== key)
-        : prev.map((l) => (l.key === key ? { ...l, qty } : l)),
+        ? prev.filter((l) => makeKey(l) !== key)
+        : prev.map((l) =>
+            makeKey(l) === key ? { ...l, qty: clampQty(qty) } : l,
+          ),
     );
   }, []);
 
   const remove = useCallback(
-    (key: string) => setLines((prev) => prev.filter((l) => l.key !== key)),
+    (key: string) => setItems((prev) => prev.filter((l) => makeKey(l) !== key)),
     [],
   );
 
-  const clear = useCallback(() => setLines([]), []);
+  const clear = useCallback(() => setItems([]), []);
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
 
@@ -69,7 +86,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     () => ({
       lines,
       count: lines.reduce((n, l) => n + l.qty, 0),
-      total: lines.reduce((sum, l) => sum + l.price * l.qty, 0),
+      // priced items only; design lines are "price on request"
+      total: lines.reduce((sum, l) => sum + (l.price ?? 0) * l.qty, 0),
       isOpen,
       add,
       setQty,

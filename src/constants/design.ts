@@ -44,7 +44,6 @@ const DESIGN: Design[] = [
     category: "Illustrative",
     price: 0,
   },
-  // ...add the rest of your real designs here
 ];
 
 const DESIGN_CATEGORIES = [

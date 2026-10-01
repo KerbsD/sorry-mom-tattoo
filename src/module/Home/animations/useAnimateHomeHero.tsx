@@ -5,7 +5,6 @@ import { useRef } from "react";
 function useAnimateHomeHero() {
   const containerRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const subtextRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -33,39 +32,22 @@ function useAnimateHomeHero() {
           duration: 1.4,
           ease: "power2.out",
         },
-      )
-        .fromTo(
-          subtextRef.current,
-          {
-            opacity: 0,
-            y: 10,
-            filter: "blur(4px)",
-          },
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.5",
-        )
-        .to(
-          buttonRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.6,
-            ease: "back.out(1.7)",
-          },
-          "-=0.2", // starts just before subtext finishes, feels like a natural chain reaction
-        );
+      ).to(
+        buttonRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        },
+        "-=0.2", // starts just before subtext finishes, feels like a natural chain reaction
+      );
     },
     { scope: containerRef },
   );
 
-  return { containerRef, headingRef, subtextRef, buttonRef };
+  return { containerRef, headingRef, buttonRef };
 }
 
 export default useAnimateHomeHero;

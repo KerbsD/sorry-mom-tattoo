@@ -34,7 +34,7 @@ function Contact() {
           <div className="flex flex-col gap-10">
             {/* Messenger CTA */}
             <a
-              href="https://m.me/jhomarmusnit12"
+              href={`https://m.me/${process.env.NEXT_PUBLIC_MESSENGER_PAGE}`}
               target="_blank"
               rel="noopener noreferrer"
               className="messenger-cta group flex items-center gap-5 border border-teal-400/40 bg-teal-400/5 p-6 transition-colors duration-300 hover:bg-teal-400/10 sm:p-8"

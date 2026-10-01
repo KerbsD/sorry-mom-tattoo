@@ -15,10 +15,12 @@ function CartDrawerContent(props: CartDrawerContentProps) {
     setNote,
     total,
     channels,
-    requestCheckout, // was handleCheckout
+    requestCheckout,
     clear,
     closeCart,
   } = props;
+
+  const hasQuotedItems = lines.some((l) => l.price === null);
 
   return (
     <>
@@ -60,7 +62,7 @@ function CartDrawerContent(props: CartDrawerContentProps) {
                 <div>
                   <strong className="font-medium">{l.name}</strong>
                   <div className="text-sm text-white/60">
-                    {l.key.split(":")[0] === "design"
+                    {l.price === null
                       ? "Reach out to see price"
                       : `${formatPHP(l.price)} each`}
                   </div>
@@ -108,11 +110,18 @@ function CartDrawerContent(props: CartDrawerContentProps) {
           </label>
 
           <div className="flex items-center justify-between border-t border-white/10 pt-4 text-lg">
-            <span>Total</span>
+            <span>{hasQuotedItems ? "Merch subtotal" : "Total"}</span>
             <strong className="font-semibold text-teal-300">
-              {!total ? "Price varies" : formatPHP(total)}
+              {total === 0 && hasQuotedItems
+                ? "Price varies"
+                : formatPHP(total)}
             </strong>
           </div>
+          {hasQuotedItems && (
+            <p className="-mt-3 text-xs text-white/40">
+              Design prices are confirmed by the artist.
+            </p>
+          )}
 
           {channels.length === 0 ? (
             <p className="rounded-lg border border-amber-400/40 bg-amber-400/10 p-3 text-sm text-amber-200">

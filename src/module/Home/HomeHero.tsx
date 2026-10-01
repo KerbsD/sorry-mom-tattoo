@@ -5,8 +5,7 @@ import BookButton from "@/components/Buttons/Home/BookButton";
 import useAnimateHomeHero from "./animations/useAnimateHomeHero";
 
 function HomeHero() {
-  const { containerRef, headingRef, subtextRef, buttonRef } =
-    useAnimateHomeHero();
+  const { containerRef, headingRef, buttonRef } = useAnimateHomeHero();
 
   return (
     <section
@@ -70,12 +69,6 @@ function HomeHero() {
         >
           SORRY MOM TATTOO
         </h1>
-        <p
-          ref={subtextRef}
-          className={`hero-subtext ${emgaramond.className} text-2xl tracking-tighter text-white/60 italic`}
-        >
-          &quot;Ink First, Apologize Later&quot;
-        </p>
       </div>
 
       <div ref={buttonRef}>
