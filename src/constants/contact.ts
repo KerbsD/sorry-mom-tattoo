@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin, Car } from "lucide-react";
 import type { ContactMethod, InfoStripItem } from "@/types/contact";
+import { siteConfig } from "./site";
 
 const DIRECT_CONTACTS: ContactMethod[] = [
   {
@@ -7,35 +8,35 @@ const DIRECT_CONTACTS: ContactMethod[] = [
     icon: Phone,
     label: "PHONE",
     value: "0929 825 7646",
-    href: "tel:+639298257646",
+    href: `tel:${siteConfig.phone}`,
   },
   {
     id: "instagram",
     image: "/socials/instagram.svg",
     label: "INSTAGRAM",
     value: "@sorrymomtatt00",
-    href: "https://www.instagram.com/sorrymomtatt00",
+    href: `${siteConfig.socials.instagram}`,
   },
   {
     id: "email",
     icon: Mail,
     label: "EMAIL",
     value: "sorrymomtatt00@gmail.com",
-    href: "mailto:sorrymomtatt00@gmail.com",
+    href: `mailto:${siteConfig.email}`,
   },
   {
     id: "facebook",
     image: "/socials/facebook.svg",
     label: "FACEBOOK",
     value: "Sorry Mom Tattoo",
-    href: "https://www.facebook.com/share/18XKsZEVxp",
+    href: `${siteConfig.socials.facebook}`,
   },
   {
     id: "tiktok",
     image: "/socials/tiktok.svg",
     label: "TIKTOK",
     value: "@sorrymomtatt00",
-    href: "https://www.tiktok.com/@sorrymomtatt00",
+    href: `${siteConfig.socials.tiktok}`,
   },
 ];
 
@@ -45,11 +46,11 @@ const INFO_STRIP: InfoStripItem[] = [
     icon: MapPin,
     title: "WE ARE HERE",
     lines: [
-      "CAMLON SILKSCREEN PRINTING SERVICES",
-      "960 Onyx Ln, Antipolo City,",
-      "1870 Rizal, Philippines",
+      `${siteConfig.address.name},`,
+      `${siteConfig.address.street}, ${siteConfig.address.locality},`,
+      `${siteConfig.address.postalCode} ${siteConfig.address.region}, ${siteConfig.address.country}`,
     ],
-    href: "https://maps.app.goo.gl/jgwFcM7n8pnfUiKbA",
+    href: `${siteConfig.address.link}`,
   },
   {
     id: "parking",

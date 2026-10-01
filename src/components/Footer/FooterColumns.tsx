@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Send } from "lucide-react";
 import { SOCIAL_LINKS, ICON_SIZE } from "@/constants/footer";
+import { siteConfig } from "@/constants/site";
 
 const FOOTER_COLUMNS: {
   title: string;
@@ -34,9 +35,10 @@ const FOOTER_COLUMNS: {
         rel="noopener noreferrer"
         className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
       >
-        CAMLON SILKSCREEN PRINTING SERVICES,
-        <br /> 960 Onyx Ln,
-        <br /> Antipolo City, 1870 Rizal
+        {siteConfig.address.name},
+        <br /> {siteConfig.address.street},
+        <br /> {siteConfig.address.locality}, {siteConfig.address.postalCode}{" "}
+        {siteConfig.address.region}
       </a>
     ),
     icon: <MapPin className="h-4 md:h-5" />,
@@ -48,7 +50,7 @@ const FOOTER_COLUMNS: {
     content: (
       <>
         <a
-          href="tel:+639298257646"
+          href={`tel:${siteConfig.phone}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
@@ -56,7 +58,7 @@ const FOOTER_COLUMNS: {
           (+63)929 8257 646
         </a>
         <a
-          href="mailto:sorrymomtatt00@gmail.com"
+          href={`mailto:${siteConfig.email}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-center transition hover:text-teal-500 active:text-teal-400 md:text-left"
