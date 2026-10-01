@@ -19,7 +19,7 @@ function Merch() {
 
   return (
     <section className="flex min-h-dvh justify-center bg-[#161616]">
-      <section className="w-full max-w-6xl px-6 pt-40 pb-20">
+      <section className="w-full max-w-6xl px-4 pt-40 pb-20 md:px-6">
         {/* Hero */}
         <div ref={heroRef} className="text-center">
           <h1
@@ -45,7 +45,7 @@ function Merch() {
         {/* Product grid */}
         <div
           ref={gridRef}
-          className="relative z-0 mt-12 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4"
+          className="relative z-0 mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 md:gap-x-6 lg:grid-cols-4"
         >
           {filteredProducts.map((product) => (
             <MerchCard key={product.id} product={product} />

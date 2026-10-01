@@ -15,7 +15,7 @@ function MerchCard({ product }: MerchCardProps) {
     <div className="merch-card z-10 flex max-w-75 flex-col">
       <div className="relative aspect-square w-full overflow-hidden rounded-sm bg-white">
         {product.preorder && (
-          <div className="absolute top-1 left-1 z-30 flex h-6 min-w-12 items-center justify-center rounded-full bg-teal-600 border-2 border-black px-2 text-xs font-semibold text-white shadow transition">
+          <div className="absolute top-1 left-1 z-30 flex h-6 min-w-12 items-center justify-center rounded-full border-2 border-black bg-teal-600 px-1 text-[8px] font-semibold text-white shadow transition md:px-2 md:text-xs">
             <p>PRE-ORDER</p>
           </div>
         )}
@@ -38,7 +38,7 @@ function MerchCard({ product }: MerchCardProps) {
       <h3 className="mt-3 text-left text-sm font-semibold text-white sm:text-base">
         {product.name}
       </h3>
-      <p className="text-left tracking-wide text-xs text-white/60 sm:text-sm">
+      <p className="text-left text-xs tracking-wide text-white/60 sm:text-sm">
         {formatPHP(product.price)}
       </p>
 
