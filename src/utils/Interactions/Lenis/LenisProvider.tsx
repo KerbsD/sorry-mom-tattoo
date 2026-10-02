@@ -1,15 +1,19 @@
-// components/LenisProvider.tsx
 "use client";
 
-import { ReactLenis, type LenisRef } from "lenis/react";
-import { ReactNode, useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ReactLenis, useLenis, type LenisRef } from "lenis/react";
+import { ReactNode, useEffect, useRef } from "react";
 
-function LenisProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+gsap.registerPlugin(ScrollTrigger);
+
+function ScrollTriggerSync() {
+  // Runs on every Lenis scroll once the instance exists
+  useLenis(ScrollTrigger.update);
+  return null;
+}
+
+function LenisProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<LenisRef>(null);
 
   useEffect(() => {
@@ -31,9 +35,10 @@ function LenisProvider({
         lerp: 0.1,
         duration: 1.2,
         smoothWheel: true,
-        autoRaf: false, // GSAP's ticker drives Lenis now instead
+        autoRaf: false,
       }}
     >
+      <ScrollTriggerSync />
       {children}
     </ReactLenis>
   );

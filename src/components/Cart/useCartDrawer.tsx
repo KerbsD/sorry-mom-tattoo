@@ -1,17 +1,16 @@
-import { useLenis } from "lenis/react";
 import { useEffect, useState } from "react";
 import { checkout } from "@/lib/checkout";
 import { channels } from "@/utils/channels";
 import { useCart } from "@/context/CartContext";
 
 import useConfirmModal from "../Modal/ConfirmModal/useConfirmModal";
+import useScrollLock from "@/utils/Interactions/Lenis/useScrollLock";
 
 function useCartDrawer() {
   const { lines, total, isOpen, closeCart, setQty, remove, clear } = useCart();
-
-  const lenis = useLenis();
-
   const [note, setNote] = useState("");
+  
+  useScrollLock(isOpen);
 
   const {
     pendingChannel,
@@ -33,20 +32,6 @@ function useCartDrawer() {
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen, closeCart, pendingChannel]);
 
-  useEffect(() => {
-    if (!lenis) return;
-
-    if (isOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
-
-    return () => {
-      lenis.start();
-    };
-  }, [isOpen, lenis]);
-
   return {
     // cart state
     lines,
@@ -66,7 +51,7 @@ function useCartDrawer() {
     pendingCopies,
     cancelCheckout,
     confirmCheckout,
-    isConfirming
+    isConfirming,
   };
 }
 

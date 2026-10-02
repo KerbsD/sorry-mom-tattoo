@@ -10,6 +10,8 @@ export function buildOrderMessage(lines: CartLine[], note?: string): string {
   const hasPriced = lines.some((l) => l.price !== null);
   const subtotal = lines.reduce((s, l) => s + (l.price ?? 0) * l.qty, 0);
 
+  const safeNote = note?.trim().slice(0, 500);
+
   const items = lines.map((l) => {
     if (l.price === null)
       return `• ${l.qty} x ${l.name} (design) - price on request`;
@@ -32,14 +34,14 @@ export function buildOrderMessage(lines: CartLine[], note?: string): string {
   if (hasDesign) {
     parts.push("Design prices to be confirmed.");
   }
-  if (note?.trim()) {
-    parts.push("", `Note: ${note.trim()}`);
+  if (safeNote?.trim()) {
+    parts.push("", `Note: ${safeNote.trim()}`);
   }
   parts.push("", "Final prices are confirmed by the seller.");
 
   return parts.join("\n");
 }
 
-export function checkout(channel: Channel, lines: CartLine[], note?: string) {
-  return sendToChat(channel, buildOrderMessage(lines, note));
+export function checkout(channel: Channel, lines: CartLine[], safeNote?: string) {
+  return sendToChat(channel, buildOrderMessage(lines, safeNote));
 }

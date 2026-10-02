@@ -1,6 +1,6 @@
 "use client";
 
-import { anton, emgaramond } from "@/utils/fonts";
+import { anton } from "@/utils/fonts";
 import BookButton from "@/components/Buttons/Home/BookButton";
 import useAnimateHomeHero from "./animations/useAnimateHomeHero";
 

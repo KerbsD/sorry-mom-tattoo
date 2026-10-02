@@ -31,7 +31,7 @@ function ConfirmRedirectModal(props: ConfirmRedirectModalProps) {
         <p className="mt-2 text-sm text-white/70">
           Your booking details will be sent to {CHANNELS[channel].label}.
           {willCopy
-            ? " That app doesn't pre-fill messages, so the details will be copied — paste them in if the message box is empty."
+            ? " That app doesn't pre-fill messages, so we'll try to copy your details. If the message box is empty, paste them in."
             : " The message box will already have your details filled in."}
         </p>
 

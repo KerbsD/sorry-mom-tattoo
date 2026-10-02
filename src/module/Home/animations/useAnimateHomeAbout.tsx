@@ -72,8 +72,23 @@ function useAnimateHomeAbout() {
             pinSpacing: false,
           });
 
+          // Re-measure once images, fonts and the video poster have loaded
+          const refresh = () => ScrollTrigger.refresh();
+
+          if (document.readyState === "complete") {
+            refresh();
+          } else {
+            window.addEventListener("load", refresh);
+          }
+
+          // Fonts can finish after "load" and change line wrapping
+          document.fonts?.ready.then(refresh);
+
           // Runs when the breakpoint stops matching (or on unmount)
-          return () => split.revert();
+          return () => {
+            window.removeEventListener("load", refresh);
+            split.revert();
+          };
         },
       );
 
