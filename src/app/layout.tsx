@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "lenis/dist/lenis.css";
-import { poppins } from "@/utils/fonts";
 import Layout from "@/module/Layout/Layout";
 import LenisProvider from "@/utils/Interactions/Lenis/LenisProvider";
 import CursorTrail from "@/utils/Interactions/CursorTrail";
+import { poppins } from "@/utils/fonts";
 import { CartProvider } from "@/context/CartContext";
 import { siteConfig } from "@/constants/site";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
     >
       <body className="flex min-h-screen flex-col">
+        <Analytics />
         <CursorTrail />
         <CartProvider>
           <LenisProvider>
