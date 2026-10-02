@@ -3,8 +3,7 @@ import { type Channel } from "@/utils/channels";
 import { willCopyToClipboard } from "@/utils/chat";
 import type { SendResult } from "@/types/modal";
 
-const CONFIRM_DELAY_MS = 1500;
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const OPENING_FEEDBACK_MS = 800;
 
 function useConfirmModal<T extends SendResult>(send: (channel: Channel) => T) {
   const [pendingChannel, setPendingChannel] = useState<Channel | null>(null);
@@ -19,17 +18,18 @@ function useConfirmModal<T extends SendResult>(send: (channel: Channel) => T) {
     setPendingChannel(null);
   }
 
-  async function confirm(): Promise<T | undefined> {
+  function confirm(): T | undefined {
     if (!pendingChannel || isConfirming) return undefined;
 
+    const result = send(pendingChannel); // runs inside the click, so the gesture is intact
+
     setIsConfirming(true);
-    try {
-      await wait(CONFIRM_DELAY_MS);
-      return send(pendingChannel);
-    } finally {
+    setTimeout(() => {
       setIsConfirming(false);
       setPendingChannel(null);
-    }
+    }, OPENING_FEEDBACK_MS);
+
+    return result;
   }
 
   return {

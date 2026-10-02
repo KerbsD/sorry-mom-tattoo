@@ -1,7 +1,7 @@
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { useLenis } from "lenis/react";
+import useScrollLock from "@/utils/Interactions/Lenis/useScrollLock";
 import type { AnimateModalProps } from "@/types/modal";
 
 function useAnimateModal(props: AnimateModalProps) {
@@ -9,11 +9,14 @@ function useAnimateModal(props: AnimateModalProps) {
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const lenis = useLenis();
+
+  useScrollLock(isOpen);
 
   useGSAP(
     () => {
       if (!overlayRef.current || !panelRef.current) return;
+
+      gsap.killTweensOf([overlayRef.current, panelRef.current]);
 
       if (isOpen) {
         gsap.set(overlayRef.current, { display: "flex" });
@@ -44,33 +47,12 @@ function useAnimateModal(props: AnimateModalProps) {
         gsap.to(overlayRef.current, {
           opacity: 0,
           duration: 0.25,
-          ease: "power2.out",
-          onComplete: () => {
-            if (overlayRef.current) {
-              gsap.set(overlayRef.current, {
-                display: "none",
-              });
-            }
-          },
+          onComplete: () => gsap.set(overlayRef.current, { display: "none" }),
         });
       }
     },
     { dependencies: [isOpen], scope: overlayRef },
   );
-
-  useEffect(() => {
-    if (!lenis) return;
-
-    if (isOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
-
-    return () => {
-      lenis.start();
-    };
-  }, [isOpen, lenis]);
 
   return {
     overlayRef,

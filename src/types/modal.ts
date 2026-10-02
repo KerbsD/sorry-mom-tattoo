@@ -16,9 +16,7 @@ interface ConfirmRedirectModalProps {
   onCancel: () => void;
 }
 
-interface SendResult {
-  copied: boolean;
-}
+type SendResult = { copied: boolean; copyResult: Promise<boolean> };
 
 type AnimateModalProps = Pick<ModalProps, "isOpen">;
 

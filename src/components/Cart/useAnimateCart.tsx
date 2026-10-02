@@ -11,6 +11,8 @@ function useAnimateCart(props: AnimateCartProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const safetyRef = useRef<gsap.core.Tween | null>(null);
 
   useEffect(() => {
     if (isOpen) setMounted(true);
@@ -20,6 +22,9 @@ function useAnimateCart(props: AnimateCartProps) {
     () => {
       if (!mounted || !overlayRef.current || !panelRef.current) return;
 
+      // Clear anything left over from a previous open/close
+      tlRef.current?.kill();
+      safetyRef.current?.kill();
       gsap.killTweensOf([overlayRef.current, panelRef.current]);
 
       if (isOpen) {
@@ -29,7 +34,7 @@ function useAnimateCart(props: AnimateCartProps) {
         gsap.set(overlayRef.current, { opacity: 0 });
         gsap.set(panelRef.current, { x: "100%" });
 
-        gsap
+        tlRef.current = gsap
           .timeline()
           .to(overlayRef.current, {
             opacity: 1,
@@ -43,14 +48,17 @@ function useAnimateCart(props: AnimateCartProps) {
           )
           .call(() => panelRef.current?.focus());
       } else {
-        gsap
-          .timeline({
-            onComplete: () => {
-              setMounted(false);
+        let finished = false;
+        const finish = () => {
+          if (finished) return;
+          finished = true;
+          safetyRef.current?.kill();
+          setMounted(false);
+          previouslyFocused.current?.focus();
+        };
 
-              previouslyFocused.current?.focus();
-            },
-          })
+        tlRef.current = gsap
+          .timeline({ onComplete: finish })
           .to(panelRef.current, {
             x: "100%",
             duration: 0.3,
@@ -61,6 +69,9 @@ function useAnimateCart(props: AnimateCartProps) {
             { opacity: 0, duration: 0.2, ease: "power1.in" },
             "<",
           );
+
+        // Fail-safe: unmount even if onComplete never fires
+        safetyRef.current = gsap.delayedCall(0.6, finish);
       }
     },
     { scope: overlayRef, dependencies: [isOpen, mounted] },
