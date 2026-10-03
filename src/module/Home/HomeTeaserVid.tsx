@@ -34,7 +34,7 @@ function HomeTeaserVid() {
       <video
         ref={videoRef}
         className="aspect-2/3 h-auto w-full object-cover grayscale sm:aspect-video"
-        poster="/video/studio-teaser-poster.jpg"
+        poster="/video/studio-teaser-poster.png"
         preload="metadata"
         muted
         loop
