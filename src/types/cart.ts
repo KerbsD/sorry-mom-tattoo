@@ -9,7 +9,7 @@ type StoredCartLine = {
   qty: number;
 };
 
-/** Stored line + data looked up from PRODUCTS / DESIGN */
+/** Stored line + data looked up from the public merch/design catalog */
 type CartLine = StoredCartLine & {
   key: string; // `${kind}:${id}`
   name: string;

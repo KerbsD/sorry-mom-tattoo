@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -17,22 +18,26 @@ import type {
   StoredCartLine,
 } from "@/types/cart";
 import { makeKey } from "@/constants/cart";
-import { clampQty, resolveLine, sanitizeStored } from "@/lib/cart";
+import { clampQty, pruneUnavailable, resolveLine, sanitizeStored } from "@/lib/cart";
+import { useCatalog } from "@/context/CatalogContext";
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-// Bumped from v2 so old carts with stored prices are ignored
-const STORAGE_KEY = "shop-cart-v3";
-const LEGACY_KEY = "shop-cart-v2";
+// Bumped to v4 when the catalog moved from hard-coded ids to API ids, so old
+// carts that point at the static constants are discarded instead of silently
+// showing an empty cart.
+const STORAGE_KEY = "shop-cart-v4";
+const LEGACY_KEYS = ["shop-cart-v3", "shop-cart-v2"];
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { products, designs } = useCatalog();
   const [items, setItems] = useState<StoredCartLine[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     try {
-      localStorage.removeItem(LEGACY_KEY);
+      for (const key of LEGACY_KEYS) localStorage.removeItem(key);
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) setItems(sanitizeStored(JSON.parse(raw)));
     } catch {}
@@ -46,10 +51,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     } catch {}
   }, [items, hydrated]);
 
-  // Always derived from the current constants, never from storage
+  // Always derived from the server-provided catalog, never from storage
   const lines = useMemo<CartLine[]>(
-    () => items.flatMap((i) => resolveLine(i) ?? []),
-    [items],
+    () =>
+      items.flatMap((item) => resolveLine(item, { products, designs }) ?? []),
+    [items, products, designs],
   );
 
   const add = useCallback((item: CartItemInput) => {

@@ -6,6 +6,15 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"], // AVIF is smaller; webp is the default
     qualities: [50, 75], // Next 16 only allows listed values (default is [75])
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    // Admin uploads land in a public Supabase Storage bucket. Allow any project
+    // subdomain so this keeps working if the Supabase project is recreated.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
   },
   async headers() {
     return [

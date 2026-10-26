@@ -3,11 +3,13 @@
 
 import { anton } from "@/utils/fonts";
 import MerchCard from "@/module/Merch/MerchCard";
-import { CATEGORIES } from "@/constants/merch";
 import useAnimateMerch from "@/module/Merch/useAnimateMerch";
 import MerchFilterDropdown from "@/components/Filters/Merch/MerchFilterDropdown";
 
+import useMerch from "@/module/Merch/useMerch";
+
 function Merch() {
+  const { products, merchCategories } = useMerch();
   const {
     activeCategory,
     setActiveCategory,
@@ -15,7 +17,7 @@ function Merch() {
     filtersRef,
     gridRef,
     filteredProducts,
-  } = useAnimateMerch();
+  } = useAnimateMerch(products);
 
   return (
     <section className="flex min-h-dvh justify-center bg-[#161616]">
@@ -36,7 +38,7 @@ function Merch() {
         {/* Filter buttons */}
         <div ref={filtersRef} className="relative z-30 mt-10">
           <MerchFilterDropdown
-            categories={CATEGORIES}
+            categories={merchCategories}
             activeCategory={activeCategory}
             onChange={setActiveCategory}
           />

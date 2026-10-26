@@ -11,3 +11,23 @@ export function formatDates(dates: Date[] | undefined): string | null {
   const sorted = [...dates].sort((a, b) => a.getTime() - b.getTime());
   return sorted.map(formatDate).join(", ");
 }
+
+/**
+ * Formats an API calendar date ("YYYY-MM-DD") without going through UTC, which
+ * would shift the day for visitors west of Greenwich.
+ */
+export function formatCalendarDate(
+  value: string | null | undefined,
+): string | undefined {
+  if (!value) return undefined;
+
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(value);
+  if (!match) return value;
+
+  const date = new Date(
+    Number(match[1]),
+    Number(match[2]) - 1,
+    Number(match[3]),
+  );
+  return Number.isNaN(date.getTime()) ? value : formatDate(date);
+}

@@ -4,9 +4,10 @@
 import { anton } from "@/utils/fonts";
 import DesignCard from "./DesignCard";
 import useAnimateDesign from "./useAnimateDesign";
-import { DESIGN_CATEGORIES } from "@/constants/design";
+import useDesign from "./useDesign";
 
 function Design() {
+  const { designs, designCategories } = useDesign();
   const {
     activeCategory,
     setActiveCategory,
@@ -14,7 +15,7 @@ function Design() {
     filtersRef,
     gridRef,
     filteredDesigns,
-  } = useAnimateDesign();
+  } = useAnimateDesign(designs);
 
   return (
     <section className="flex min-h-dvh justify-center">
@@ -37,7 +38,7 @@ function Design() {
           ref={filtersRef}
           className="mt-10 flex flex-wrap justify-center gap-8 border-b border-black/10 pb-4"
         >
-          {DESIGN_CATEGORIES.map((category) => (
+          {designCategories.map((category) => (
             <button
               key={category}
               type="button"
