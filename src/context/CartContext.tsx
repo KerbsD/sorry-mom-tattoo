@@ -18,7 +18,12 @@ import type {
   StoredCartLine,
 } from "@/types/cart";
 import { makeKey } from "@/constants/cart";
-import { clampQty, pruneUnavailable, resolveLine, sanitizeStored } from "@/lib/cart";
+import {
+  clampQty,
+  pruneUnavailable,
+  resolveLine,
+  sanitizeStored,
+} from "@/lib/cart";
 import { useCatalog } from "@/context/CatalogContext";
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -34,15 +39,24 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<StoredCartLine[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  // The catalog arrays can get a new identity when the layout re-renders, but
+  // storage should only be read once, on mount.
+  const didHydrate = useRef(false);
 
   useEffect(() => {
+    if (didHydrate.current) return;
+    didHydrate.current = true;
+
     try {
       for (const key of LEGACY_KEYS) localStorage.removeItem(key);
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setItems(sanitizeStored(JSON.parse(raw)));
+      if (raw) {
+        const stored = sanitizeStored(JSON.parse(raw));
+        setItems(pruneUnavailable(stored, { products, designs }));
+      }
     } catch {}
     setHydrated(true);
-  }, []);
+  }, [products, designs]);
 
   useEffect(() => {
     if (!hydrated) return;

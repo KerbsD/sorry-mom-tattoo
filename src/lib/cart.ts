@@ -55,9 +55,7 @@ export function pruneUnavailable(
 ): StoredCartLine[] {
   const kept = items.filter((item) => {
     const source = item.kind === "merch" ? catalog.products : catalog.designs;
-    return (
-      source.length === 0 || source.some((entry) => entry.id === item.id)
-    );
+    return source.length === 0 || source.some((entry) => entry.id === item.id);
   });
 
   // Preserve identity when nothing changed so the persist effect stays quiet.
