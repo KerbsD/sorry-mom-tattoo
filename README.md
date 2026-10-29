@@ -23,8 +23,13 @@ npm run dev                  # http://localhost:3002
 | --------------------- | -------- | ---------------------------------------------------------------------------------- |
 | `NEXT_PUBLIC_API_URL` | Yes      | Origin of the public `smt-be` API. Falls back to `http://localhost:3000` if unset. |
 
-The landing page fetches this API on the server only, so no CORS configuration
-is needed for the site's origin.
+Catalog reads happen on the server. Booking creation and availability reads
+happen in the browser, so the landing origin must also be listed in the API's
+`CORS_ORIGINS` setting. For local development that means:
+
+```dotenv
+CORS_ORIGINS=http://localhost:3001,http://localhost:3002
+```
 
 ## How data is loaded
 
@@ -36,6 +41,9 @@ is needed for the site's origin.
   admin edits show up immediately.
 - If the API is unreachable the site still renders, with empty portfolio and
   store sections instead of an error page.
+- The booking form posts to the public `POST /bookings` endpoint and reads
+  taken days from `GET /bookings/availability` in the browser. The calendar
+  disables days held by a pending or confirmed booking.
 
 ## Deployment
 
