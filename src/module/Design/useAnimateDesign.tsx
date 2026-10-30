@@ -4,9 +4,9 @@
 import gsap from "gsap";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { DESIGN } from "@/constants/design";
+import type { Design } from "@/types/design";
 
-function useAnimateDesign() {
+function useAnimateDesign(designs: Design[]) {
   const [activeCategory, setActiveCategory] = useState("All Designs");
   const prevCategory = useRef(activeCategory);
 
@@ -16,8 +16,8 @@ function useAnimateDesign() {
 
   const filteredDesigns =
     activeCategory === "All Designs"
-      ? DESIGN
-      : DESIGN.filter((d) => d.category === activeCategory);
+      ? designs
+      : designs.filter((d) => d.category === activeCategory);
 
   useGSAP(
     () => {

@@ -13,6 +13,7 @@ import { channels } from "@/utils/channels";
 
 import useHomeBooking from "@/components/Booking/useHomeBooking";
 import FormInput from "@/components/Form/FormInput";
+import FormTextarea from "@/components/Form/FormTextarea";
 import BookingCalendar from "@/components/Booking/BookingCalendar";
 import BookingFormButton from "@/components/Booking/BookingFormButton";
 import ConfirmRedirectModal from "@/components/Modal/ConfirmModal/ConfirmRedirectModal";
@@ -22,6 +23,12 @@ function BookingForm({ className = "" }: BookingFormProps) {
   const {
     formik,
     formattedDate,
+    submittedDateText,
+    submitted,
+    submitError,
+    takenDates,
+    isAvailabilityLoading,
+    availabilityError,
     requestSend,
     cancelSend,
     confirmSend,
@@ -36,12 +43,24 @@ function BookingForm({ className = "" }: BookingFormProps) {
     <FormikProvider value={formik}>
       <form
         onSubmit={formik.handleSubmit}
+        noValidate
         className={`rounded-2xl border border-white/10 bg-[#161616] p-6 ${className}`}
       >
         <div className="mb-4 flex flex-col gap-4 sm:flex-row">
           <FormInput
-            name="fullName"
+            name="name"
             placeholder="Full Name"
+            aria-label="Full name"
+            autoComplete="name"
+            className="flex-1"
+          />
+          <FormInput
+            name="phone"
+            type="tel"
+            inputMode="tel"
+            placeholder="Phone (optional)"
+            aria-label="Phone number (optional)"
+            autoComplete="tel"
             className="flex-1"
           />
         </div>
@@ -50,13 +69,52 @@ function BookingForm({ className = "" }: BookingFormProps) {
           name="email"
           type="email"
           placeholder="Email"
+          aria-label="Email"
+          autoComplete="email"
           className="mb-4"
         />
 
-        <p className="mb-4 text-sm text-white/70">Pick a Date:</p>
-        <BookingCalendar />
+        <FormTextarea
+          name="message"
+          placeholder="Tell us about your tattoo idea (optional)"
+          aria-label="Tattoo idea (optional)"
+          rows={3}
+          maxLength={2000}
+          className="mb-4"
+        />
 
-        <div className="mt-6 flex items-center justify-between">
+        <p className="mb-2 text-sm text-white/70">Pick up to 3 dates:</p>
+        <BookingCalendar
+          takenDates={takenDates}
+          isLoading={isAvailabilityLoading}
+        />
+        <p className="mt-2 text-xs text-white/50">
+          We&apos;ll confirm the exact time with you by email.
+        </p>
+
+        {availabilityError && (
+          <p className="mt-2 text-xs text-amber-400" role="status">
+            {availabilityError} You can still request a date - we&apos;ll verify
+            it for you.
+          </p>
+        )}
+
+        {formik.touched.date && formik.errors.date && (
+          <p className="mt-2 text-xs text-red-400" role="alert">
+            {formik.errors.date}
+          </p>
+        )}
+
+        {submitError && (
+          <div
+            role="alert"
+            className="mt-4 rounded-lg border border-red-400/30 bg-red-400/10 px-3 py-2 text-sm text-red-300"
+          >
+            {submitError}
+          </div>
+        )}
+
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
           <p className="text-sm font-semibold text-white/90">
             Date:{" "}
             {!formattedDate ? (
@@ -72,22 +130,34 @@ function BookingForm({ className = "" }: BookingFormProps) {
       <Modal
         isOpen={isConfirmed}
         onClose={closeConfirmation}
-        title="Send your booking request"
+        title="Booking received"
         className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#161616] p-6 text-white shadow-2xl"
       >
         <h3 className="mb-1 text-base font-semibold text-white">
-          Booking confirmed
+          Booking received
         </h3>
-        <p className="mb-4 text-sm text-white/60">Date: {formattedDate}</p>
 
-        {channels.length === 0 ? (
-          <p className="text-sm text-amber-400">
-            No chat app is set up yet. Add one in your environment settings.
-          </p>
-        ) : (
+        {submitted ? (
           <>
-            <p className="mb-3 text-sm text-white/70">
-              Send your booking request via:
+            <p className="text-xs font-medium text-teal-300">
+              Booking #{submitted.bookingId}
+            </p>
+            <p className="mt-1 text-sm text-white/60">{submittedDateText}</p>
+            <p className="mt-3 text-sm text-white/70">
+              We&apos;ll review your request and email you at{" "}
+              <span className="text-white">{submitted.email}</span>.
+            </p>
+          </>
+        ) : (
+          <p className="text-sm text-white/70">
+            We&apos;ll review your request and get back to you soon.
+          </p>
+        )}
+
+        {channels.length > 0 && (
+          <>
+            <p className="mt-5 mb-3 text-sm text-white/70">
+              Want to reach us faster? Send a copy via:
             </p>
             <div className="flex flex-wrap gap-2">
               {channels.map((c) => (
@@ -105,6 +175,14 @@ function BookingForm({ className = "" }: BookingFormProps) {
             </div>
           </>
         )}
+
+        <button
+          type="button"
+          onClick={closeConfirmation}
+          className="mt-5 w-full rounded-lg bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+        >
+          Done
+        </button>
       </Modal>
 
       {pendingChannel && (

@@ -6,8 +6,13 @@ import LenisProvider from "@/utils/Interactions/Lenis/LenisProvider";
 import CursorTrail from "@/utils/Interactions/CursorTrail";
 import { poppins } from "@/utils/fonts";
 import { CartProvider } from "@/context/CartContext";
+import { CatalogProvider } from "@/context/CatalogContext";
+import { getCatalog } from "@/lib/api";
 import { siteConfig } from "@/constants/site";
 import { Analytics } from "@vercel/analytics/next";
+
+// Public catalog data is refreshed in the background at this interval.
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -31,7 +36,9 @@ export const viewport: Viewport = {
   themeColor: "#161616",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const { products, designs } = await getCatalog();
+
   return (
     <html
       lang="en"
@@ -41,11 +48,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-screen flex-col">
         <Analytics />
         <CursorTrail />
-        <CartProvider>
-          <LenisProvider>
-            <Layout>{children}</Layout>
-          </LenisProvider>
-        </CartProvider>
+        <CatalogProvider products={products} designs={designs}>
+          <CartProvider>
+            <LenisProvider>
+              <Layout>{children}</Layout>
+            </LenisProvider>
+          </CartProvider>
+        </CatalogProvider>
       </body>
     </html>
   );

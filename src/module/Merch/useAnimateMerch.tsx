@@ -1,9 +1,9 @@
 import gsap from "gsap";
 import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { PRODUCTS } from "@/constants/merch";
+import type { Product } from "@/types/merch";
 
-function useAnimateMerch() {
+function useAnimateMerch(products: Product[]) {
   const [activeCategory, setActiveCategory] = useState("All");
   const prevCategory = useRef(activeCategory);
 
@@ -13,8 +13,8 @@ function useAnimateMerch() {
 
   const filteredProducts =
     activeCategory === "All"
-      ? PRODUCTS
-      : PRODUCTS.filter((p) => p.category === activeCategory);
+      ? products
+      : products.filter((p) => p.category === activeCategory);
 
   // Entrance animation — runs exactly once on mount, unrelated to activeCategory
   useGSAP(

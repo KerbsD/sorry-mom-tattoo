@@ -1,9 +1,35 @@
-import { InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 interface BookingValues {
-  fullName: string;
+  name: string;
   email: string;
-  date: Date[] | undefined; // was DateRange | undefined
+  phone: string;
+  message: string;
+  date: Date[] | undefined;
+}
+
+/** Snapshot kept after a successful submit so the confirmation modal can show it. */
+interface SubmittedBooking {
+  bookingId: number;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  date: Date[];
+}
+
+interface BookingPayload {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  scheduledAt: string[];
+}
+
+interface CreatedBooking {
+  id: number;
+  status: string;
+  scheduledAt: string[];
 }
 
 interface BookingFormProps {
@@ -18,4 +44,20 @@ interface FormInputProps extends Omit<
   label?: string;
 }
 
-export type { BookingValues, BookingFormProps, FormInputProps };
+interface FormTextareaProps extends Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "name"
+> {
+  name: string;
+  label?: string;
+}
+
+export type {
+  BookingValues,
+  SubmittedBooking,
+  BookingPayload,
+  CreatedBooking,
+  BookingFormProps,
+  FormInputProps,
+  FormTextareaProps,
+};

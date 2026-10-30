@@ -2,11 +2,11 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useRef, useState } from "react";
-import { PORTFOLIO_IMAGES } from "@/constants/portfolio";
+import type { PortfolioImageProps } from "@/types/portfolio";
 
 import useClickOutside from "@/utils/Interactions/useClickOutside";
 
-function usePortfolio() {
+function usePortfolio(items: PortfolioImageProps[]) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "center",
@@ -32,7 +32,7 @@ function usePortfolio() {
     });
   };
 
-  const currentTattoo = PORTFOLIO_IMAGES[selectedIndex] ?? null;
+  const currentTattoo = items[selectedIndex] ?? null;
 
   const animateSlides = useCallback(() => {
     if (!emblaApi) return;
@@ -101,7 +101,7 @@ function usePortfolio() {
     isOpen,
     toggleModal,
     currentTattoo,
-    modalInstanceKey
+    modalInstanceKey,
   };
 }
 
