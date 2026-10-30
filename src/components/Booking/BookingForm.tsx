@@ -94,7 +94,7 @@ function BookingForm({ className = "" }: BookingFormProps) {
 
         {availabilityError && (
           <p className="mt-2 text-xs text-amber-400" role="status">
-            {availabilityError} You can still request a date; we&apos;ll verify
+            {availabilityError} You can still request a date - we&apos;ll verify
             it for you.
           </p>
         )}
